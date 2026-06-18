@@ -1,9 +1,9 @@
 {
-  "name": "GCP PCA Real Dump Study",
+  "name": "GCP PCA Full Real Study",
   "short_name": "GCP PCA",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f5f7fb",
   "theme_color": "#1a73e8",
-  "description": "Mobile answer-first study page for real crawled GCP PCA dump questions only."
+  "description": "Mobile answer-first study page for real GCP PCA dump questions, including older real case-study rows."
 }
