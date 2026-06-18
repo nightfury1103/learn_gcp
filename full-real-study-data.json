@@ -36,7 +36,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "EHR Healthcare",
-    "sortOrder": 20214001
+    "sortOrder": 20214001,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to EHR Healthcare, and 'privacy compliance audit' is the specific requirement that changes the design choice. When you see that trigger, map it to answer AB: A: Verify EHR's product usage against the list of compliant products on the Google Cloud compliance page. | B: Advise EHR to execute a Business Associate Agreement (BAA) with Google Cloud."
   },
   {
     "id": 2,
@@ -71,7 +72,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "EHR Healthcare",
-    "sortOrder": 20214002
+    "sortOrder": 20214002,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to EHR Healthcare, and 'verified containers' is the specific requirement that changes the design choice. When you see that trigger, map it to answer AD: A: Enable Binary Authorization on GKE, and sign containers as part of a CI/CD pipeline. | D: Configure Container Registry to use vulnerability scanning to confirm that there are no vulnerabilities before deploying the..."
   },
   {
     "id": 3,
@@ -106,7 +108,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "EHR Healthcare",
-    "sortOrder": 20214004
+    "sortOrder": 20214004,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to EHR Healthcare, and 'hybrid connectivity' is the specific requirement that changes the design choice. When you see that trigger, map it to answer D: D: Configure two Dedicated Interconnect connections in one metro (City) and two connections in another metro, and make sure the Interconnect connections are placed in different metro zones."
   },
   {
     "id": 4,
@@ -141,7 +144,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "EHR Healthcare",
-    "sortOrder": 20214005
+    "sortOrder": 20214005,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to EHR Healthcare, and 'load has increased' is the specific requirement that changes the design choice. When you see that trigger, map it to answer C: C: Turn off Pub/Sub message batching."
   },
   {
     "id": 5,
@@ -176,7 +180,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "EHR Healthcare",
-    "sortOrder": 20214006
+    "sortOrder": 20214006,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to EHR Healthcare, and 'public IP addresses' is the specific requirement that changes the design choice. When you see that trigger, map it to answer A: A: Create an Organizational Policy with a constraint to allow external IP addresses only on the frontend Compute Engine instances."
   },
   {
     "id": 6,
@@ -211,7 +216,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "EHR Healthcare",
-    "sortOrder": 20214007
+    "sortOrder": 20214007,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to EHR Healthcare, and 'Google KubernetesEngine' is the specific requirement that changes the design choice. When you see that trigger, map it to answer A: A: Use a private cluster with a private endpoint with master authorized networks configured."
   },
   {
     "id": 7,
@@ -219,7 +225,7 @@
     "topic": 1,
     "questionNumber": 197,
     "ref": "2024 / T1 Q197",
-    "cue": "approval documents",
+    "cue": "cannot be deleted or overwritten + next 5 years",
     "category": "Security & Compliance",
     "answerLetters": "A",
     "answerPattern": "A: Create a retention policy on the bucket for the duration of 5 years. Create a lock on the retention policy.",
@@ -246,7 +252,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20241197
+    "sortOrder": 20241197,
+    "cueWhy": "I chose this cue because 'cannot be deleted or overwritten + next 5 years' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create a retention policy on the bucket for the duration of 5 years. Create a lock on the retention policy."
   },
   {
     "id": 8,
@@ -254,7 +261,7 @@
     "topic": 1,
     "questionNumber": 198,
     "ref": "2024 / T1 Q198",
-    "cue": "same SSL",
+    "cue": "old version of the API available + same SSL and DNS records",
     "category": "Networking & Delivery",
     "answerLetters": "D",
     "answerPattern": "D: Use separate backend pools for each API path behind the load balancer",
@@ -281,7 +288,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20241198
+    "sortOrder": 20241198,
+    "cueWhy": "I chose this cue because 'old version of the API available + same SSL and DNS records' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use separate backend pools for each API path behind the load balancer"
   },
   {
     "id": 9,
@@ -289,7 +297,7 @@
     "topic": 1,
     "questionNumber": 199,
     "ref": "2024 / T1 Q199",
-    "cue": "memory usage",
+    "cue": "autoscale + memory usage exceeds 80%",
     "category": "DevOps & Operations",
     "answerLetters": "C",
     "answerPattern": "C: Change the filter to metric.label.state = \u2018used\u2019.",
@@ -316,7 +324,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20241199
+    "sortOrder": 20241199,
+    "cueWhy": "I chose this cue because 'autoscale + memory usage exceeds 80%' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Change the filter to metric.label.state = \u2018used\u2019."
   },
   {
     "id": 10,
@@ -324,7 +333,7 @@
     "topic": 1,
     "questionNumber": 200,
     "ref": "2025 / T1 Q200",
-    "cue": "data exfiltration",
+    "cue": "avoid data exfiltration + on-premises environment",
     "category": "Security & Compliance",
     "answerLetters": "B",
     "answerPattern": "B: Configure VPC Service Controls and configure Private Google Access for on-promises hosts.",
@@ -351,7 +360,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251200
+    "sortOrder": 20251200,
+    "cueWhy": "I chose this cue because 'avoid data exfiltration + on-premises environment' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Configure VPC Service Controls and configure Private Google Access for on-promises hosts."
   },
   {
     "id": 11,
@@ -359,7 +369,7 @@
     "topic": 1,
     "questionNumber": 201,
     "ref": "2025 / T1 Q201",
-    "cue": "patch the operating systems",
+    "cue": "few hundred Ubuntu and Red Hat + secure and scalable",
     "category": "DevOps & Operations",
     "answerLetters": "D",
     "answerPattern": "D: Set up VM Manager, and install the OS Config agent on each VM. Schedule a patch job to apply patches on each VM.",
@@ -386,7 +396,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251201
+    "sortOrder": 20251201,
+    "cueWhy": "I chose this cue because 'few hundred Ubuntu and Red Hat + secure and scalable' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Set up VM Manager, and install the OS Config agent on each VM. Schedule a patch job to apply patches on each VM."
   },
   {
     "id": 12,
@@ -394,7 +405,7 @@
     "topic": 1,
     "questionNumber": 202,
     "ref": "2025 / T1 Q202",
-    "cue": "connect, map",
+    "cue": "Salesforce + ServiceNow + Cloud SQL",
     "category": "AI, ML & Application Modernization",
     "answerLetters": "B",
     "answerPattern": "B: Leverage Application Integration to connect the services and transform the data.",
@@ -421,7 +432,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251202
+    "sortOrder": 20251202,
+    "cueWhy": "I chose this cue because 'Salesforce + ServiceNow + Cloud SQL' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Leverage Application Integration to connect the services and transform the data."
   },
   {
     "id": 13,
@@ -429,7 +441,7 @@
     "topic": 1,
     "questionNumber": 203,
     "ref": "2025 / T1 Q203",
-    "cue": "dynamic API content",
+    "cue": "dynamic API content + static assets + user-uploaded videos",
     "category": "Networking & Delivery",
     "answerLetters": "AB",
     "answerPattern": "A: Use an external Application Load Balancer to serve your application APIs. | B: Use Cloud CDN to serve static assets of your application.",
@@ -460,7 +472,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251203
+    "sortOrder": 20251203,
+    "cueWhy": "I chose this cue because 'dynamic API content + static assets + user-uploaded videos' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer AB: A: Use an external Application Load Balancer to serve your application APIs. | B: Use Cloud CDN to serve static assets of your application."
   },
   {
     "id": 14,
@@ -468,7 +481,7 @@
     "topic": 1,
     "questionNumber": 204,
     "ref": "2025 / T1 Q204",
-    "cue": "manage costs",
+    "cue": "migration plan + manage costs effectively",
     "category": "Migration & DR",
     "answerLetters": "BE",
     "answerPattern": "B: Configure labels and tags for the resources provisioned in Google Cloud. | E: Adopt infrastructure as code (IaC) for the cloud resources.",
@@ -499,7 +512,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251204
+    "sortOrder": 20251204,
+    "cueWhy": "I chose this cue because 'migration plan + manage costs effectively' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer BE: B: Configure labels and tags for the resources provisioned in Google Cloud. | E: Adopt infrastructure as code (IaC) for the cloud resources."
   },
   {
     "id": 15,
@@ -507,7 +521,7 @@
     "topic": 1,
     "questionNumber": 205,
     "ref": "2025 / T1 Q205",
-    "cue": "AlloyDB database",
+    "cue": "Cloud Run service + AlloyDB database + default configurations",
     "category": "Compute, GKE & Cloud Run",
     "answerLetters": "B",
     "answerPattern": "B: Enable Direct VPC egress for the Cloud Run service, and send traffic directly to a VPC.",
@@ -534,7 +548,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251205
+    "sortOrder": 20251205,
+    "cueWhy": "I chose this cue because 'Cloud Run service + AlloyDB database + default configurations' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Enable Direct VPC egress for the Cloud Run service, and send traffic directly to a VPC."
   },
   {
     "id": 16,
@@ -542,7 +557,7 @@
     "topic": 1,
     "questionNumber": 206,
     "ref": "2025 / T1 Q206",
-    "cue": "container images",
+    "cue": "Identify potential vulnerabilities + Generate verifiable metadata",
     "category": "Security & Compliance",
     "answerLetters": "A",
     "answerPattern": "A: Use Cloud Build to build container images, and then trigger Artifact Analysis on images pushed to Artifact Registry.",
@@ -569,7 +584,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251206
+    "sortOrder": 20251206,
+    "cueWhy": "I chose this cue because 'Identify potential vulnerabilities + Generate verifiable metadata' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use Cloud Build to build container images, and then trigger Artifact Analysis on images pushed to Artifact Registry."
   },
   {
     "id": 17,
@@ -577,7 +593,7 @@
     "topic": 1,
     "questionNumber": 207,
     "ref": "2025 / T1 Q207",
-    "cue": "private endpoint",
+    "cue": "private endpoint + deployments to the GKE cluster are failing",
     "category": "Compute, GKE & Cloud Run",
     "answerLetters": "C",
     "answerPattern": "C: Create a Cloud Build private pool that is peered with the same VPC network as your GKE cluster. Update the Cloud Deploy pipeline to use this private pool as its execution environment.",
@@ -604,7 +620,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251207
+    "sortOrder": 20251207,
+    "cueWhy": "I chose this cue because 'private endpoint + deployments to the GKE cluster are failing' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create a Cloud Build private pool that is peered with the same VPC network as your GKE cluster. Update the Cloud Deploy pipeline to use this private pool as its execution environment."
   },
   {
     "id": 18,
@@ -612,7 +629,7 @@
     "topic": 1,
     "questionNumber": 208,
     "ref": "2025 / T1 Q208",
-    "cue": "SAP workloads",
+    "cue": "on-premises compute and SAP workloads + cost estimate",
     "category": "Migration & DR",
     "answerLetters": "D",
     "answerPattern": "D: Gather data about your current environment, and leverage Google Cloud Migration Center to generate a cost estimate.",
@@ -639,7 +656,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251208
+    "sortOrder": 20251208,
+    "cueWhy": "I chose this cue because 'on-premises compute and SAP workloads + cost estimate' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Gather data about your current environment, and leverage Google Cloud Migration Center to generate a cost estimate."
   },
   {
     "id": 19,
@@ -647,7 +665,7 @@
     "topic": 1,
     "questionNumber": 209,
     "ref": "2025 / T1 Q209",
-    "cue": "using SQL",
+    "cue": "log data + using SQL + dashboards",
     "category": "DevOps & Operations",
     "answerLetters": "C",
     "answerPattern": "C: Enable log analytics and run queries in the linked log dataset in BigQuery. Visualize the data with Looker Studio dashboards.",
@@ -674,7 +692,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251209
+    "sortOrder": 20251209,
+    "cueWhy": "I chose this cue because 'log data + using SQL + dashboards' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Enable log analytics and run queries in the linked log dataset in BigQuery. Visualize the data with Looker Studio dashboards."
   },
   {
     "id": 20,
@@ -682,7 +701,7 @@
     "topic": 1,
     "questionNumber": 210,
     "ref": "2025 / T1 Q210",
-    "cue": "30 days",
+    "cue": "real-time fraud detection + older than 30 days",
     "category": "Data, Storage & Analytics",
     "answerLetters": "D",
     "answerPattern": "D: Configure a Cloud Storage bucket with an Object Lifecycle Management policy to transition data from the Standard class to the Coldline class after 30 days.",
@@ -709,7 +728,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251210
+    "sortOrder": 20251210,
+    "cueWhy": "I chose this cue because 'real-time fraud detection + older than 30 days' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Configure a Cloud Storage bucket with an Object Lifecycle Management policy to transition data from the Standard class to the Coldline class after 30 days."
   },
   {
     "id": 21,
@@ -717,7 +737,7 @@
     "topic": 1,
     "questionNumber": 211,
     "ref": "2025 / T1 Q211",
-    "cue": "based in Qatar",
+    "cue": "sensitive patient notes + outside of Qatar's borders",
     "category": "AI, ML & Application Modernization",
     "answerLetters": "B",
     "answerPattern": "B: Use Vertex AI Model Garden to select a Gemma model. Deploy this model to a Vertex AI Endpoint within a Google Cloud region located in Qatar.",
@@ -744,7 +764,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251211
+    "sortOrder": 20251211,
+    "cueWhy": "I chose this cue because 'sensitive patient notes + outside of Qatar's borders' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use Vertex AI Model Garden to select a Gemma model. Deploy this model to a Vertex AI Endpoint within a Google Cloud region located in Qatar."
   },
   {
     "id": 22,
@@ -752,7 +773,7 @@
     "topic": 1,
     "questionNumber": 212,
     "ref": "2025 / T1 Q212",
-    "cue": "monolith",
+    "cue": "rapid data center exit + monolith is exposing an API",
     "category": "AI, ML & Application Modernization",
     "answerLetters": "B",
     "answerPattern": "B: Implement a managed API facade with Apigee to handle all requests from dependent applications on behalf of the monolith\u2019s backend.",
@@ -779,7 +800,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251212
+    "sortOrder": 20251212,
+    "cueWhy": "I chose this cue because 'rapid data center exit + monolith is exposing an API' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Implement a managed API facade with Apigee to handle all requests from dependent applications on behalf of the monolith\u2019s backend."
   },
   {
     "id": 23,
@@ -787,7 +809,7 @@
     "topic": 1,
     "questionNumber": 213,
     "ref": "2025 / T1 Q213",
-    "cue": "private CI/CD runners",
+    "cue": "private CI/CD runners + separate Google Cloud projects",
     "category": "Networking & Delivery",
     "answerLetters": "A",
     "answerPattern": "A: Create a separate VPC in each of the four projects. Connect each environment's VPC to the shared services VPC through VPC Network Peering.",
@@ -814,7 +836,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251213
+    "sortOrder": 20251213,
+    "cueWhy": "I chose this cue because 'private CI/CD runners + separate Google Cloud projects' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create a separate VPC in each of the four projects. Connect each environment's VPC to the shared services VPC through VPC Network Peering."
   },
   {
     "id": 24,
@@ -822,7 +845,7 @@
     "topic": 1,
     "questionNumber": 214,
     "ref": "2025 / T1 Q214",
-    "cue": "Cloud Armor",
+    "cue": "inspected by a Cloud Armor web application firewall + before reaching the application",
     "category": "Security & Compliance",
     "answerLetters": "C",
     "answerPattern": "C: Set the Cloud Run ingress to Allow internal traffic and Cloud Load Balancing, and use a serverless NEG backend on the load balancer",
@@ -849,7 +872,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251214
+    "sortOrder": 20251214,
+    "cueWhy": "I chose this cue because 'inspected by a Cloud Armor web application firewall + before reaching the application' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Set the Cloud Run ingress to Allow internal traffic and Cloud Load Balancing, and use a serverless NEG backend on the load balancer"
   },
   {
     "id": 25,
@@ -857,7 +881,7 @@
     "topic": 1,
     "questionNumber": 215,
     "ref": "2025 / T1 Q215",
-    "cue": "production environments",
+    "cue": "production environments + blocks internet ingress traffic + direct HTTPS traffic",
     "category": "Security & Compliance",
     "answerLetters": "A",
     "answerPattern": "A: At each production folder, apply a hierarchical firewall policy to deny all ingress except for HTTPS to tagged VMs.",
@@ -884,7 +908,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251215
+    "sortOrder": 20251215,
+    "cueWhy": "I chose this cue because 'production environments + blocks internet ingress traffic + direct HTTPS traffic' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: At each production folder, apply a hierarchical firewall policy to deny all ingress except for HTTPS to tagged VMs."
   },
   {
     "id": 26,
@@ -892,7 +917,7 @@
     "topic": 1,
     "questionNumber": 216,
     "ref": "2025 / T1 Q216",
-    "cue": "audit trail",
+    "cue": "non-repudiable audit trail + administrative actions",
     "category": "DevOps & Operations",
     "answerLetters": "C",
     "answerPattern": "C: Enable GKE Audit Logging to send Kubernetes API server logs to Cloud Logging, and ensure Cloud Audit Logs are enabled for the project.",
@@ -919,7 +944,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251216
+    "sortOrder": 20251216,
+    "cueWhy": "I chose this cue because 'non-repudiable audit trail + administrative actions' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Enable GKE Audit Logging to send Kubernetes API server logs to Cloud Logging, and ensure Cloud Audit Logs are enabled for the project."
   },
   {
     "id": 27,
@@ -927,7 +953,7 @@
     "topic": 1,
     "questionNumber": 217,
     "ref": "2025 / T1 Q217",
-    "cue": "Spanner",
+    "cue": "Spanner + FinOps team is concerned",
     "category": "AI, ML & Application Modernization",
     "answerLetters": "C",
     "answerPattern": "C: Develop a total cost of ownership (TCO) analysis that includes operational overhead, and present it in a workshop to facilitate a decision.",
@@ -954,7 +980,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251217
+    "sortOrder": 20251217,
+    "cueWhy": "I chose this cue because 'Spanner + FinOps team is concerned' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Develop a total cost of ownership (TCO) analysis that includes operational overhead, and present it in a workshop to facilitate a decision."
   },
   {
     "id": 28,
@@ -962,7 +989,7 @@
     "topic": 1,
     "questionNumber": 218,
     "ref": "2025 / T1 Q218",
-    "cue": "roll back",
+    "cue": "immediately roll back + unpredictable traffic spikes",
     "category": "DevOps & Operations",
     "answerLetters": "C",
     "answerPattern": "C: Separate CI/CD pipelines for database schema migrations from application deployments. When deploying a new Cloud Run revision, use gradual traffic split.",
@@ -989,7 +1016,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20251218
+    "sortOrder": 20251218,
+    "cueWhy": "I chose this cue because 'immediately roll back + unpredictable traffic spikes' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Separate CI/CD pipelines for database schema migrations from application deployments. When deploying a new Cloud Run revision, use gradual traffic split."
   },
   {
     "id": 29,
@@ -1024,7 +1052,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "Altostrat Media",
-    "sortOrder": 20261219
+    "sortOrder": 20261219,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to Altostrat Media, and 'encryption keys' is the specific requirement that changes the design choice. When you see that trigger, map it to answer D: D: Use customer-managed encryption keys (CMEK) for all Cloud Storage buckets storing sensitive media content. Implement fine-grained access control using IAM roles and groups to restrict access to sensitive buckets."
   },
   {
     "id": 30,
@@ -1059,7 +1088,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "Altostrat Media",
-    "sortOrder": 20261220
+    "sortOrder": 20261220,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to Altostrat Media, and 'occasional interruptions' is the specific requirement that changes the design choice. When you see that trigger, map it to answer B: B: Deploy spot VM instances."
   },
   {
     "id": 31,
@@ -1094,7 +1124,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "Altostrat Media",
-    "sortOrder": 20261221
+    "sortOrder": 20261221,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to Altostrat Media, and 'in isolation' is the specific requirement that changes the design choice. When you see that trigger, map it to answer A: A: Run unit testing."
   },
   {
     "id": 32,
@@ -1129,7 +1160,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "Altostrat Media",
-    "sortOrder": 20261222
+    "sortOrder": 20261222,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to Altostrat Media, and 'Java-based' is the specific requirement that changes the design choice. When you see that trigger, map it to answer B: B: Analyze the data via Cloud Profiler."
   },
   {
     "id": 33,
@@ -1164,7 +1196,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "Altostrat Media",
-    "sortOrder": 20261223
+    "sortOrder": 20261223,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to Altostrat Media, and 'DDoS attacks' is the specific requirement that changes the design choice. When you see that trigger, map it to answer C: C: Deploy Google Cloud Armor with pre-configured and custom rules for L3/L4 and L7 protection"
   },
   {
     "id": 34,
@@ -1199,7 +1232,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "Altostrat Media",
-    "sortOrder": 20261224
+    "sortOrder": 20261224,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to Altostrat Media, and 'API calls' is the specific requirement that changes the design choice. When you see that trigger, map it to answer C: C: Configure Quota policies."
   },
   {
     "id": 35,
@@ -1234,7 +1268,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261225
+    "sortOrder": 20261225,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'multiple locations' is the specific requirement that changes the design choice. When you see that trigger, map it to answer D: D: Create a fleet of GKE clusters in different regions. Deploy the app on every cluster. Configure a multi-cluster Gateway."
   },
   {
     "id": 36,
@@ -1269,7 +1304,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261226
+    "sortOrder": 20261226,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'vehicle sensor data' is the specific requirement that changes the design choice. When you see that trigger, map it to answer C: C: Use the vehicle ID, event ID, and timestamp (in that order) as the row key. Create a column family per sensor category, and use a column qualifier for each individual sensor within its respective category."
   },
   {
     "id": 37,
@@ -1304,7 +1340,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261227
+    "sortOrder": 20261227,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'too much CPU' is the specific requirement that changes the design choice. When you see that trigger, map it to answer A: A: Configure resource requests per Deployment. Set resource requests slightly above the typical CPU usage observed during monitoring."
   },
   {
     "id": 38,
@@ -1339,7 +1376,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261228
+    "sortOrder": 20261228,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'two regions' is the specific requirement that changes the design choice. When you see that trigger, map it to answer D: D: Configure the Resource Location Restriction constraint organization policy at the organization level, and ensure only the allowed regions are listed."
   },
   {
     "id": 39,
@@ -1374,7 +1412,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261229
+    "sortOrder": 20261229,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'XML format' is the specific requirement that changes the design choice. When you see that trigger, map it to answer A: A: Create a Pub/Sub topic per supplier, and have HQ publish all changes related to the respective supplier in JSON format on that topic. Allow all plants to create Pub/Sub Pull subscription to receive messages for the..."
   },
   {
     "id": 40,
@@ -1409,7 +1448,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261230
+    "sortOrder": 20261230,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'personally identifiable information' is the specific requirement that changes the design choice. When you see that trigger, map it to answer A: A: Store the training data in BigQuery using column-level encryption. Train the model using Confidential GKE Nodes."
   },
   {
     "id": 41,
@@ -1444,7 +1484,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261231
+    "sortOrder": 20261231,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'guaranteed bandwidth' is the specific requirement that changes the design choice. When you see that trigger, map it to answer C: C: Create a Premium Ter VPand ensure a subnet is available in the region closest to a plant. Establish a Cloud Interconnect between each subnet and the local plant."
   },
   {
     "id": 42,
@@ -1479,7 +1520,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261232
+    "sortOrder": 20261232,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'modernize their landscape' is the specific requirement that changes the design choice. When you see that trigger, map it to answer B: B: Create a Shared Virtual Private Cloud (VPC). Migrate the VMs to Compute Engine in a new project. During modernization, deploy each modernized workload in a dedicated Google Cloud project using the Shared VPC."
   },
   {
     "id": 43,
@@ -1514,7 +1556,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261233
+    "sortOrder": 20261233,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'sandbox environment' is the specific requirement that changes the design choice. When you see that trigger, map it to answer A: A: Create a request form where engineers can request a sandbox environment for a specific technology. Automate the creation of a project with only the relevant APIs enabled and lower the default API quota. Grant IAM r..."
   },
   {
     "id": 44,
@@ -1549,7 +1592,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "KnightMotives Automotive",
-    "sortOrder": 20261234
+    "sortOrder": 20261234,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to KnightMotives Automotive, and 'customer behavior' is the specific requirement that changes the design choice. When you see that trigger, map it to answer B: B: Configure Model Monitoring, and select prediction drift detection."
   },
   {
     "id": 45,
@@ -1557,7 +1601,7 @@
     "topic": 1,
     "questionNumber": 235,
     "ref": "2026 / T1 Q235",
-    "cue": "security posture",
+    "cue": "restricting data exfiltration + Vertex AI and Workbench",
     "category": "Security & Compliance",
     "answerLetters": "D",
     "answerPattern": "D: Create a service perimeter and include aiplatform.googleapis.com and notebooks.googleapis.com as protected services.",
@@ -1584,7 +1628,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261235
+    "sortOrder": 20261235,
+    "cueWhy": "I chose this cue because 'restricting data exfiltration + Vertex AI and Workbench' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a service perimeter and include aiplatform.googleapis.com and notebooks.googleapis.com as protected services."
   },
   {
     "id": 46,
@@ -1592,7 +1637,7 @@
     "topic": 1,
     "questionNumber": 236,
     "ref": "2026 / T1 Q236",
-    "cue": "overall duration",
+    "cue": "overall duration of a request",
     "category": "AI, ML & Application Modernization",
     "answerLetters": "C",
     "answerPattern": "C: Measure the Latency of your requests.",
@@ -1619,7 +1664,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261236
+    "sortOrder": 20261236,
+    "cueWhy": "I chose this cue because 'overall duration of a request' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Measure the Latency of your requests."
   },
   {
     "id": 47,
@@ -1627,7 +1673,7 @@
     "topic": 1,
     "questionNumber": 237,
     "ref": "2026 / T1 Q237",
-    "cue": "business continuity",
+    "cue": "fully recovered and operational + different geographical region",
     "category": "Migration & DR",
     "answerLetters": "A",
     "answerPattern": "A: Deploy active managed instance groups (MIGs) in both us-west1 and us-east1, fronted by a global external HTTP(S) Load Balancer. For the database, use a cross-region read replica in us-east1, and rely on load balancer health checks to automatically fail over all traffic during an outage.",
@@ -1654,7 +1700,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261237
+    "sortOrder": 20261237,
+    "cueWhy": "I chose this cue because 'fully recovered and operational + different geographical region' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Deploy active managed instance groups (MIGs) in both us-west1 and us-east1, fronted by a global external HTTP(S) Load Balancer. For the database, use a cross-region read replica in us-east1, and rely on load balanc..."
   },
   {
     "id": 48,
@@ -1662,7 +1709,7 @@
     "topic": 1,
     "questionNumber": 238,
     "ref": "2026 / T1 Q238",
-    "cue": "one-time migration",
+    "cue": "one-time migration + 60-day window",
     "category": "Migration & DR",
     "answerLetters": "D",
     "answerPattern": "D: Order a Transfer Appliance, copy the data to the appliance using your high-speed local network, and ship it back to Google to upload the data into your Cloud Storage bucket.",
@@ -1689,7 +1736,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261238
+    "sortOrder": 20261238,
+    "cueWhy": "I chose this cue because 'one-time migration + 60-day window' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Order a Transfer Appliance, copy the data to the appliance using your high-speed local network, and ship it back to Google to upload the data into your Cloud Storage bucket."
   },
   {
     "id": 49,
@@ -1697,7 +1745,7 @@
     "topic": 1,
     "questionNumber": 239,
     "ref": "2026 / T1 Q239",
-    "cue": "9:00 AM",
+    "cue": "Monday through Friday + idle more than 70%",
     "category": "DevOps & Operations",
     "answerLetters": "A",
     "answerPattern": "A: Schedule the virtual machines to start and stop to match your team\u2019s work schedule.",
@@ -1724,7 +1772,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261239
+    "sortOrder": 20261239,
+    "cueWhy": "I chose this cue because 'Monday through Friday + idle more than 70%' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Schedule the virtual machines to start and stop to match your team\u2019s work schedule."
   },
   {
     "id": 50,
@@ -1732,7 +1781,7 @@
     "topic": 1,
     "questionNumber": 240,
     "ref": "2026 / T1 Q240",
-    "cue": "zonal outage",
+    "cue": "complete zonal outage + minimizing cost",
     "category": "Compute, GKE & Cloud Run",
     "answerLetters": "B",
     "answerPattern": "B: Deploy the application on a regional MIG to provide high availability across multiple zones in the primary region.",
@@ -1759,7 +1808,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261240
+    "sortOrder": 20261240,
+    "cueWhy": "I chose this cue because 'complete zonal outage + minimizing cost' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Deploy the application on a regional MIG to provide high availability across multiple zones in the primary region."
   },
   {
     "id": 51,
@@ -1767,7 +1817,7 @@
     "topic": 1,
     "questionNumber": 241,
     "ref": "2026 / T1 Q241",
-    "cue": "fraud detection",
+    "cue": "real time for fraud detection + batch queries",
     "category": "Data, Storage & Analytics",
     "answerLetters": "BD",
     "answerPattern": "B: Use Dataflow to process the streaming data. | D: Use BigQuery for the batch analytics reports.",
@@ -1798,7 +1848,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261241
+    "sortOrder": 20261241,
+    "cueWhy": "I chose this cue because 'real time for fraud detection + batch queries' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer BD: B: Use Dataflow to process the streaming data. | D: Use BigQuery for the batch analytics reports."
   },
   {
     "id": 52,
@@ -1806,7 +1857,7 @@
     "topic": 1,
     "questionNumber": 242,
     "ref": "2026 / T1 Q242",
-    "cue": "90 days",
+    "cue": "zonal Persistent Disk + retained for at least 90 days + separate project",
     "category": "Migration & DR",
     "answerLetters": "D",
     "answerPattern": "D: Use the Backup and Disaster Recovery (DR) service to create a backup plan. Configure the backup plan to take daily snapshots and store them in a backup vault with a 90-day retention policy.",
@@ -1833,7 +1884,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261242
+    "sortOrder": 20261242,
+    "cueWhy": "I chose this cue because 'zonal Persistent Disk + retained for at least 90 days + separate project' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use the Backup and Disaster Recovery (DR) service to create a backup plan. Configure the backup plan to take daily snapshots and store them in a backup vault with a 90-day retention policy."
   },
   {
     "id": 53,
@@ -1841,7 +1893,7 @@
     "topic": 1,
     "questionNumber": 243,
     "ref": "2026 / T1 Q243",
-    "cue": "page load speed",
+    "cue": "pictures and videos + page load speed",
     "category": "Data, Storage & Analytics",
     "answerLetters": "BC",
     "answerPattern": "B: Use Memorystore tor Redis. | C: Implement CDN with the application's external HTTPS load balancer.",
@@ -1872,7 +1924,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261243
+    "sortOrder": 20261243,
+    "cueWhy": "I chose this cue because 'pictures and videos + page load speed' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer BC: B: Use Memorystore tor Redis. | C: Implement CDN with the application's external HTTPS load balancer."
   },
   {
     "id": 54,
@@ -1880,7 +1933,7 @@
     "topic": 1,
     "questionNumber": 244,
     "ref": "2026 / T1 Q244",
-    "cue": "write-heavy",
+    "cue": "write-heavy + relational database + multiple cloud regions",
     "category": "Data, Storage & Analytics",
     "answerLetters": "B",
     "answerPattern": "B: Deploy the application to Cloud Run in multiple regions behind a global HTTPS load balancer. Use Spanner as the database.",
@@ -1907,7 +1960,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261244
+    "sortOrder": 20261244,
+    "cueWhy": "I chose this cue because 'write-heavy + relational database + multiple cloud regions' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Deploy the application to Cloud Run in multiple regions behind a global HTTPS load balancer. Use Spanner as the database."
   },
   {
     "id": 55,
@@ -1915,7 +1969,7 @@
     "topic": 1,
     "questionNumber": 245,
     "ref": "2026 / T1 Q245",
-    "cue": "self-hosted Jupyter",
+    "cue": "self-hosted Jupyter notebooks + maximum flexibility",
     "category": "AI, ML & Application Modernization",
     "answerLetters": "C",
     "answerPattern": "C: Use Vertex AI for machine learning and machine learning operations (MLOps) for model deployment.",
@@ -1942,7 +1996,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261245
+    "sortOrder": 20261245,
+    "cueWhy": "I chose this cue because 'self-hosted Jupyter notebooks + maximum flexibility' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use Vertex AI for machine learning and machine learning operations (MLOps) for model deployment."
   },
   {
     "id": 56,
@@ -1950,7 +2005,7 @@
     "topic": 1,
     "questionNumber": 246,
     "ref": "2026 / T1 Q246",
-    "cue": "monolithic Python",
+    "cue": "monolithic Python application + slow deployment cycles",
     "category": "AI, ML & Application Modernization",
     "answerLetters": "C",
     "answerPattern": "C: Propose a phased, event-driven migration to a microservices architecture. Use Pub/Sub for asynchronous communication and deploy the fraud models on Vertex AI endpoints.",
@@ -1977,7 +2032,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261246
+    "sortOrder": 20261246,
+    "cueWhy": "I chose this cue because 'monolithic Python application + slow deployment cycles' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Propose a phased, event-driven migration to a microservices architecture. Use Pub/Sub for asynchronous communication and deploy the fraud models on Vertex AI endpoints."
   },
   {
     "id": 57,
@@ -1985,7 +2041,7 @@
     "topic": 1,
     "questionNumber": 247,
     "ref": "2026 / T1 Q247",
-    "cue": "three-tier application",
+    "cue": "web tier + application tier + database tier",
     "category": "Networking & Delivery",
     "answerLetters": "C",
     "answerPattern": "C: Use a combination of network tags and service accounts. Apply a unique network tag and a dedicated service account to the instances in each tier. Then create specific firewall rules that allow ingress traffic based on the source service account or tag of the upstream tier.",
@@ -2012,7 +2068,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261247
+    "sortOrder": 20261247,
+    "cueWhy": "I chose this cue because 'web tier + application tier + database tier' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use a combination of network tags and service accounts. Apply a unique network tag and a dedicated service account to the instances in each tier. Then create specific firewall rules that allow ingress traffic based..."
   },
   {
     "id": 58,
@@ -2020,7 +2077,7 @@
     "topic": 1,
     "questionNumber": 248,
     "ref": "2026 / T1 Q248",
-    "cue": "2 petabytes",
+    "cue": "2 petabytes + ten weeks + low latency",
     "category": "Migration & DR",
     "answerLetters": "B",
     "answerPattern": "B: Request Transfer Appliances from Google Cloud. Transfer the data using the appliances.",
@@ -2047,7 +2104,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261248
+    "sortOrder": 20261248,
+    "cueWhy": "I chose this cue because '2 petabytes + ten weeks + low latency' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Request Transfer Appliances from Google Cloud. Transfer the data using the appliances."
   },
   {
     "id": 59,
@@ -2055,7 +2113,7 @@
     "topic": 1,
     "questionNumber": 249,
     "ref": "2026 / T1 Q249",
-    "cue": "trade confirmation",
+    "cue": "immutable and serve as a legal record + accidentally deleted or maliciously overwritten",
     "category": "Security & Compliance",
     "answerLetters": "D",
     "answerPattern": "D: Enable Object Versioning on the bucket. Additionally, configure the bucket with a Bucket Lock and a retention policy of seven years.",
@@ -2082,7 +2140,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261249
+    "sortOrder": 20261249,
+    "cueWhy": "I chose this cue because 'immutable and serve as a legal record + accidentally deleted or maliciously overwritten' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Enable Object Versioning on the bucket. Additionally, configure the bucket with a Bucket Lock and a retention policy of seven years."
   },
   {
     "id": 60,
@@ -2090,7 +2149,7 @@
     "topic": 1,
     "questionNumber": 250,
     "ref": "2026 / T1 Q250",
-    "cue": "external auditors",
+    "cue": "external auditors + temporary, read-only access + individual auditor's identity",
     "category": "Security & Compliance",
     "answerLetters": "A",
     "answerPattern": "A: Apply an IAM policy binding that grants the roles/storage.objectViewer role to the Google Group. Configure this binding with a time-based IAM Condition that automatically grants access from October 1 to November 1.",
@@ -2117,7 +2176,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261250
+    "sortOrder": 20261250,
+    "cueWhy": "I chose this cue because 'external auditors + temporary, read-only access + individual auditor's identity' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Apply an IAM policy binding that grants the roles/storage.objectViewer role to the Google Group. Configure this binding with a time-based IAM Condition that automatically grants access from October 1 to November 1."
   },
   {
     "id": 61,
@@ -2125,7 +2185,7 @@
     "topic": 1,
     "questionNumber": 251,
     "ref": "2026 / T1 Q251",
-    "cue": "pull request is merged",
+    "cue": "pull request is merged + Cloud Run",
     "category": "DevOps & Operations",
     "answerLetters": "D",
     "answerPattern": "D: Connect your repository using the Cloud Build GitHub app. Create a trigger in Cloud Build. Once a pull request is merged, trigger Cloud Build to build and deploy the application to Cloud Run.",
@@ -2152,7 +2212,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261251
+    "sortOrder": 20261251,
+    "cueWhy": "I chose this cue because 'pull request is merged + Cloud Run' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Connect your repository using the Cloud Build GitHub app. Create a trigger in Cloud Build. Once a pull request is merged, trigger Cloud Build to build and deploy the application to Cloud Run."
   },
   {
     "id": 62,
@@ -2160,7 +2221,7 @@
     "topic": 1,
     "questionNumber": 252,
     "ref": "2026 / T1 Q252",
-    "cue": "Hardware Security",
+    "cue": "validated Hardware Security Module + fully integrated Google Cloud managed service",
     "category": "Security & Compliance",
     "answerLetters": "C",
     "answerPattern": "C: Create a new key in Cloud Key Management Service (Cloud KMS) with the HSM protection level.",
@@ -2187,7 +2248,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261252
+    "sortOrder": 20261252,
+    "cueWhy": "I chose this cue because 'validated Hardware Security Module + fully integrated Google Cloud managed service' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create a new key in Cloud Key Management Service (Cloud KMS) with the HSM protection level."
   },
   {
     "id": 63,
@@ -2195,7 +2257,7 @@
     "topic": 1,
     "questionNumber": 253,
     "ref": "2026 / T1 Q253",
-    "cue": "less than 10 minutes",
+    "cue": "recovery time objective (RTO) of less than 10 minutes + recovery point objective (RPO) of 2 minutes + full regional outage",
     "category": "Migration & DR",
     "answerLetters": "C",
     "answerPattern": "C: Configure the Cloud SQL instance with a cross-region read replica. In a disaster, promote the read replica to a standalone, primary instance.",
@@ -2222,7 +2284,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261253
+    "sortOrder": 20261253,
+    "cueWhy": "I chose this cue because 'recovery time objective (RTO) of less than 10 minutes + recovery point objective (RPO) of 2 minutes + full regional outage' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Configure the Cloud SQL instance with a cross-region read replica. In a disaster, promote the read replica to a standalone, primary instance."
   },
   {
     "id": 64,
@@ -2230,7 +2293,7 @@
     "topic": 1,
     "questionNumber": 254,
     "ref": "2026 / T1 Q254",
-    "cue": "static service account keys",
+    "cue": "static service account keys + must not have permissions to directly apply",
     "category": "Security & Compliance",
     "answerLetters": "B",
     "answerPattern": "B: Use service account impersonation in Cloud Build. Configure the pipeline to run terraform plan on pull requests, and require manual approval before running terraform apply.",
@@ -2257,7 +2320,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261254
+    "sortOrder": 20261254,
+    "cueWhy": "I chose this cue because 'static service account keys + must not have permissions to directly apply' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use service account impersonation in Cloud Build. Configure the pipeline to run terraform plan on pull requests, and require manual approval before running terraform apply."
   },
   {
     "id": 65,
@@ -2265,7 +2329,7 @@
     "topic": 1,
     "questionNumber": 255,
     "ref": "2026 / T1 Q255",
-    "cue": "all your tests",
+    "cue": "run all your tests + continuous delivery pipeline",
     "category": "DevOps & Operations",
     "answerLetters": "A",
     "answerPattern": "A: 1. After the developers push the code to a central repository, trigger Cloud Build to run unit tests. If all unit tests are successful, build the application container and push it to a central registry. 2. Trigger Cloud Build to deploy the container to a testing environment and run integration tests and acceptance tests. 3. If all tests are successful, deploy the application to the production environment and run the smoke tests.",
@@ -2292,7 +2356,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261255
+    "sortOrder": 20261255,
+    "cueWhy": "I chose this cue because 'run all your tests + continuous delivery pipeline' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: 1. After the developers push the code to a central repository, trigger Cloud Build to run unit tests. If all unit tests are successful, build the application container and push it to a central registry. 2. Trigger..."
   },
   {
     "id": 66,
@@ -2300,7 +2365,7 @@
     "topic": 1,
     "questionNumber": 256,
     "ref": "2026 / T1 Q256",
-    "cue": "infrastructure as code",
+    "cue": "infrastructure as code + Google Kubernetes Engine (GKE) extensively",
     "category": "DevOps & Operations",
     "answerLetters": "C",
     "answerPattern": "C: Set up Config Controller, and use YAML manifests to define the desired state of your Google Cloud resources. Apply these YAML configurations to provision and manage the resources.",
@@ -2327,7 +2392,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261256
+    "sortOrder": 20261256,
+    "cueWhy": "I chose this cue because 'infrastructure as code + Google Kubernetes Engine (GKE) extensively' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Set up Config Controller, and use YAML manifests to define the desired state of your Google Cloud resources. Apply these YAML configurations to provision and manage the resources."
   },
   {
     "id": 67,
@@ -2335,7 +2401,7 @@
     "topic": 1,
     "questionNumber": 257,
     "ref": "2026 / T1 Q257",
-    "cue": "static assets",
+    "cue": "Europe and Asia + slow loading static content",
     "category": "Networking & Delivery",
     "answerLetters": "BD",
     "answerPattern": "B: Enable Cloud CDN for the backend service that serves the static assets, and configure it as part of a global external HTTP(S) Load Balancer. | D: Deploy the application frontend service to Compute Engine managed instance groups in regions in Europe and Asia. Use a global external HTTP(S) Load Balancer to route user traffic to the nearest region.",
@@ -2366,7 +2432,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261257
+    "sortOrder": 20261257,
+    "cueWhy": "I chose this cue because 'Europe and Asia + slow loading static content' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer BD: B: Enable Cloud CDN for the backend service that serves the static assets, and configure it as part of a global external HTTP(S) Load Balancer. | D: Deploy the application frontend service to Compute Engine managed in..."
   },
   {
     "id": 68,
@@ -2374,7 +2441,7 @@
     "topic": 1,
     "questionNumber": 258,
     "ref": "2026 / T1 Q258",
-    "cue": "local file system",
+    "cue": "large volumes of media data + local file system",
     "category": "Data, Storage & Analytics",
     "answerLetters": "C",
     "answerPattern": "C: Use the gcsfuse command line tool to mount the Cloud Storage bucket as a local file system, and perform read/write operations in your bucket using standard file system semantics.",
@@ -2401,7 +2468,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261258
+    "sortOrder": 20261258,
+    "cueWhy": "I chose this cue because 'large volumes of media data + local file system' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use the gcsfuse command line tool to mount the Cloud Storage bucket as a local file system, and perform read/write operations in your bucket using standard file system semantics."
   },
   {
     "id": 69,
@@ -2409,7 +2477,7 @@
     "topic": 1,
     "questionNumber": 259,
     "ref": "2026 / T1 Q259",
-    "cue": "can tolerate interruptions",
+    "cue": "not time-sensitive + can tolerate interruptions",
     "category": "Compute, GKE & Cloud Run",
     "answerLetters": "B",
     "answerPattern": "B: Deploy spot VMs with attached persistent disks and implement checkpoint mechanisms.",
@@ -2436,7 +2504,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261259
+    "sortOrder": 20261259,
+    "cueWhy": "I chose this cue because 'not time-sensitive + can tolerate interruptions' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Deploy spot VMs with attached persistent disks and implement checkpoint mechanisms."
   },
   {
     "id": 70,
@@ -2444,7 +2513,7 @@
     "topic": 1,
     "questionNumber": 260,
     "ref": "2026 / T1 Q260",
-    "cue": "business units",
+    "cue": "business units + Finance + Marketing + Research and Development",
     "category": "AI, ML & Application Modernization",
     "answerLetters": "A",
     "answerPattern": "A: Create a folder for each department under the root Organization node. Apply the resource location Organization Policy on the Finance folder. Within the Marketing folder, create separate projects for mktg-prod and mktg-dev. Grant the compliance team the roles/viewer role at the Organization level.",
@@ -2471,7 +2540,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261260
+    "sortOrder": 20261260,
+    "cueWhy": "I chose this cue because 'business units + Finance + Marketing + Research and Development' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create a folder for each department under the root Organization node. Apply the resource location Organization Policy on the Finance folder. Within the Marketing folder, create separate projects for mktg-prod and m..."
   },
   {
     "id": 71,
@@ -2479,7 +2549,7 @@
     "topic": 1,
     "questionNumber": 261,
     "ref": "2026 / T1 Q261",
-    "cue": "new to Kubernetes",
+    "cue": "new to Kubernetes + reduce operational overhead",
     "category": "Migration & DR",
     "answerLetters": "D",
     "answerPattern": "D: Assess application and dependencies for containerization. Develop a migration strategy for deployment to GKE in Autopilot mode.",
@@ -2506,7 +2576,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261261
+    "sortOrder": 20261261,
+    "cueWhy": "I chose this cue because 'new to Kubernetes + reduce operational overhead' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Assess application and dependencies for containerization. Develop a migration strategy for deployment to GKE in Autopilot mode."
   },
   {
     "id": 72,
@@ -2514,7 +2585,7 @@
     "topic": 1,
     "questionNumber": 262,
     "ref": "2026 / T1 Q262",
-    "cue": "low-priority notifications",
+    "cue": "low-priority notifications + 99.9% availability",
     "category": "DevOps & Operations",
     "answerLetters": "C",
     "answerPattern": "C: Implement an error budget policy based on the availability of the SLO. Create a \"page\u201d alert that triggers only when the rate of burn of the error budget predicts a full exhaustion within the next 24 hours.",
@@ -2541,7 +2612,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261262
+    "sortOrder": 20261262,
+    "cueWhy": "I chose this cue because 'low-priority notifications + 99.9% availability' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Implement an error budget policy based on the availability of the SLO. Create a \"page\u201d alert that triggers only when the rate of burn of the error budget predicts a full exhaustion within the next 24 hours."
   },
   {
     "id": 73,
@@ -2549,7 +2621,7 @@
     "topic": 1,
     "questionNumber": 263,
     "ref": "2026 / T1 Q263",
-    "cue": "Prometheus Query Language",
+    "cue": "Prometheus + low-maintenance enterprise solution",
     "category": "DevOps & Operations",
     "answerLetters": "C",
     "answerPattern": "C: Enable Google Cloud Managed Service for Prometheus to monitor and alert on your workloads at scale.",
@@ -2576,7 +2648,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261263
+    "sortOrder": 20261263,
+    "cueWhy": "I chose this cue because 'Prometheus + low-maintenance enterprise solution' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Enable Google Cloud Managed Service for Prometheus to monitor and alert on your workloads at scale."
   },
   {
     "id": 74,
@@ -2584,7 +2657,7 @@
     "topic": 1,
     "questionNumber": 264,
     "ref": "2026 / T1 Q264",
-    "cue": "multiple cloud providers",
+    "cue": "Google Kubernetes Engine (GKE) and Amazon Elastic Kubernetes Service (EKS) + multiple cloud providers",
     "category": "DevOps & Operations",
     "answerLetters": "D",
     "answerPattern": "D: Utilize Config Sync as part of GKE to synchronize configurations from a centralized repository, and utilize Policy Controller to enforce policies using OPA Gatekeeper.",
@@ -2611,7 +2684,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261264
+    "sortOrder": 20261264,
+    "cueWhy": "I chose this cue because 'Google Kubernetes Engine (GKE) and Amazon Elastic Kubernetes Service (EKS) + multiple cloud providers' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Utilize Config Sync as part of GKE to synchronize configurations from a centralized repository, and utilize Policy Controller to enforce policies using OPA Gatekeeper."
   },
   {
     "id": 75,
@@ -2619,7 +2693,7 @@
     "topic": 1,
     "questionNumber": 265,
     "ref": "2026 / T1 Q265",
-    "cue": "container image vulnerabilities",
+    "cue": "prevent container image vulnerabilities + GKE production environment",
     "category": "Security & Compliance",
     "answerLetters": "BC",
     "answerPattern": "B: Incorporate vulnerability scanning before building container images, and use Google-maintained base images for your container deployments. | C: Enable Artifact Analysis for the container images, and stop deployment if critical vulnerabilities are found.",
@@ -2650,7 +2724,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261265
+    "sortOrder": 20261265,
+    "cueWhy": "I chose this cue because 'prevent container image vulnerabilities + GKE production environment' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer BC: B: Incorporate vulnerability scanning before building container images, and use Google-maintained base images for your container deployments. | C: Enable Artifact Analysis for the container images, and stop deployment..."
   },
   {
     "id": 76,
@@ -2658,7 +2733,7 @@
     "topic": 1,
     "questionNumber": 266,
     "ref": "2026 / T1 Q266",
-    "cue": "ISO/IEC 27001",
+    "cue": "security reports and documentation + ISO/IEC 27001 audit process",
     "category": "Security & Compliance",
     "answerLetters": "C",
     "answerPattern": "C: Review the Compliance Reports Manager for information about ISO/IEC 27001 compliance and related documentation on obtaining reports through your Google Cloud account.",
@@ -2685,7 +2760,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261266
+    "sortOrder": 20261266,
+    "cueWhy": "I chose this cue because 'security reports and documentation + ISO/IEC 27001 audit process' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Review the Compliance Reports Manager for information about ISO/IEC 27001 compliance and related documentation on obtaining reports through your Google Cloud account."
   },
   {
     "id": 77,
@@ -2693,7 +2769,7 @@
     "topic": 1,
     "questionNumber": 267,
     "ref": "2026 / T1 Q267",
-    "cue": "triage incidents",
+    "cue": "triage incidents quickly + Cloud Monitoring workspace",
     "category": "DevOps & Operations",
     "answerLetters": "A",
     "answerPattern": "A: 1. Navigate the predefined dashboards in the Cloud Monitoring workspace. 2. Add metrics and create alert policies.",
@@ -2720,7 +2796,8 @@
     "isNew": false,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261267
+    "sortOrder": 20261267,
+    "cueWhy": "I chose this cue because 'triage incidents quickly + Cloud Monitoring workspace' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: 1. Navigate the predefined dashboards in the Cloud Monitoring workspace. 2. Add metrics and create alert policies."
   },
   {
     "id": 78,
@@ -2755,7 +2832,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "EHR Healthcare",
-    "sortOrder": 20261268
+    "sortOrder": 20261268,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to EHR Healthcare, and 'new insurance providers' is the specific requirement that changes the design choice. When you see that trigger, map it to answer D: D: Utilize Infrastructure as Code (IaC) tools, such as Terraform, to define and manage infrastructure configurations."
   },
   {
     "id": 79,
@@ -2790,7 +2868,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "EHR Healthcare",
-    "sortOrder": 20261269
+    "sortOrder": 20261269,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to EHR Healthcare, and 'compromised credentials' is the specific requirement that changes the design choice. When you see that trigger, map it to answer C: C: Configure Workload Identity Federation with Active Directory to enable authentication and authorization for applications across both Kubernetes environments."
   },
   {
     "id": 80,
@@ -2825,7 +2904,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "EHR Healthcare",
-    "sortOrder": 20261270
+    "sortOrder": 20261270,
+    "cueWhy": "I chose this cue because the case name anchors the scenario to EHR Healthcare, and 'legacy relational database' is the specific requirement that changes the design choice. When you see that trigger, map it to answer A: A: Use the Database Migration Service (DMS) to migrate the MySQL databases to Cloud SQL."
   },
   {
     "id": 81,
@@ -2833,7 +2913,7 @@
     "topic": 1,
     "questionNumber": 271,
     "ref": "2026 / T1 Q271",
-    "cue": "more than 2 TB",
+    "cue": "more than 2 TB + resume where it left off",
     "category": "Data, Storage & Analytics",
     "answerLetters": "B",
     "answerPattern": "B: Utilize Storage Transfer Service (STS) to migrate objects to the destination bucket in the target region. Once the transfer is complete, delete the original source bucket objects.",
@@ -2860,7 +2940,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261271
+    "sortOrder": 20261271,
+    "cueWhy": "I chose this cue because 'more than 2 TB + resume where it left off' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Utilize Storage Transfer Service (STS) to migrate objects to the destination bucket in the target region. Once the transfer is complete, delete the original source bucket objects."
   },
   {
     "id": 82,
@@ -2868,7 +2949,7 @@
     "topic": 1,
     "questionNumber": 272,
     "ref": "2026 / T1 Q272",
-    "cue": "interconnected virtual machines",
+    "cue": "interconnected virtual machines + identify dependencies + total cost of ownership",
     "category": "Migration & DR",
     "answerLetters": "B",
     "answerPattern": "B: Use the Google Cloud Migration Center to perform an automated discovery and assessment of the on-premises environment.",
@@ -2895,7 +2976,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261272
+    "sortOrder": 20261272,
+    "cueWhy": "I chose this cue because 'interconnected virtual machines + identify dependencies + total cost of ownership' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use the Google Cloud Migration Center to perform an automated discovery and assessment of the on-premises environment."
   },
   {
     "id": 83,
@@ -2903,7 +2985,7 @@
     "topic": 1,
     "questionNumber": 273,
     "ref": "2026 / T1 Q273",
-    "cue": "similar dashboard",
+    "cue": "similar dashboard + minimize time and effort",
     "category": "DevOps & Operations",
     "answerLetters": "A",
     "answerPattern": "A: Export your dashboard to a JSON file and share it with the Ops team.",
@@ -2930,7 +3012,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261273
+    "sortOrder": 20261273,
+    "cueWhy": "I chose this cue because 'similar dashboard + minimize time and effort' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Export your dashboard to a JSON file and share it with the Ops team."
   },
   {
     "id": 84,
@@ -2938,7 +3021,7 @@
     "topic": 1,
     "questionNumber": 274,
     "ref": "2026 / T1 Q274",
-    "cue": "tightly coupled dependencies",
+    "cue": "tightly coupled dependencies + \"all-at-once\" migration",
     "category": "Migration & DR",
     "answerLetters": "D",
     "answerPattern": "D: Use dependency mapping to group application components into waves, create a phased migration plan, and incorporate performance testing for each wave.",
@@ -2965,7 +3048,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261274
+    "sortOrder": 20261274,
+    "cueWhy": "I chose this cue because 'tightly coupled dependencies + \"all-at-once\" migration' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use dependency mapping to group application components into waves, create a phased migration plan, and incorporate performance testing for each wave."
   },
   {
     "id": 85,
@@ -2973,7 +3057,7 @@
     "topic": 1,
     "questionNumber": 275,
     "ref": "2026 / T1 Q275",
-    "cue": "flash sales",
+    "cue": "unpredictable flash sales + automatically handle high traffic",
     "category": "Compute, GKE & Cloud Run",
     "answerLetters": "C",
     "answerPattern": "C: Deploy the application as a Cloud Run service. Configure request-based auto-scaling and use gradual rollouts by splitting traffic between revisions.",
@@ -3000,7 +3084,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261275
+    "sortOrder": 20261275,
+    "cueWhy": "I chose this cue because 'unpredictable flash sales + automatically handle high traffic' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Deploy the application as a Cloud Run service. Configure request-based auto-scaling and use gradual rollouts by splitting traffic between revisions."
   },
   {
     "id": 86,
@@ -3008,7 +3093,7 @@
     "topic": 1,
     "questionNumber": 276,
     "ref": "2026 / T1 Q276",
-    "cue": "not correlated",
+    "cue": "logs are not correlated + downstream services",
     "category": "DevOps & Operations",
     "answerLetters": "A",
     "answerPattern": "A: Implement Cloud Trace by ensuring the traceparent header is propagated between microservice calls to link logs to a single trace.",
@@ -3035,7 +3120,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261276
+    "sortOrder": 20261276,
+    "cueWhy": "I chose this cue because 'logs are not correlated + downstream services' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Implement Cloud Trace by ensuring the traceparent header is propagated between microservice calls to link logs to a single trace."
   },
   {
     "id": 87,
@@ -3043,7 +3129,7 @@
     "topic": 1,
     "questionNumber": 277,
     "ref": "2026 / T1 Q277",
-    "cue": "GPU capacity",
+    "cue": "GPU capacity is always available + production and development projects",
     "category": "Compute, GKE & Cloud Run",
     "answerLetters": "C",
     "answerPattern": "C: Create an owner project with shared reservations, and then configure the production project and development project as consumer projects to consume capacity.",
@@ -3070,7 +3156,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261277
+    "sortOrder": 20261277,
+    "cueWhy": "I chose this cue because 'GPU capacity is always available + production and development projects' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create an owner project with shared reservations, and then configure the production project and development project as consumer projects to consume capacity."
   },
   {
     "id": 88,
@@ -3078,7 +3165,7 @@
     "topic": 1,
     "questionNumber": 278,
     "ref": "2026 / T1 Q278",
-    "cue": "zone becomes unavailable",
+    "cue": "zone becomes unavailable + recreate the lost capacity",
     "category": "Compute, GKE & Cloud Run",
     "answerLetters": "C",
     "answerPattern": "C: Create a single regional managed instance group (MIG) configured to span all three zones. Place a regional external Application Load Balancer in front of the MIG, and configure its backend service with a health check.",
@@ -3105,7 +3192,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261278
+    "sortOrder": 20261278,
+    "cueWhy": "I chose this cue because 'zone becomes unavailable + recreate the lost capacity' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create a single regional managed instance group (MIG) configured to span all three zones. Place a regional external Application Load Balancer in front of the MIG, and configure its backend service with a health check."
   },
   {
     "id": 89,
@@ -3113,7 +3201,7 @@
     "topic": 1,
     "questionNumber": 279,
     "ref": "2026 / T1 Q279",
-    "cue": "Google Groups",
+    "cue": "corporate identity + audit trails + simple to operate",
     "category": "Security & Compliance",
     "answerLetters": "B",
     "answerPattern": "B: Enable uniform bucket-level access on the buckets, and grant predefined Storage IAM roles to the Google Groups.",
@@ -3140,7 +3228,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261279
+    "sortOrder": 20261279,
+    "cueWhy": "I chose this cue because 'corporate identity + audit trails + simple to operate' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Enable uniform bucket-level access on the buckets, and grant predefined Storage IAM roles to the Google Groups."
   },
   {
     "id": 90,
@@ -3148,7 +3237,7 @@
     "topic": 1,
     "questionNumber": 280,
     "ref": "2026 / T1 Q280",
-    "cue": "shared file system",
+    "cue": "hundreds of Compute Engine virtual machines + concurrent, low-latency read and write access",
     "category": "Data, Storage & Analytics",
     "answerLetters": "B",
     "answerPattern": "B: Create a Filestore Enterprise instance in the same region as the VMs. Mount the Filestore file share on each Compute Engine VM.",
@@ -3175,7 +3264,8 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261280
+    "sortOrder": 20261280,
+    "cueWhy": "I chose this cue because 'hundreds of Compute Engine virtual machines + concurrent, low-latency read and write access' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create a Filestore Enterprise instance in the same region as the VMs. Mount the Filestore file share on each Compute Engine VM."
   },
   {
     "id": 91,
@@ -3183,7 +3273,7 @@
     "topic": 1,
     "questionNumber": 281,
     "ref": "2026 / T1 Q281",
-    "cue": "pre-approved architectural patterns",
+    "cue": "pre-approved architectural patterns + self-service",
     "category": "AI, ML & Application Modernization",
     "answerLetters": "B",
     "answerPattern": "B: Use Service Catalog to define, govern, and offer a portfolio of approved products. Include Terraform scripts into Service Catalog items.",
@@ -3210,6 +3300,7 @@
     "isNew": true,
     "sourceType": "Dump",
     "caseStudy": "",
-    "sortOrder": 20261281
+    "sortOrder": 20261281,
+    "cueWhy": "I chose this cue because 'pre-approved architectural patterns + self-service' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use Service Catalog to define, govern, and offer a portfolio of approved products. Include Terraform scripts into Service Catalog items."
   }
 ]
