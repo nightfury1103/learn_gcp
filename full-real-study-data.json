@@ -4115,8 +4115,8 @@
     "ref": "Uploaded / Altostrat Media Q300",
     "cue": "Altostrat Media + content ingestion workflows",
     "category": "Case Study",
-    "answerLetters": "AC",
-    "answerPattern": "A: Selecting the right data transfer service (e.g., Transfer Appliance vs. Cloud Interconnect). | C: Rewriting the ingestion logic to use cloud-native triggers (e.g., Cloud Functions).",
+    "answerLetters": "ABC",
+    "answerPattern": "A: Selecting the right data transfer service (e.g., Transfer Appliance vs. Cloud Interconnect). | B: Planning for network bandwidth and potential egress costs from the on-premises location. | C: Rewriting the ingestion logic to use cloud-native triggers (e.g., Cloud Functions).",
     "questionText": "As part of their migration plan for content ingestion workflows, what are three key technical considerations Altostrat must address to ensure a successful transition from on-premises to Google Cloud? (Choose three.)",
     "options": [
       {
@@ -4595,8 +4595,8 @@
     "ref": "Uploaded / Cymbal Retail Q259",
     "cue": "Cymbal Retail + stable, private connection endpoint",
     "category": "Case Study",
-    "answerLetters": "C",
-    "answerPattern": "C: Private Service Connect",
+    "answerLetters": "CD",
+    "answerPattern": "C: Private Service Connect | D: Apigee",
     "questionText": "Cymbal needs to securely expose a new inventory management API, hosted on a private GKE cluster, to a trusted third-party logistics partner. The partner requires a stable, private connection endpoint and must not have access to Cymbal’s VPC network. Which two services should Cymbal use to provide this access securely? (Choose two.)",
     "options": [
       {
@@ -4707,8 +4707,8 @@
     "ref": "Uploaded / Cymbal Retail Q262",
     "cue": "Cymbal Retail + prevented from viewing personally identifiable information",
     "category": "Case Study",
-    "answerLetters": "B",
-    "answerPattern": "B: Implement BigQuery column-level security to restrict access to PII columns.",
+    "answerLetters": "BC",
+    "answerPattern": "B: Implement BigQuery column-level security to restrict access to PII columns. | C: Create an authorized view that omits the PII columns and grant the team access only to the view.",
     "questionText": "Cymbal’s data science team needs to analyze customer chat logs stored in BigQuery to improve the virtual agent’s performance. The team must be able to run aggregate queries but should be prevented from viewing personally identifiable information (PII) like names and email addresses within the logs. Which two controls should be implemented to enforce this? (Choose two.)",
     "options": [
       {
