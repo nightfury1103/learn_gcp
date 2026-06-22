@@ -26,7 +26,7 @@ def main():
     require(INDEX, "setState(item.id,{missed:!state(item.id).missed},{sync:true})", "missed autosync")
     require(INDEX, "window.onload=()=>{draw();loadGitHubSettings();loadProgressFromGitHub();};", "github progress autoload")
     require(INDEX, "GitHub is the saved progress store", "storage source of truth hint")
-    require(SW, 'const CACHE_NAME = "gcp-pca-study-v10";', "service worker cache bump")
+    require(SW, 'const CACHE_NAME = "gcp-pca-study-v11";', "service worker cache bump")
     print("static sync checks passed")
 
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = "gcp-pca-study-v10";
+const CACHE_NAME = "gcp-pca-study-v11";
 const ASSETS = [
   "./full-real-study-data.json",
   "./full-real-study-reference.md",
