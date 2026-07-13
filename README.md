@@ -1,11 +1,22 @@
-# GCP PCA Study
+# GCP Cert Study Pages
 
-Static GitHub Pages version of the mobile answer-first study app.
+Static GitHub Pages study apps for Google Cloud certifications.
 
 ## Pages
 
-- `index.html` - main answer-first learning page.
-- `pca_exact_keyword_mindmap_2024_now_360.html` - exact-keyword memory map.
-- `exact-question-keywords.md` - exact keyword reference table.
+- [`index.html`](index.html) — Professional Cloud Architect (existing PCA study set)
+- [`pde.html`](pde.html) — Professional Data Engineer, **2024 to now**
 
-The app stores progress in browser `localStorage`, so progress is local to each device/browser.
+## Tooling
+
+Crawler, discussion fetcher, builder, and tests live in
+[`tools/gcp_cert`](tools/gcp_cert/).
+
+Preferred PDE refresh (discussion pages, includes year from comment dates):
+
+```sh
+python3 tools/gcp_cert/fetch_pde_discussions.py --discover --scan 0 --out pde_questions_crawled
+python3 tools/gcp_cert/build_full_real_app.py --source pde_questions_crawled.json --min-year 2024
+```
+
+Progress is stored in browser `localStorage` (separate keys per cert page).

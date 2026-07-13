@@ -1,7 +1,10 @@
-const CACHE_NAME = "gcp-pca-study-v11";
+const CACHE_NAME = "gcp-cert-study-v12";
 const ASSETS = [
   "./full-real-study-data.json",
   "./full-real-study-reference.md",
+  "./pde.html",
+  "./pde-study-data.json",
+  "./pde-study-reference.md",
   "./pca_exact_keyword_mindmap_2024_now_360.html",
   "./pca_exact_keyword_mindmap_2024_now_360.svg",
   "./pca_exact_keyword_mindmap_2024_now_360_full.png",
