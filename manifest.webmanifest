@@ -1,9 +1,9 @@
 {
-  "name": "GCP PCA Full Real Study",
-  "short_name": "GCP PCA",
+  "name": "GCP Cert Study",
+  "short_name": "GCP Cert",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f5f7fb",
-  "theme_color": "#1a73e8",
-  "description": "Mobile answer-first study page for real GCP PCA dump questions, including older real case-study rows."
+  "background_color": "#071421",
+  "theme_color": "#0b1f33",
+  "description": "Choose Professional Cloud Architect or Professional Data Engineer study pages."
 }

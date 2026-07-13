@@ -4,8 +4,11 @@ Static GitHub Pages study apps for Google Cloud certifications.
 
 ## Pages
 
-- [`index.html`](index.html) — Professional Cloud Architect (existing PCA study set)
+- [`index.html`](index.html) — choose PCA or PDE
+- [`pca.html`](pca.html) — Professional Cloud Architect
 - [`pde.html`](pde.html) — Professional Data Engineer, **2024 to now**
+
+Live site: https://nightfury1103.github.io/learn_gcp/
 
 ## Tooling
 

@@ -1,8 +1,11 @@
-const CACHE_NAME = "gcp-cert-study-v12";
+const CACHE_NAME = "gcp-cert-study-v13";
 const ASSETS = [
+  "./",
+  "./index.html",
+  "./pca.html",
+  "./pde.html",
   "./full-real-study-data.json",
   "./full-real-study-reference.md",
-  "./pde.html",
   "./pde-study-data.json",
   "./pde-study-reference.md",
   "./pca_exact_keyword_mindmap_2024_now_360.html",
@@ -32,9 +35,11 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(event.request).then((response) => {
         const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", copy));
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
         return response;
-      }).catch(() => caches.match("./index.html"))
+      }).catch(() =>
+        caches.match(event.request).then((cached) => cached || caches.match("./index.html"))
+      )
     );
     return;
   }

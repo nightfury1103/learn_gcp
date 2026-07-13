@@ -10,7 +10,8 @@ from pathlib import Path
 
 SITE = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE = SITE / "pde_questions_crawled.json"
-DEFAULT_TEMPLATE = SITE / "index.html"
+DEFAULT_TEMPLATE = SITE / "pca.html"
+
 
 
 def norm(value: str) -> str:
@@ -232,6 +233,12 @@ def render_study_page(
     text = text.replace('href="full-real-study-reference.md"', 'href="pde-study-reference.md"')
     text = text.replace('href="real-dump-study-reference.md"', 'href="pde-study-reference.md"')
     text = strip_pca_case_filters(text)
+    if 'href="index.html"' not in text.split("const DATA")[0]:
+        text = text.replace(
+            '<div class="title">',
+            '<div class="title"><a href="index.html" style="display:inline-block;margin-bottom:6px;color:#0f8a5f;font-size:12px;font-weight:700;text-decoration:none">← All certs</a>',
+            1,
+        )
     out_path.write_text(text, encoding="utf-8")
 
 
