@@ -1,0 +1,662 @@
+{
+  "1-15": {
+    "cue": "strong consistency",
+    "cueWhy": "Streaming inserts are eventually consistent, so aggregations run immediately can miss in-flight rows. The trigger is needing stronger consistency after streaming inserts — wait about twice the typical availability latency before querying."
+  },
+  "1-19": {
+    "cue": "minimize the storage cost",
+    "cueWhy": "A like-for-like Dataproc move with huge Persistent Disk is expensive. When the goal is minimize storage cost, keep data in Cloud Storage and let Dataproc use it, instead of 50 TB PD per node."
+  },
+  "1-44": {
+    "cue": "multiple values + ordered by",
+    "cueWhy": "Datastore equality filters on multi-valued properties plus an inequality/order on another property need a composite index. Manually define that index for actor/tag + date_released style queries."
+  },
+  "1-62": {
+    "cue": "late or out of order",
+    "cueWhy": "Batch and stream events can arrive late. Dataflow handles that with event-time watermarks and timestamps, not just a single global window or naive sliding windows."
+  },
+  "1-64": {
+    "cue": "do not want individual users to authenticate",
+    "cueWhy": "The app must query BigQuery without end-user Google identities on the dataset. Use a service account with dataset access and its key from the app."
+  },
+  "1-73": {
+    "cue": "transactions that scale horizontally + range queries",
+    "cueWhy": "Need horizontal transactional scale plus range queries on non-key columns. That is Spanner with secondary indexes, not Cloud SQL."
+  },
+  "1-74": {
+    "cue": "financial time-series + Apache Hadoop",
+    "cueWhy": "Frequent updates/streaming time-series plus migrating Hadoop-style workloads points to Bigtable as the storage engine."
+  },
+  "1-75": {
+    "cue": "expose aggregates + analysis cost for other projects",
+    "cueWhy": "Share only aggregates, keep user-level data private, and push query cost to consumers. An authorized view over aggregates does that without duplicating storage."
+  },
+  "1-77": {
+    "cue": "increase the training speed",
+    "cueWhy": "Training is slow because of training-set size/complexity. Subsample the training data to speed training; test-set size does not drive training time."
+  },
+  "1-79": {
+    "cue": "maximize transfer speeds",
+    "cueWhy": "Hybrid ingest is bottlenecked getting data into GCP. Raising datacenter→GCP network bandwidth is the lever, not disk or VPC→GCS bandwidth alone."
+  },
+  "1-82": {
+    "cue": "tracking_table + fine-grained analysis of each day's events",
+    "cueWhy": "One big tracking_table with streaming ingest and cheap per-day analysis means a partitioned BigQuery table using a TIMESTAMP partition column, not YYYYMMDD shards."
+  },
+  "1-85": {
+    "cue": "avoid introducing new projects",
+    "cueWhy": "On-demand 2K slots/project is starving queries and you cannot add projects. Switch to flat-rate/reservations and set hierarchical priorities."
+  },
+  "1-105": {
+    "cue": "multiple dependencies + every day",
+    "cueWhy": "Daily multi-step Dataproc/Dataflow pipeline with dependencies needs a managed orchestrator → Cloud Composer (Airflow)."
+  },
+  "1-142": {
+    "cue": "monitor slot usage",
+    "cueWhy": "Teams need slot usage visibility in their projects. Monitor BigQuery slots/allocated_for_project (slots/allocated) style metrics, not scanned_bytes."
+  },
+  "1-152": {
+    "cue": "40 TB + GeoJSON",
+    "cueWhy": "Huge multi-source analytics with GeoJSON telemetry and dashboards fits BigQuery, not OLTP stores like Cloud SQL/Datastore."
+  },
+  "1-166": {
+    "cue": "package-tracking + query performance",
+    "cueWhy": "Ingest-date partitioning is not how analysts filter packages. Cluster on package-tracking ID to speed lifecycle/geospatial package queries."
+  },
+  "1-167": {
+    "cue": "peak usage + fluctuate",
+    "cueWhy": "On-prem Spark/Hive/HDFS sized for peaks but batchy/variable. Lift to Dataproc with Cloud Storage first, modernize later — cheapest lift with elastic storage."
+  },
+  "1-174": {
+    "cue": "70% of customer requests + 10 intents",
+    "cueWhy": "Automate the small intent set covering most volume first so agents focus on the long-tail complicated 30%."
+  },
+  "1-179": {
+    "cue": "referential integrity + PII",
+    "cueWhy": "Mask PII but keep joinability on names/emails. Use DLP cryptographic format-preserving tokens/pseudonyms, not irreversible redaction."
+  },
+  "1-180": {
+    "cue": "author information is kept in a separate table",
+    "cueWhy": "BigQuery schema guidance for 1:many attributes is nesting (author RECORD/ARRAY), not forced relational joins."
+  },
+  "1-196": {
+    "cue": "POSIX-compliant + weekly",
+    "cueWhy": "Recurring secure transfer from on-prem POSIX with limited public bandwidth → Storage Transfer Service for on-premises on a weekly schedule."
+  },
+  "1-204": {
+    "cue": "invalid values + near-real time",
+    "cueWhy": "Multi-vendor streaming into BigQuery ML/Vertex needs cleansing. Pub/Sub + Dataflow sanitize, then stream to BigQuery."
+  },
+  "1-206": {
+    "cue": "longtail and outlier + near-real time",
+    "cueWhy": "Cleanse outliers in near real time before AI. Programmatic Dataflow cleansing into BigQuery is the fit."
+  },
+  "1-207": {
+    "cue": "location_id and device_version",
+    "cueWhy": "Queries filter recent data by location_id and device_version. Partition by date, cluster by those filter columns."
+  },
+  "1-208": {
+    "cue": "partial results + count the votes exactly once",
+    "cueWhy": "Live votes need real-time partials plus exact-once final count cheaply. Pub/Sub → Dataflow into Bigtable (live) and BigQuery (final analytics)."
+  },
+  "1-209": {
+    "cue": "ingest-date partitioning + geospatial trends + package",
+    "cueWhy": "Queries by package lifecycle not ingest day → cluster on package-tracking ID."
+  },
+  "1-210": {
+    "cue": "each team can access only the assets",
+    "cueWhy": "Data mesh with isolated products: one Dataplex lake per product with landing/raw/curated zones and team-scoped access."
+  },
+  "1-211": {
+    "cue": "less than 24 hours + keeping costs to a minimum",
+    "cueWhy": "Protect a frequently updated multi-region sales table with <24h RPO cheaply: daily export to a dual/multi-region Cloud Storage bucket."
+  },
+  "1-212": {
+    "cue": "network tags + communicate with one another",
+    "cueWhy": "Dataflow workers must talk on TCP 12345/12346. With tag-based firewalls, allow those ports for the Dataflow network tag."
+  },
+  "1-213": {
+    "cue": "country_name and username + 10 PB",
+    "cueWhy": "Filter-heavy huge order table → cluster by country and username."
+  },
+  "1-214": {
+    "cue": "simulate a Redis instance failover + no impact on production data",
+    "cueWhy": "Practice failover without touching prod data: use a non-prod Standard Tier instance and force-data-loss manual failover."
+  },
+  "1-215": {
+    "cue": "partner organization + CMEK",
+    "cueWhy": "Partner lacks your CMEK. Copy needed tables to a non-CMEK dataset and share via Analytics Hub listing."
+  },
+  "1-216": {
+    "cue": "does not have a public IP address + connection failure",
+    "cueWhy": "Dataflow in Project A must reach private Cloud SQL in Project B. Peer VPCs and use a private proxy VM in B on the peered subnet."
+  },
+  "1-217": {
+    "cue": "must not be able to access the sensitive data",
+    "cueWhy": "Column security via policy tags: analytics team must not have Fine-Grained Reader on sensitive tags while still reading non-sensitive columns."
+  },
+  "1-218": {
+    "cue": "same database capacity + promoting a read replica",
+    "cueWhy": "After promoting Region2 replica, recreate capacity: two new replicas from the new primary (Region3 + another region)."
+  },
+  "1-219": {
+    "cue": "task does not succeed",
+    "cueWhy": "Composer/Airflow task failure notifications use on_failure_callback on the operator, not retry/SLA callbacks."
+  },
+  "1-220": {
+    "cue": "does not go through the public internet",
+    "cueWhy": "On-prem MySQL with no public IP into BigQuery privately: Datastream over Cloud Interconnect with private connectivity."
+  },
+  "1-221": {
+    "cue": "as little movement of data as possible",
+    "cueWhy": "Query US BigQuery plus US Azure/AWS object data in place → BigQuery Omni / BigLake, not bulk copying everything in."
+  },
+  "1-222": {
+    "cue": "low code + cleanse and explore",
+    "cueWhy": "Data science needs low-code prep/validation on Cloud Storage files → Dataprep."
+  },
+  "1-223": {
+    "cue": "uniqueness and null value checks + Dataform",
+    "cueWhy": "ELT quality checks inside Dataform pipelines belong as Dataform assertions in code."
+  },
+  "1-225": {
+    "cue": "minimizing ETL data processing changes",
+    "cueWhy": "Move Spark+Parquet with managed services and minimal pipeline rewrites: Cloud Storage + Dataproc Metastore, run Spark on Dataproc; BigQuery later."
+  },
+  "1-226": {
+    "cue": "any future project cannot access",
+    "cueWhy": "Lock a confidential Pub/Sub topic to project A only, including future projects → VPC Service Controls perimeter around project A."
+  },
+  "1-227": {
+    "cue": "few hundred + read-only clients + Basic Tier",
+    "cueWhy": "Many read-only clients need Standard Tier Redis with read replicas."
+  },
+  "1-228": {
+    "cue": "reprocesses the previous two days of delivered Pub/Sub messages",
+    "cueWhy": "Need already-acked history for replay → retain-acked-messages (plus snapshot/new sub as second control)."
+  },
+  "1-229": {
+    "cue": "outer joins and analytic functions + no less than 4 hours old",
+    "cueWhy": "Non-incremental materialized views with max_staleness 4h speed viz SQL."
+  },
+  "1-230": {
+    "cue": "minimal changes + Hadoop + Airflow",
+    "cueWhy": "Lift Hadoop to Dataproc + GCS for HDFS; keep orchestration on Cloud Composer."
+  },
+  "1-231": {
+    "cue": "worker pod evictions + workers memory usage",
+    "cueWhy": "Composer OOM/evictions: raise max workers and lower concurrency (and/or worker memory)."
+  },
+  "1-232": {
+    "cue": "only the europe-west3 region",
+    "cueWhy": "Org-wide location lock → resourceLocations constraint to europe-west3."
+  },
+  "1-233": {
+    "cue": "job queuing or slot contention",
+    "cueWhy": "Admin resource charts + INFORMATION_SCHEMA to diagnose slot/queue slowdowns."
+  },
+  "1-234": {
+    "cue": "10 PB of historical + 1000 queries per second",
+    "cueWhy": "Huge history in BigQuery; hot last-state API in Cloud SQL."
+  },
+  "1-235": {
+    "cue": "no fixed schedule + different for every table",
+    "cueWhy": "Event-driven sequential Dataproc/BQ transforms per table → Composer DAGs + GCS trigger."
+  },
+  "1-236": {
+    "cue": "regional outage + several readers from various geographic regions",
+    "cueWhy": "HA Cloud SQL + cross-region HA replica, cascade readers, promote on failover."
+  },
+  "1-237": {
+    "cue": "stream or batch-load + mask some sensitive data + programmatic",
+    "cueWhy": "One Beam pipeline covering stream/batch + DLP into BQ is cost-efficient."
+  },
+  "1-238": {
+    "cue": "per-user crypto-deletion",
+    "cueWhy": "Native per-user crypto-shredding in BQ → AEAD functions."
+  },
+  "1-239": {
+    "cue": "quota errors + 1500 queries + non time-sensitive",
+    "cueWhy": "Slot contention: run pipelines as batch jobs; keep ad-hoc interactive."
+  },
+  "1-240": {
+    "cue": "Data engineers + Analytic users",
+    "cueWhy": "Lake: dataOwner for engineers; curated zone: dataReader for analysts."
+  },
+  "1-241": {
+    "cue": "regional failure + minimize the recovery point objective (RPO)",
+    "cueWhy": "Pipeline buckets surviving regional failure with low RPO → dual-region + turbo replication."
+  },
+  "1-242": {
+    "cue": "RPO of 15 minutes + regional outage",
+    "cueWhy": "Dual-region turbo GCS + seek subscription back + restart Dataflow in secondary region."
+  },
+  "1-243": {
+    "cue": "replace the nulls with zeros",
+    "cueWhy": "For BQML features, replace null feature1 with 0 in the SELECT (IFNULL/COALESCE) feeding the model."
+  },
+  "1-244": {
+    "cue": "full control of their collected data + exchange their data",
+    "cueWhy": "Teams keep ownership and share read access → publish/subscribe via Analytics Hub."
+  },
+  "1-245": {
+    "cue": "completed processing your data + model development lifecycle",
+    "cueWhy": "After prep, next ML step is split train vs test data."
+  },
+  "1-246": {
+    "cue": "street addresses",
+    "cueWhy": "Find STREET_ADDRESS occurrences across a dataset → DLP deep inspection with that infoType."
+  },
+  "1-247": {
+    "cue": "central data platform team is becoming a bottleneck + data mesh",
+    "cueWhy": "Per-domain Dataplex lakes/zones owned by domain teams removes central bottleneck."
+  },
+  "1-248": {
+    "cue": "fewer than 8 vCPU",
+    "cueWhy": "Cheap recurring filter of nested VM inventory → view with filter + UNNEST."
+  },
+  "1-249": {
+    "cue": "There should not be any charges for data retrieval",
+    "cueWhy": "No retrieval fees, instant access, deletable old data → Autoclass."
+  },
+  "1-250": {
+    "cue": "email field + personally identifiable information (PII) should not be accessible",
+    "cueWhy": "Join on email without exposing PII → DLP FFX format-preserving encryption then load BQ."
+  },
+  "1-251": {
+    "cue": "not deleted or modified",
+    "cueWhy": "Legal hold immutability → retention policy and lock it."
+  },
+  "1-252": {
+    "cue": "historical record of all data + easy-to-use",
+    "cueWhy": "Monthly-updating dims with history for viz → denormalized append-only nested model + ingest time."
+  },
+  "1-253": {
+    "cue": "only internal IP addresses and no external IP addresses",
+    "cueWhy": "Org bans external IPs: Private Google Access + internal-IP Dataflow workers."
+  },
+  "1-254": {
+    "cue": "autoscaler is not spinning up additional workers",
+    "cueWhy": "Fusion hides parallelism so autoscaler stalls → Reshuffle to break fusion."
+  },
+  "1-255": {
+    "cue": "Oracle + continuously synchronize + minimize the need to manage infrastructure",
+    "cueWhy": "Managed Oracle→BQ continuous sync on private VPC → Datastream."
+  },
+  "1-256": {
+    "cue": "no Internet access + reactive way every time a new file",
+    "cueWhy": "Private Composer react to GCS object: GCS notify → CF via PSC to Airflow API."
+  },
+  "1-257": {
+    "cue": "ingested once + access patterns of individual objects will be random",
+    "cueWhy": "One-write random-read cost optimization without app changes → Autoclass."
+  },
+  "1-258": {
+    "cue": "your own encryption keys + GUI-based solution",
+    "cueWhy": "GUI ingest of Parquet/CSV into GCS with customer keys → Cloud Data Fusion."
+  },
+  "1-259": {
+    "cue": "graphical user interfaces + spreadsheet",
+    "cueWhy": "GUI prep then analyze in sheets → Dataprep to BQ + Connected Sheets."
+  },
+  "1-260": {
+    "cue": "strict completion time SLAs + ad-hoc analytical queries",
+    "cueWhy": "SLA project: Enterprise baseline 300 + autoscale 500; ad-hoc stays on-demand."
+  },
+  "1-261": {
+    "cue": "local storage space on your existing data warehouse is limited",
+    "cueWhy": "Teradata→BQ with little code and limited local disk → BQ Data Transfer JDBC FastExport."
+  },
+  "1-262": {
+    "cue": "on-premises hardware security module (HSM)",
+    "cueWhy": "Keys only on customer HSM for BQ → Cloud EKM linked from on-prem HSM."
+  },
+  "1-263": {
+    "cue": "merged into one step + potential bottleneck",
+    "cueWhy": "Fused Dataflow graph hides stage cost → Reshuffle between steps to inspect."
+  },
+  "1-264": {
+    "cue": "predictable cost model + scan intensive",
+    "cueWhy": "On-demand CDC merge scanning huge target → BigQuery reservation."
+  },
+  "1-265": {
+    "cue": "past seven days + lowest RPO",
+    "cueWhy": "Recover from recent table corruption cheaply → BigQuery time travel."
+  },
+  "1-266": {
+    "cue": "more than 30 minutes + no data has been received for 15 minutes",
+    "cueWhy": "Activity then 15-minute silence ends the window → session windows with 15-minute gap."
+  },
+  "1-267": {
+    "cue": "tightly coupled immutable relationship + frequently joined",
+    "cueWhy": "Header/line sales tables rarely change and always join → nest lines under header."
+  },
+  "1-268": {
+    "cue": "without losing any data + more than 10 minutes",
+    "cueWhy": "Replace streaming Dataflow safely: drain old pipeline, then start new."
+  },
+  "1-269": {
+    "cue": "BigQuery, Pub/Sub, and a PostgreSQL + discoverability",
+    "cueWhy": "Auto-catalog BQ/Pub/Sub in Data Catalog; manually catalog Postgres via API."
+  },
+  "1-270": {
+    "cue": "every two hours + three consecutive failures",
+    "cueWhy": "Scheduled BQ SQL every 2h with email after 3 failures: scheduled query → Pub/Sub → Cloud Functions."
+  },
+  "1-271": {
+    "cue": "daily stored data increased by 50% + volumes of data in Pub/Sub remained the same",
+    "cueWhy": "Same Pub/Sub volume but bigger BQ partitions → investigate duplicates and which Dataflow version wrote them."
+  },
+  "1-272": {
+    "cue": "has_sensitive_data + Human Resources (HR) group",
+    "cueWhy": "Public tag-template search for everyone; only HR gets dataViewer on sensitive tables."
+  },
+  "1-273": {
+    "cue": "certain tag is pushed + development and another instance for production",
+    "cueWhy": "Tag-based DAG deploy: Cloud Build to dev bucket then prod bucket after tests."
+  },
+  "1-274": {
+    "cue": "Google-managed encryption key + Cloud KMS",
+    "cueWhy": "Org requires CMEK: create CMEK table and migrate from Google-managed table."
+  },
+  "1-275": {
+    "cue": "ORC + Hive partitioning + SQL on the Hive query engine",
+    "cueWhy": "Explore ORC Hive-partitioned HDFS-like data: copy to GCS + BigQuery external tables."
+  },
+  "1-276": {
+    "cue": "multiple zonal failures at job submission time",
+    "cueWhy": "Batch Dataflow resilience at submit: set --region (regional workers)."
+  },
+  "1-277": {
+    "cue": "real-time dashboards + supply and demand",
+    "cueWhy": "Ride-hail real-time aggregates for dashboards → hopping windows in Dataflow to Memorystore."
+  },
+  "1-278": {
+    "cue": "business logic fails on a message + alerting",
+    "cueWhy": "Failed DoFn elements → side output to a monitor Pub/Sub topic."
+  },
+  "1-279": {
+    "cue": "readable but unmodifiable + individual workspaces",
+    "cueWhy": "Shared dataset: Data Viewer; per-analyst datasets with Data Editor."
+  },
+  "1-280": {
+    "cue": "late data + hopping windows",
+    "cueWhy": "Late data not classified correctly → watermarks + allowed lateness."
+  },
+  "1-281": {
+    "cue": "garbage collection policy + older than 30 days",
+    "cueWhy": "GC is lazy; filter by timestamp range in queries so analysts never see >30-day data."
+  },
+  "1-282": {
+    "cue": "exactly-once delivery semantics + 1.5 GB per second",
+    "cueWhy": "Exactly-once into BQ at high rate → BigQuery Storage Write API (multiregional table)."
+  },
+  "1-283": {
+    "cue": "Hive partitioned + queries against this table are slow",
+    "cueWhy": "Slow external Hive table: upgrade to BigLake + metadata caching."
+  },
+  "1-284": {
+    "cue": "single-digit millisecond latency + complex analytic queries",
+    "cueWhy": "Point lookups in ms → Bigtable row key; daily export to BigQuery for analytics."
+  },
+  "1-285": {
+    "cue": "immutable for 3 years + one or two times a year",
+    "cueWhy": "Rare SQL access + 3y immutability: export to Archive GCS, lock retention, external table."
+  },
+  "1-286": {
+    "cue": "keep code changes to a minimum + managed services",
+    "cueWhy": "Many Spark jobs off long-lived Hadoop: data to GCS, run on Dataproc."
+  },
+  "1-287": {
+    "cue": "consistent BigQuery analytics spend each month",
+    "cueWhy": "Predictable monthly spend → fixed baseline reservation (no autoscaling) and chargeback."
+  },
+  "1-288": {
+    "cue": "Data lineage tracking + Data quality validation",
+    "cueWhy": "Discovery + lineage + quality in one managed service → Dataplex."
+  },
+  "1-289": {
+    "cue": "no coding + recurring job + normalize",
+    "cueWhy": "No-code recurring normalize of BQ report fields → Data Fusion Wrangler."
+  },
+  "1-290": {
+    "cue": "maximum of 10 retries + store the failed messages",
+    "cueWhy": "Push reliability: exponential backoff + dead letter topic after 10 attempts."
+  },
+  "1-291": {
+    "cue": "self-serving, low-maintenance + share the sales dataset",
+    "cueWhy": "Org sharing of a BQ dataset with low ops → Analytics Hub private exchange."
+  },
+  "1-292": {
+    "cue": "100 times a day + Cloud SQL for MySQL + Cloud SQL for PostgreSQL",
+    "cueWhy": "Frequent BQ campaigns joining GA + two Cloud SQL sources → Datastream replicate into BQ."
+  },
+  "1-293": {
+    "cue": "data mesh + sales, product design, and marketing",
+    "cueWhy": "Per-department lakes/zones in Dataplex over their own projects enables mesh sharing."
+  },
+  "1-294": {
+    "cue": "new subscriber + last 30 days",
+    "cueWhy": "Late joiners need historical messages → topic retention 30 days."
+  },
+  "1-295": {
+    "cue": "Shared VPC network + Dataflow",
+    "cueWhy": "Deploy Dataflow on Shared VPC: grant compute.networkUser to the pipeline SA."
+  },
+  "1-296": {
+    "cue": "Apache Kafka + interconnect + minimal latency",
+    "cueWhy": "On-prem Kafka over interconnect into BQ with low latency → Dataflow."
+  },
+  "1-297": {
+    "cue": "column level + data mesh",
+    "cueWhy": "HDFS→GCS with Spark/SQL and column security → BigLake + policy tags."
+  },
+  "1-298": {
+    "cue": "re- encrypt + CMEK-protected + compromised key",
+    "cueWhy": "New KMS key, new default-CMEK bucket, copy objects, then retire old key."
+  },
+  "1-299": {
+    "cue": "RPO=15 mins + minimal latency when reading",
+    "cueWhy": "Dual-region GCS + turbo replication; read local region, failover Dataproc."
+  },
+  "1-300": {
+    "cue": "without changing database management systems + transactional workloads and support analytics",
+    "cueWhy": "Stay on PostgreSQL with HTAP: AlloyDB for PostgreSQL."
+  },
+  "1-301": {
+    "cue": "ELT + SQL as code",
+    "cueWhy": "SQL-first ELT with code management → Dataform."
+  },
+  "1-302": {
+    "cue": "500 MB + every 30 seconds + once a week",
+    "cueWhy": "Small sensor dim table + high-frequency metrics: partition metrics by time, FK to sensors, append inserts."
+  },
+  "1-303": {
+    "cue": "curated zone but the files are not being automatically discovered",
+    "cueWhy": "JSON/CSV auto-discovery belongs in raw; move files from curated to raw zone."
+  },
+  "1-304": {
+    "cue": "past year of data + always include the latest data",
+    "cueWhy": "Materialized view over last-year partitions keeps fresh aggregates without scanning full history."
+  },
+  "1-305": {
+    "cue": "Amazon Web Services’ (AWS) S3",
+    "cueWhy": "Query US GCS+S3 in place without bucket ACLs to users → BigQuery Omni/BigLake."
+  },
+  "1-306": {
+    "cue": "data privacy requirements",
+    "cueWhy": "Restricted GCS customer data → Dataflow + DLP mask, then BigQuery."
+  },
+  "1-307": {
+    "cue": "dynamic public IP addresses + Cloud SQL public IP",
+    "cueWhy": "Changing client IPs can’t use static authorized networks → Cloud SQL Auth proxy."
+  },
+  "1-308": {
+    "cue": "signed URLs + HTTP 403",
+    "cueWhy": "Expired signed URLs mid-transfer: regenerate longer-lived URLs and split parallel STS jobs."
+  },
+  "1-309": {
+    "cue": "only uses the last 30 days + minimize costs",
+    "cueWhy": "Partition by weather date and expire partitions after 30 days."
+  },
+  "1-310": {
+    "cue": "several petabytes + simple aggregations + up-to-date",
+    "cueWhy": "Repeated filtered aggregations on huge table → materialized view."
+  },
+  "1-311": {
+    "cue": "do not process orders twice + pull subscription",
+    "cueWhy": "Pull subscription without double-processing → Pub/Sub exactly-once delivery."
+  },
+  "1-312": {
+    "cue": "securely publish, discover, and subscribe + data freshness",
+    "cueWhy": "Org-wide self-serve read-only sharing with freshness → Analytics Hub."
+  },
+  "1-313": {
+    "cue": "minimally change + 8 vCPU and 16 GB + minimize installation",
+    "cueWhy": "Spark 3 batch with similar executor sizing and low ops → Dataproc Serverless."
+  },
+  "1-314": {
+    "cue": "cost-effective and secure communication + Google APIs",
+    "cueWhy": "Dataflow workers: no external IPs + Private Google Access to reach Google APIs."
+  },
+  "1-315": {
+    "cue": "Python's standard library + Workflows",
+    "cueWhy": "When Workflows can’t run complex Python logic, call a Cloud Function then continue."
+  },
+  "1-316": {
+    "cue": "day and month levels + minimize maintenance",
+    "cueWhy": "Repeated day/month aggregations on a huge fact table → materialized views."
+  },
+  "1-317": {
+    "cue": "your own encryption keys + GUI-based solution",
+    "cueWhy": "GUI move of mixed on-prem/cloud files into GCS with customer keys → Cloud Data Fusion."
+  },
+  "1-318": {
+    "cue": "recovery point objective (RPO) of less than 24 hours",
+    "cueWhy": "Cheap regional-table protection: daily export to dual/multi-region GCS."
+  },
+  "1-319": {
+    "cue": "protecting certain sensitive data elements + retaining all of the data",
+    "cueWhy": "Mask with Dataflow+DLP into BQ while keeping usable data for analysis."
+  },
+  "1-320": {
+    "cue": "Looker Studio + slow dashboard load times",
+    "cueWhy": "Precompute with materialized views and/or accelerate with BI Engine for Looker Studio."
+  },
+  "1-321": {
+    "cue": "without physically moving or duplicating the data",
+    "cueWhy": "Federated governance over GCS+BQ without copies is Dataplex lakes/zones + quality/policies."
+  },
+  "1-322": {
+    "cue": "proprietary, vendor-specific format + batch migration",
+    "cueWhy": "Unknown proprietary warehouse format: export CSV → GCS → load BigQuery."
+  },
+  "1-323": {
+    "cue": "development, staging, and production + Google-recommended practices",
+    "cueWhy": "Manage env IAM via Google Groups with roles per project, not per-user bindings."
+  },
+  "1-324": {
+    "cue": "strict dependencies + notify you if not completed by 7:00 AM",
+    "cueWhy": "Multi-step SFTP→decrypt→GCS→BQ with SLA/alerts and reruns is Cloud Composer (Airflow)."
+  },
+  "1-325": {
+    "cue": "Analyst dashboards + ETL jobs",
+    "cueWhy": "Separate capacity: reserved/autoscaling slots for interactive dashboards vs separate/on-demand for ETL."
+  },
+  "1-326": {
+    "cue": "Resources exceeded",
+    "cueWhy": "On-demand resource failures on huge queries → move to slot reservations."
+  },
+  "1-327": {
+    "cue": "Retrieval-Augmented Generation + embedding",
+    "cueWhy": "RAG prep means embedding unstructured text into semantic vectors, not keyword indexes alone."
+  },
+  "1-328": {
+    "cue": "compressed JSON + low-cost, programmatic",
+    "cueWhy": "TB-scale daily JSON in GCS: external table then INSERT…SELECT is cheap and scalable."
+  },
+  "1-329": {
+    "cue": "older than two years + seven years",
+    "cueWhy": "Lifecycle: Archive after 2 years, delete at 7 years for rarely accessed historical objects."
+  },
+  "1-330": {
+    "cue": "HiveQL queries directly against the data in Cloud Storage",
+    "cueWhy": "Interactive HiveQL on Parquet in GCS with low ops → Dataproc with Hive enabled."
+  },
+  "1-331": {
+    "cue": "millions of events each second + late-arriving data",
+    "cueWhy": "High-rate clickstream with sessionization and late data is Pub/Sub + Dataflow + BigQuery."
+  },
+  "1-332": {
+    "cue": "event date ranges + user ID UUID",
+    "cueWhy": "Partition by event date and cluster by user ID optimizes time-range + user filters."
+  },
+  "1-333": {
+    "cue": "validate email + generative AI sentiment + manual review",
+    "cueWhy": "Dataflow ParDo validation + RunInference sentiment + side outputs for invalids matches the branching pipeline."
+  },
+  "1-334": {
+    "cue": "lightweight, serverless orchestration + sequential",
+    "cueWhy": "Sequential Dataflow→BQ→Vertex with minimal ops is Cloud Workflows, not heavy Composer."
+  },
+  "1-335": {
+    "cue": "fully managed, no-code + 200 CSV files",
+    "cueWhy": "Analyst no-code daily CSV→BQ load/transform fits BigQuery pipelines."
+  },
+  "1-336": {
+    "cue": "resilient to zonal failures + us-central1",
+    "cueWhy": "Regional Dataflow (--region=us-central1) survives zonal outages better than a single zone."
+  },
+  "1-337": {
+    "cue": "external partner companies + discoverable",
+    "cueWhy": "Secure cross-org discoverable sharing of curated BQ datasets is Analytics Hub listings."
+  },
+  "1-338": {
+    "cue": "unreadable whenever an employee leaves",
+    "cueWhy": "Crypto-shredding: AEAD encrypt with per-employee keys and delete keys when they leave."
+  },
+  "1-339": {
+    "cue": "execution plan + JOIN",
+    "cueWhy": "To inspect JOIN bottlenecks fast, use Query History and the execution graph."
+  },
+  "1-340": {
+    "cue": "recovery point objective (RPO) of 24 hours + recovery time objective (RTO) of 4 hours",
+    "cueWhy": "Cross-region BigQuery dataset replication to us-east1 meets regional DR with low ops vs custom export."
+  },
+  "1-341": {
+    "cue": "managed integration + incremental loads",
+    "cueWhy": "Daily MySQL→BigQuery managed incremental ingest is BigQuery Data Transfer Service."
+  },
+  "1-342": {
+    "cue": "consistently applied during both model training and prediction",
+    "cueWhy": "BQML TRANSFORM in CREATE MODEL keeps feature SQL consistent for train and predict without manual dual pipelines."
+  },
+  "1-343": {
+    "cue": "categorize these images + least amount of coding",
+    "cueWhy": "Least-code image content analysis into structured BigQuery results points to Vertex AI Vision API."
+  },
+  "1-344": {
+    "cue": "ACID compliance + high throughput + low-latency",
+    "cueWhy": "Concurrent transactional ops with ACID on a managed service maps to Spanner."
+  },
+  "1-345": {
+    "cue": "prevent training-serving skew",
+    "cueWhy": "Preprocessing must match train and serve. Replicate the same pre-processing logic in the Vertex AI inference path."
+  },
+  "1-346": {
+    "cue": "same aggregation + minimizes analytics spend",
+    "cueWhy": "Repeated store-ID/sales aggregations should not recompute every query. A materialized view caches that aggregation cheaper and faster."
+  },
+  "1-347": {
+    "cue": "clinical researchers + accounting team",
+    "cueWhy": "Different teams need different columns from the same sensitive table. Separate datasets with authorized views expose only approved fields per team."
+  },
+  "1-348": {
+    "cue": "consistently cataloged + data quality checks and transformations",
+    "cueWhy": "Different formats need catalog discovery plus quality/transform before use. Dataplex Universal Catalog over GCS/BQ is the managed governance path."
+  },
+  "1-349": {
+    "cue": "30 minutes of inactivity",
+    "cueWhy": "A visit ends after inactivity, which is a per-user gap — not a fixed clock window. Session windows with a 30-minute gap match that definition; tumbling/hopping windows do not."
+  }
+}

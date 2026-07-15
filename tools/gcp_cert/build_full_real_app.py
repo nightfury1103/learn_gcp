@@ -11,6 +11,7 @@ from pathlib import Path
 SITE = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE = SITE / "pde_questions_crawled.json"
 DEFAULT_TEMPLATE = SITE / "pca.html"
+DEFAULT_OVERRIDES = SITE / "pde_keyword_overrides.json"
 
 
 
@@ -30,28 +31,42 @@ def validate_cue(row: dict) -> None:
 
 
 def make_cue(question_text: str) -> str:
-    cleaned = re.sub(r"\s+", " ", question_text).strip()
-    if not cleaned:
-        return ""
-    snippet = cleaned[:110]
-    if len(cleaned) > 110:
-        snippet = snippet.rsplit(" ", 1)[0]
-    return snippet
+    """Fallback when no curated override exists. Never use a long stem as a keyword."""
+    return ""
 
 
 def make_cue_why(row: dict) -> str:
-    trigger = row["cue"] or "the question constraints"
+    trigger = row["cue"] or ""
     answer = row["answerPattern"]
     if len(answer) > 220:
         answer = answer[:217].rstrip() + "..."
+    if not trigger:
+        return (
+            "Keyword not curated yet for this question. "
+            f"Correct answer {row['answerLetters']}: {answer}"
+        )
     return (
-        f"I chose this cue because '{trigger}' is the decision trigger in the question, "
-        f"not just a product name from the answer. It tells you which constraint must be solved, "
-        f"so map it to answer {row['answerLetters']}: {answer}"
+        f"When you see '{trigger}' in the question, map it to answer "
+        f"{row['answerLetters']}: {answer}"
     )
 
 
-def convert_source_row(row: dict, next_id: int) -> dict:
+def load_keyword_overrides(path: Path) -> dict[tuple[int, int], dict]:
+    if not path.exists():
+        return {}
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    out: dict[tuple[int, int], dict] = {}
+    for key, value in raw.items():
+        topic_s, q_s = str(key).split("-", 1)
+        out[(int(topic_s), int(q_s))] = value
+    return out
+
+
+def convert_source_row(
+    row: dict,
+    next_id: int,
+    overrides: dict[tuple[int, int], dict] | None = None,
+) -> dict:
     question_number = row["question_number"]
     topic = row["topic"]
     year = row.get("year")
@@ -64,6 +79,7 @@ def convert_source_row(row: dict, next_id: int) -> dict:
         for o in options
         if o.get("label") in answers
     ]
+    override = (overrides or {}).get((topic, question_number), {})
     result = {
         "id": next_id,
         "year": year,
@@ -74,7 +90,7 @@ def convert_source_row(row: dict, next_id: int) -> dict:
             if year is not None
             else f"T{topic} Q{question_number}"
         ),
-        "cue": make_cue(question_text),
+        "cue": override.get("cue") or make_cue(question_text),
         "category": "General",
         "answerLetters": answer_letters,
         "answerPattern": " | ".join(selected),
@@ -86,12 +102,16 @@ def convert_source_row(row: dict, next_id: int) -> dict:
         "caseStudy": "",
         "sortOrder": int(year or 0) * 10000 + topic * 1000 + question_number,
     }
-    result["cueWhy"] = make_cue_why(result)
+    result["cueWhy"] = override.get("cueWhy") or make_cue_why(result)
     validate_cue(result)
     return result
 
 
-def build_data(source: Path, min_year: int | None = None) -> list[dict]:
+def build_data(
+    source: Path,
+    min_year: int | None = None,
+    overrides: dict[tuple[int, int], dict] | None = None,
+) -> list[dict]:
     source_rows = json.loads(source.read_text(encoding="utf-8"))
     if min_year is not None:
         source_rows = [
@@ -100,7 +120,7 @@ def build_data(source: Path, min_year: int | None = None) -> list[dict]:
             if isinstance(row.get("year"), int) and row["year"] >= min_year
         ]
     rows = [
-        convert_source_row(source_row, idx)
+        convert_source_row(source_row, idx, overrides=overrides)
         for idx, source_row in enumerate(source_rows, 1)
     ]
     rows.sort(
@@ -239,7 +259,81 @@ def render_study_page(
             '<div class="title"><a href="index.html" style="display:inline-block;margin-bottom:6px;color:#0f8a5f;font-size:12px;font-weight:700;text-decoration:none">← All certs</a>',
             1,
         )
+    text = inject_keyword_popup(text)
     out_path.write_text(text, encoding="utf-8")
+
+
+def inject_keyword_popup(text: str) -> str:
+    """No popup. Keep inline reveal; only highlight short curated cues."""
+    text = re.sub(
+        r'<div id="keywordModal" class="keywordModal".*?</div></div>',
+        "",
+        text,
+        count=1,
+        flags=re.S,
+    )
+    text = re.sub(
+        r"\.keywordModal\{.*?\.keywordModalCard button\{[^}]*\}",
+        "",
+        text,
+        count=1,
+        flags=re.S,
+    )
+    text = re.sub(
+        r"function openKeywordModal\(item,answerOk\)\{.*?function closeKeywordModal\(\)\{.*?\}",
+        "",
+        text,
+        count=1,
+        flags=re.S,
+    )
+    text = text.replace("openKeywordModal(item,answerOk);", "")
+
+    # Prefer a surgical edit of the original highlight() — do not rewrite the regex.
+    text = text.replace(
+        ".map(x=>x.trim()).filter(Boolean).sort((a,b)=>b.length-a.length);",
+        ".map(x=>x.trim()).filter(Boolean).filter(p=>p.length>0&&p.length<=80)"
+        ".sort((a,b)=>b.length-a.length);",
+        1,
+    )
+    text = text.replace(
+        "const parts=String(phrase).split('+')",
+        "const parts=String(phrase||'').split('+')",
+        1,
+    )
+
+    # Refresh inline reveal fields on Check; highlight only when cue is short.
+    replacements = [
+        (
+            "$('questionText').innerHTML=highlight(item.questionText,item.cue,true);"
+            "$('matchResult').textContent=`${answerOk?'Answer OK':'Answer missed'} - keyword is now highlighted in the question`;"
+            "$('reveal').className='reveal show';$('showBtn').textContent='Next';recordAttempt(item,picked,answerOk);",
+            (
+                "$('matchResult').textContent=answerOk?'Answer OK':'Answer missed';"
+                "$('correctKeyword').textContent=item.cue||'(not curated yet)';"
+                "$('keywordWhy').textContent=item.cueWhy||'';"
+                "$('answerPattern').textContent=item.answerPattern||'';"
+                "$('questionText').innerHTML=highlight(item.questionText,item.cue,!!(item.cue&&item.cue.length<=80));"
+                "$('reveal').className='reveal show';$('showBtn').textContent='Next';"
+                "recordAttempt(item,picked,answerOk);"
+            ),
+        ),
+        (
+            "$('questionText').innerHTML=highlight(item.questionText,item.cue,true);"
+            "$('matchResult').textContent=answerOk?'Answer OK':'Answer missed';",
+            (
+                "$('matchResult').textContent=answerOk?'Answer OK':'Answer missed';"
+                "$('correctKeyword').textContent=item.cue||'(not curated yet)';"
+                "$('keywordWhy').textContent=item.cueWhy||'';"
+                "$('answerPattern').textContent=item.answerPattern||'';"
+                "$('questionText').innerHTML=highlight(item.questionText,item.cue,!!(item.cue&&item.cue.length<=80));"
+            ),
+        ),
+    ]
+    for old, new in replacements:
+        if old in text:
+            text = text.replace(old, new, 1)
+            break
+    return text
 
 
 def main() -> None:
@@ -248,6 +342,7 @@ def main() -> None:
     )
     ap.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     ap.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
+    ap.add_argument("--overrides", type=Path, default=DEFAULT_OVERRIDES)
     ap.add_argument("--min-year", type=int, default=2024)
     ap.add_argument("--out-html", type=Path, default=SITE / "pde.html")
     ap.add_argument("--out-data", type=Path, default=SITE / "pde-study-data.json")
@@ -259,7 +354,8 @@ def main() -> None:
     if not args.template.exists():
         raise SystemExit(f"Template HTML not found: {args.template}")
 
-    rows = build_data(args.source, min_year=args.min_year)
+    overrides = load_keyword_overrides(args.overrides)
+    rows = build_data(args.source, min_year=args.min_year, overrides=overrides)
     if not rows:
         raise SystemExit(
             f"No questions with year >= {args.min_year}. "
@@ -283,11 +379,17 @@ def main() -> None:
         ),
         store_key="pde-2024-now-study-v1",
     )
+    curated = sum(
+        1
+        for row in rows
+        if (row["topic"], row["questionNumber"]) in overrides
+    )
     print(
         json.dumps(
             {
                 "total": len(rows),
                 "min_year": args.min_year,
+                "curated_keywords": curated,
                 "source": str(args.source),
                 "html": str(args.out_html),
                 "data": str(args.out_data),

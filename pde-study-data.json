@@ -5,7 +5,7 @@
     "topic": 1,
     "questionNumber": 15,
     "ref": "2024 / T1 Q15",
-    "cue": "You need to store and analyze social media postings in Google BigQuery at a rate of 10,000 messages per",
+    "cue": "strong consistency",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Estimate the average latency for data availability after streaming inserts, and always run queries after waiting twice as long.",
@@ -33,7 +33,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241015,
-    "cueWhy": "I chose this cue because 'You need to store and analyze social media postings in Google BigQuery at a rate of 10,000 messages per' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Estimate the average latency for data availability after streaming inserts, and always run queries after waiting twice as long."
+    "cueWhy": "Streaming inserts are eventually consistent, so aggregations run immediately can miss in-flight rows. The trigger is needing stronger consistency after streaming inserts \u2014 wait about twice the typical availability latency before querying."
   },
   {
     "id": 2,
@@ -41,7 +41,7 @@
     "topic": 1,
     "questionNumber": 19,
     "ref": "2024 / T1 Q19",
-    "cue": "Your company's on-premises Apache Hadoop servers are approaching end-of-life, and IT has decided to migrate",
+    "cue": "minimize the storage cost",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Put the data into Google Cloud Storage.",
@@ -69,7 +69,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241019,
-    "cueWhy": "I chose this cue because 'Your company's on-premises Apache Hadoop servers are approaching end-of-life, and IT has decided to migrate' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Put the data into Google Cloud Storage."
+    "cueWhy": "A like-for-like Dataproc move with huge Persistent Disk is expensive. When the goal is minimize storage cost, keep data in Cloud Storage and let Dataproc use it, instead of 50 TB PD per node."
   },
   {
     "id": 3,
@@ -77,7 +77,7 @@
     "topic": 1,
     "questionNumber": 44,
     "ref": "2024 / T1 Q44",
-    "cue": "You are deploying a new storage system for your mobile application, which is a media streaming service. You",
+    "cue": "multiple values + ordered by",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Manually configure the index in your index config as follows:",
@@ -105,7 +105,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241044,
-    "cueWhy": "I chose this cue because 'You are deploying a new storage system for your mobile application, which is a media streaming service. You' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Manually configure the index in your index config as follows:"
+    "cueWhy": "Datastore equality filters on multi-valued properties plus an inequality/order on another property need a composite index. Manually define that index for actor/tag + date_released style queries."
   },
   {
     "id": 4,
@@ -113,7 +113,7 @@
     "topic": 1,
     "questionNumber": 62,
     "ref": "2024 / T1 Q62",
-    "cue": "Your company receives both batch- and stream-based event data. You want to process the data using Google",
+    "cue": "late or out of order",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use watermarks and timestamps to capture the lagged data.",
@@ -141,7 +141,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241062,
-    "cueWhy": "I chose this cue because 'Your company receives both batch- and stream-based event data. You want to process the data using Google' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use watermarks and timestamps to capture the lagged data."
+    "cueWhy": "Batch and stream events can arrive late. Dataflow handles that with event-time watermarks and timestamps, not just a single global window or naive sliding windows."
   },
   {
     "id": 5,
@@ -149,7 +149,7 @@
     "topic": 1,
     "questionNumber": 64,
     "ref": "2024 / T1 Q64",
-    "cue": "You are integrating one of your internal IT applications and Google BigQuery, so users can query BigQuery",
+    "cue": "do not want individual users to authenticate",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Create a service account and grant dataset access to that account. Use the service account's private key to access the dataset",
@@ -177,7 +177,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241064,
-    "cueWhy": "I chose this cue because 'You are integrating one of your internal IT applications and Google BigQuery, so users can query BigQuery' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create a service account and grant dataset access to that account. Use the service account's private key to access the dataset"
+    "cueWhy": "The app must query BigQuery without end-user Google identities on the dataset. Use a service account with dataset access and its key from the app."
   },
   {
     "id": 6,
@@ -185,7 +185,7 @@
     "topic": 1,
     "questionNumber": 73,
     "ref": "2024 / T1 Q73",
-    "cue": "You are designing storage for two relational tables that are part of a 10-TB database on Google Cloud. You",
+    "cue": "transactions that scale horizontally + range queries",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use Cloud Spanner for storage. Add secondary indexes to support query patterns.",
@@ -213,7 +213,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241073,
-    "cueWhy": "I chose this cue because 'You are designing storage for two relational tables that are part of a 10-TB database on Google Cloud. You' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use Cloud Spanner for storage. Add secondary indexes to support query patterns."
+    "cueWhy": "Need horizontal transactional scale plus range queries on non-key columns. That is Spanner with secondary indexes, not Cloud SQL."
   },
   {
     "id": 7,
@@ -221,7 +221,7 @@
     "topic": 1,
     "questionNumber": 74,
     "ref": "2024 / T1 Q74",
-    "cue": "Your financial services company is moving to cloud technology and wants to store 50 TB of financial",
+    "cue": "financial time-series + Apache Hadoop",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Cloud Bigtable",
@@ -249,7 +249,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241074,
-    "cueWhy": "I chose this cue because 'Your financial services company is moving to cloud technology and wants to store 50 TB of financial' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Cloud Bigtable"
+    "cueWhy": "Frequent updates/streaming time-series plus migrating Hadoop-style workloads points to Bigtable as the storage engine."
   },
   {
     "id": 8,
@@ -257,7 +257,7 @@
     "topic": 1,
     "questionNumber": 75,
     "ref": "2024 / T1 Q75",
-    "cue": "An organization maintains a Google BigQuery dataset that contains tables with user-level data. They want to",
+    "cue": "expose aggregates + analysis cost for other projects",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Create and share an authorized view that provides the aggregate results.",
@@ -285,7 +285,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241075,
-    "cueWhy": "I chose this cue because 'An organization maintains a Google BigQuery dataset that contains tables with user-level data. They want to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create and share an authorized view that provides the aggregate results."
+    "cueWhy": "Share only aggregates, keep user-level data private, and push query cost to consumers. An authorized view over aggregates does that without duplicating storage."
   },
   {
     "id": 9,
@@ -293,7 +293,7 @@
     "topic": 1,
     "questionNumber": 77,
     "ref": "2024 / T1 Q77",
-    "cue": "Your neural network model is taking days to train. You want to increase the training speed. What can you do?",
+    "cue": "increase the training speed",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Subsample your training dataset.",
@@ -321,7 +321,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241077,
-    "cueWhy": "I chose this cue because 'Your neural network model is taking days to train. You want to increase the training speed. What can you do?' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Subsample your training dataset."
+    "cueWhy": "Training is slow because of training-set size/complexity. Subsample the training data to speed training; test-set size does not drive training time."
   },
   {
     "id": 10,
@@ -329,7 +329,7 @@
     "topic": 1,
     "questionNumber": 79,
     "ref": "2024 / T1 Q79",
-    "cue": "Your company maintains a hybrid deployment with GCP, where analytics are performed on your anonymized",
+    "cue": "maximize transfer speeds",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Increase your network bandwidth from your datacenter to GCP.",
@@ -357,7 +357,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241079,
-    "cueWhy": "I chose this cue because 'Your company maintains a hybrid deployment with GCP, where analytics are performed on your anonymized' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Increase your network bandwidth from your datacenter to GCP."
+    "cueWhy": "Hybrid ingest is bottlenecked getting data into GCP. Raising datacenter\u2192GCP network bandwidth is the lever, not disk or VPC\u2192GCS bandwidth alone."
   },
   {
     "id": 11,
@@ -365,7 +365,7 @@
     "topic": 1,
     "questionNumber": 82,
     "ref": "2024 / T1 Q82",
-    "cue": "MJTelco Case Study -Company Overview -MJTelco is a startup that plans to build networks in rapidly growing,",
+    "cue": "tracking_table + fine-grained analysis of each day's events",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create a partitioned table called tracking_table and include a TIMESTAMP column.",
@@ -393,7 +393,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241082,
-    "cueWhy": "I chose this cue because 'MJTelco Case Study -Company Overview -MJTelco is a startup that plans to build networks in rapidly growing,' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create a partitioned table called tracking_table and include a TIMESTAMP column."
+    "cueWhy": "One big tracking_table with streaming ingest and cheap per-day analysis means a partitioned BigQuery table using a TIMESTAMP partition column, not YYYYMMDD shards."
   },
   {
     "id": 12,
@@ -401,7 +401,7 @@
     "topic": 1,
     "questionNumber": 85,
     "ref": "2024 / T1 Q85",
-    "cue": "You are a head of BI at a large enterprise company with multiple business units that each have different",
+    "cue": "avoid introducing new projects",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Switch to flat-rate pricing and establish a hierarchical priority model for your projects.",
@@ -429,7 +429,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241085,
-    "cueWhy": "I chose this cue because 'You are a head of BI at a large enterprise company with multiple business units that each have different' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Switch to flat-rate pricing and establish a hierarchical priority model for your projects."
+    "cueWhy": "On-demand 2K slots/project is starving queries and you cannot add projects. Switch to flat-rate/reservations and set hierarchical priorities."
   },
   {
     "id": 13,
@@ -437,7 +437,7 @@
     "topic": 1,
     "questionNumber": 105,
     "ref": "2024 / T1 Q105",
-    "cue": "You want to automate execution of a multi-step data pipeline running on Google Cloud. The pipeline includes",
+    "cue": "multiple dependencies + every day",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Cloud Composer",
@@ -465,7 +465,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241105,
-    "cueWhy": "I chose this cue because 'You want to automate execution of a multi-step data pipeline running on Google Cloud. The pipeline includes' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Cloud Composer"
+    "cueWhy": "Daily multi-step Dataproc/Dataflow pipeline with dependencies needs a managed orchestrator \u2192 Cloud Composer (Airflow)."
   },
   {
     "id": 14,
@@ -473,7 +473,7 @@
     "topic": 1,
     "questionNumber": 142,
     "ref": "2024 / T1 Q142",
-    "cue": "Each analytics team in your organization is running BigQuery jobs in their own projects. You want to enable",
+    "cue": "monitor slot usage",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create a Cloud Monitoring dashboard based on the BigQuery metric slots/allocated_for_project",
@@ -501,7 +501,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241142,
-    "cueWhy": "I chose this cue because 'Each analytics team in your organization is running BigQuery jobs in their own projects. You want to enable' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create a Cloud Monitoring dashboard based on the BigQuery metric slots/allocated_for_project"
+    "cueWhy": "Teams need slot usage visibility in their projects. Monitor BigQuery slots/allocated_for_project (slots/allocated) style metrics, not scanned_bytes."
   },
   {
     "id": 15,
@@ -509,7 +509,7 @@
     "topic": 1,
     "questionNumber": 152,
     "ref": "2024 / T1 Q152",
-    "cue": "You work for a global shipping company. You want to train a model on 40 TB of data to predict which ships in",
+    "cue": "40 TB + GeoJSON",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: BigQuery",
@@ -537,7 +537,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241152,
-    "cueWhy": "I chose this cue because 'You work for a global shipping company. You want to train a model on 40 TB of data to predict which ships in' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: BigQuery"
+    "cueWhy": "Huge multi-source analytics with GeoJSON telemetry and dashboards fits BigQuery, not OLTP stores like Cloud SQL/Datastore."
   },
   {
     "id": 16,
@@ -545,7 +545,7 @@
     "topic": 1,
     "questionNumber": 166,
     "ref": "2024 / T1 Q166",
-    "cue": "A shipping company has live package-tracking data that is sent to an Apache Kafka stream in real time. This",
+    "cue": "package-tracking + query performance",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Implement clustering in BigQuery on the package-tracking ID column.",
@@ -573,7 +573,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241166,
-    "cueWhy": "I chose this cue because 'A shipping company has live package-tracking data that is sent to an Apache Kafka stream in real time. This' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Implement clustering in BigQuery on the package-tracking ID column."
+    "cueWhy": "Ingest-date partitioning is not how analysts filter packages. Cluster on package-tracking ID to speed lifecycle/geospatial package queries."
   },
   {
     "id": 17,
@@ -581,7 +581,7 @@
     "topic": 1,
     "questionNumber": 167,
     "ref": "2024 / T1 Q167",
-    "cue": "Your company currently runs a large on-premises cluster using Spark, Hive, and HDFS in a colocation facility.",
+    "cue": "peak usage + fluctuate",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Migrate the workloads to Dataproc plus Cloud Storage; modernize later.",
@@ -609,7 +609,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241167,
-    "cueWhy": "I chose this cue because 'Your company currently runs a large on-premises cluster using Spark, Hive, and HDFS in a colocation facility.' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Migrate the workloads to Dataproc plus Cloud Storage; modernize later."
+    "cueWhy": "On-prem Spark/Hive/HDFS sized for peaks but batchy/variable. Lift to Dataproc with Cloud Storage first, modernize later \u2014 cheapest lift with elastic storage."
   },
   {
     "id": 18,
@@ -617,7 +617,7 @@
     "topic": 1,
     "questionNumber": 174,
     "ref": "2024 / T1 Q174",
-    "cue": "You work for a large financial institution that is planning to use Dialogflow to create a chatbot for the",
+    "cue": "70% of customer requests + 10 intents",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Automate the 10 intents that cover 70% of the requests so that live agents can handle more complicated requests.",
@@ -645,7 +645,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241174,
-    "cueWhy": "I chose this cue because 'You work for a large financial institution that is planning to use Dialogflow to create a chatbot for the' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Automate the 10 intents that cover 70% of the requests so that live agents can handle more complicated requests."
+    "cueWhy": "Automate the small intent set covering most volume first so agents focus on the long-tail complicated 30%."
   },
   {
     "id": 19,
@@ -653,7 +653,7 @@
     "topic": 1,
     "questionNumber": 179,
     "ref": "2024 / T1 Q179",
-    "cue": "You are building a real-time prediction engine that streams files, which may contain PII (personal",
+    "cue": "referential integrity + PII",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create a pseudonym by replacing PII data with a cryptographic format-preserving token.",
@@ -681,7 +681,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241179,
-    "cueWhy": "I chose this cue because 'You are building a real-time prediction engine that streams files, which may contain PII (personal' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a pseudonym by replacing PII data with a cryptographic format-preserving token."
+    "cueWhy": "Mask PII but keep joinability on names/emails. Use DLP cryptographic format-preserving tokens/pseudonyms, not irreversible redaction."
   },
   {
     "id": 20,
@@ -689,7 +689,7 @@
     "topic": 1,
     "questionNumber": 180,
     "ref": "2024 / T1 Q180",
-    "cue": "You are migrating an application that tracks library books and information about each book, such as author or",
+    "cue": "author information is kept in a separate table",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Create a table that includes information about the books and authors, but nest the author fields inside the author column.",
@@ -717,7 +717,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241180,
-    "cueWhy": "I chose this cue because 'You are migrating an application that tracks library books and information about each book, such as author or' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create a table that includes information about the books and authors, but nest the author fields inside the author column."
+    "cueWhy": "BigQuery schema guidance for 1:many attributes is nesting (author RECORD/ARRAY), not forced relational joins."
   },
   {
     "id": 21,
@@ -725,7 +725,7 @@
     "topic": 1,
     "questionNumber": 196,
     "ref": "2024 / T1 Q196",
-    "cue": "You have 15 TB of data in your on-premises data center that you want to transfer to Google Cloud. Your data",
+    "cue": "POSIX-compliant + weekly",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Install Storage Transfer Service for on-premises data in your data center, and then configure a weekly transfer job.",
@@ -753,7 +753,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241196,
-    "cueWhy": "I chose this cue because 'You have 15 TB of data in your on-premises data center that you want to transfer to Google Cloud. Your data' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Install Storage Transfer Service for on-premises data in your data center, and then configure a weekly transfer job."
+    "cueWhy": "Recurring secure transfer from on-prem POSIX with limited public bandwidth \u2192 Storage Transfer Service for on-premises on a weekly schedule."
   },
   {
     "id": 22,
@@ -761,7 +761,7 @@
     "topic": 1,
     "questionNumber": 204,
     "ref": "2024 / T1 Q204",
-    "cue": "You want to create a machine learning model using BigQuery ML and create an endpoint for hosting the model",
+    "cue": "invalid values + near-real time",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create a Pub/Sub topic and send all vendor data to it. Use Dataflow to process and sanitize the Pub/Sub data and stream it to BigQuery.",
@@ -789,7 +789,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241204,
-    "cueWhy": "I chose this cue because 'You want to create a machine learning model using BigQuery ML and create an endpoint for hosting the model' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a Pub/Sub topic and send all vendor data to it. Use Dataflow to process and sanitize the Pub/Sub data and stream it to BigQuery."
+    "cueWhy": "Multi-vendor streaming into BigQuery ML/Vertex needs cleansing. Pub/Sub + Dataflow sanitize, then stream to BigQuery."
   },
   {
     "id": 23,
@@ -797,7 +797,7 @@
     "topic": 1,
     "questionNumber": 206,
     "ref": "2024 / T1 Q206",
-    "cue": "You need ads data to serve AI models and historical data for analytics. Longtail and outlier data points need",
+    "cue": "longtail and outlier + near-real time",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Use Dataflow to identify longtail and outlier data points programmatically, with BigQuery as a sink.",
@@ -825,7 +825,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241206,
-    "cueWhy": "I chose this cue because 'You need ads data to serve AI models and historical data for analytics. Longtail and outlier data points need' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use Dataflow to identify longtail and outlier data points programmatically, with BigQuery as a sink."
+    "cueWhy": "Cleanse outliers in near real time before AI. Programmatic Dataflow cleansing into BigQuery is the fit."
   },
   {
     "id": 24,
@@ -833,7 +833,7 @@
     "topic": 1,
     "questionNumber": 207,
     "ref": "2024 / T1 Q207",
-    "cue": "You are collecting IoT sensor data from millions of devices across the world and storing the data in",
+    "cue": "location_id and device_version",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Partition table data by create_date, cluster table data by location_id, and device_version.",
@@ -861,7 +861,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241207,
-    "cueWhy": "I chose this cue because 'You are collecting IoT sensor data from millions of devices across the world and storing the data in' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Partition table data by create_date, cluster table data by location_id, and device_version."
+    "cueWhy": "Queries filter recent data by location_id and device_version. Partition by date, cluster by those filter columns."
   },
   {
     "id": 25,
@@ -869,7 +869,7 @@
     "topic": 1,
     "questionNumber": 208,
     "ref": "2024 / T1 Q208",
-    "cue": "A live TV show asks viewers to cast votes using their mobile phones. The event generates a large volume of",
+    "cue": "partial results + count the votes exactly once",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Write votes to a Pub/Sub topic and load into both Bigtable and BigQuery via a Dataflow pipeline. Query Bigtable for real-time results and BigQuery for later analysis. Shut down the Bigtable instance when voting concludes.",
@@ -897,7 +897,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241208,
-    "cueWhy": "I chose this cue because 'A live TV show asks viewers to cast votes using their mobile phones. The event generates a large volume of' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Write votes to a Pub/Sub topic and load into both Bigtable and BigQuery via a Dataflow pipeline. Query Bigtable for real-time results and BigQuery for later analysis. Shut down the Bigtable instance when voting con..."
+    "cueWhy": "Live votes need real-time partials plus exact-once final count cheaply. Pub/Sub \u2192 Dataflow into Bigtable (live) and BigQuery (final analytics)."
   },
   {
     "id": 26,
@@ -905,7 +905,7 @@
     "topic": 1,
     "questionNumber": 210,
     "ref": "2024 / T1 Q210",
-    "cue": "You are designing a data mesh on Google Cloud with multiple distinct data engineering teams building data",
+    "cue": "each team can access only the assets",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: 1. Create a Dataplex virtual lake for each data product, and create multiple zones for landing, raw, and curated data. 2. Provide the data engineering teams with full access to the virtual lake assigned to their data product.",
@@ -933,7 +933,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241210,
-    "cueWhy": "I chose this cue because 'You are designing a data mesh on Google Cloud with multiple distinct data engineering teams building data' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: 1. Create a Dataplex virtual lake for each data product, and create multiple zones for landing, raw, and curated data. 2. Provide the data engineering teams with full access to the virtual lake assigned to their da..."
+    "cueWhy": "Data mesh with isolated products: one Dataplex lake per product with landing/raw/curated zones and team-scoped access."
   },
   {
     "id": 27,
@@ -941,7 +941,7 @@
     "topic": 1,
     "questionNumber": 211,
     "ref": "2024 / T1 Q211",
-    "cue": "You are using BigQuery with a multi-region dataset that includes a table with the daily sales volumes. This",
+    "cue": "less than 24 hours + keeping costs to a minimum",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Schedule a daily export of the table to a Cloud Storage dual or multi-region bucket.",
@@ -969,7 +969,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241211,
-    "cueWhy": "I chose this cue because 'You are using BigQuery with a multi-region dataset that includes a table with the daily sales volumes. This' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Schedule a daily export of the table to a Cloud Storage dual or multi-region bucket."
+    "cueWhy": "Protect a frequently updated multi-region sales table with <24h RPO cheaply: daily export to a dual/multi-region Cloud Storage bucket."
   },
   {
     "id": 28,
@@ -977,7 +977,7 @@
     "topic": 1,
     "questionNumber": 212,
     "ref": "2024 / T1 Q212",
-    "cue": "You are troubleshooting your Dataflow pipeline that processes data from Cloud Storage to BigQuery. You have",
+    "cue": "network tags + communicate with one another",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Determine whether there is a firewall rule set to allow traffic on TCP ports 12345 and 12346 for the Dataflow network tag.",
@@ -1005,7 +1005,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241212,
-    "cueWhy": "I chose this cue because 'You are troubleshooting your Dataflow pipeline that processes data from Cloud Storage to BigQuery. You have' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Determine whether there is a firewall rule set to allow traffic on TCP ports 12345 and 12346 for the Dataflow network tag."
+    "cueWhy": "Dataflow workers must talk on TCP 12345/12346. With tag-based firewalls, allow those ports for the Dataflow network tag."
   },
   {
     "id": 29,
@@ -1013,7 +1013,7 @@
     "topic": 1,
     "questionNumber": 214,
     "ref": "2024 / T1 Q214",
-    "cue": "You have a Standard Tier Memorystore for Redis instance deployed in a production environment. You need to",
+    "cue": "simulate a Redis instance failover + no impact on production data",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create a Standard Tier Memorystore for Redis instance in a development environment. Initiate a manual failover by using the force-data-loss data protection mode.",
@@ -1041,7 +1041,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241214,
-    "cueWhy": "I chose this cue because 'You have a Standard Tier Memorystore for Redis instance deployed in a production environment. You need to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create a Standard Tier Memorystore for Redis instance in a development environment. Initiate a manual failover by using the force-data-loss data protection mode."
+    "cueWhy": "Practice failover without touching prod data: use a non-prod Standard Tier instance and force-data-loss manual failover."
   },
   {
     "id": 30,
@@ -1049,7 +1049,7 @@
     "topic": 1,
     "questionNumber": 215,
     "ref": "2024 / T1 Q215",
-    "cue": "You are administering a BigQuery dataset that uses a customer-managed encryption key (CMEK). You need to",
+    "cue": "partner organization + CMEK",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Copy the tables you need to share to a dataset without CMEKs. Create an Analytics Hub listing for this dataset.",
@@ -1077,7 +1077,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241215,
-    "cueWhy": "I chose this cue because 'You are administering a BigQuery dataset that uses a customer-managed encryption key (CMEK). You need to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Copy the tables you need to share to a dataset without CMEKs. Create an Analytics Hub listing for this dataset."
+    "cueWhy": "Partner lacks your CMEK. Copy needed tables to a non-CMEK dataset and share via Analytics Hub listing."
   },
   {
     "id": 31,
@@ -1085,7 +1085,7 @@
     "topic": 1,
     "questionNumber": 216,
     "ref": "2024 / T1 Q216",
-    "cue": "You are developing an Apache Beam pipeline to extract data from a Cloud SQL instance by using JdbcIO. You",
+    "cue": "does not have a public IP address + connection failure",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Set up VPC Network Peering between Project A and Project B. Create a Compute Engine instance without external IP address in Project B on the peered subnet to serve as a proxy server to the Cloud SQL database.",
@@ -1113,7 +1113,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241216,
-    "cueWhy": "I chose this cue because 'You are developing an Apache Beam pipeline to extract data from a Cloud SQL instance by using JdbcIO. You' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Set up VPC Network Peering between Project A and Project B. Create a Compute Engine instance without external IP address in Project B on the peered subnet to serve as a proxy server to the Cloud SQL database."
+    "cueWhy": "Dataflow in Project A must reach private Cloud SQL in Project B. Peer VPCs and use a private proxy VM in B on the peered subnet."
   },
   {
     "id": 32,
@@ -1121,7 +1121,7 @@
     "topic": 1,
     "questionNumber": 217,
     "ref": "2024 / T1 Q217",
-    "cue": "You have a BigQuery table that contains customer data, including sensitive information such as names and",
+    "cue": "must not be able to access the sensitive data",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Ensure that the data analytics team members do not have the Data Catalog Fine-Grained Reader role for the policy tags.",
@@ -1153,7 +1153,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241217,
-    "cueWhy": "I chose this cue because 'You have a BigQuery table that contains customer data, including sensitive information such as names and' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Ensure that the data analytics team members do not have the Data Catalog Fine-Grained Reader role for the policy tags."
+    "cueWhy": "Column security via policy tags: analytics team must not have Fine-Grained Reader on sensitive tags while still reading non-sensitive columns."
   },
   {
     "id": 33,
@@ -1161,7 +1161,7 @@
     "topic": 1,
     "questionNumber": 218,
     "ref": "2024 / T1 Q218",
-    "cue": "You have a Cloud SQL for PostgreSQL instance in Region\u2019 with one read replica in Region2 and another read",
+    "cue": "same database capacity + promoting a read replica",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Create two new read replicas from the new primary instance, one in Region3 and one in a new region.",
@@ -1189,7 +1189,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241218,
-    "cueWhy": "I chose this cue because 'You have a Cloud SQL for PostgreSQL instance in Region\u2019 with one read replica in Region2 and another read' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create two new read replicas from the new primary instance, one in Region3 and one in a new region."
+    "cueWhy": "After promoting Region2 replica, recreate capacity: two new replicas from the new primary (Region3 + another region)."
   },
   {
     "id": 34,
@@ -1197,7 +1197,7 @@
     "topic": 1,
     "questionNumber": 219,
     "ref": "2024 / T1 Q219",
-    "cue": "You orchestrate ETL pipelines by using Cloud Composer. One of the tasks in the Apache Airflow directed",
+    "cue": "task does not succeed",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Assign a function with notification logic to the on_failure_callback parameter tor the operator responsible for the task at risk.",
@@ -1225,7 +1225,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241219,
-    "cueWhy": "I chose this cue because 'You orchestrate ETL pipelines by using Cloud Composer. One of the tasks in the Apache Airflow directed' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Assign a function with notification logic to the on_failure_callback parameter tor the operator responsible for the task at risk."
+    "cueWhy": "Composer/Airflow task failure notifications use on_failure_callback on the operator, not retry/SLA callbacks."
   },
   {
     "id": 35,
@@ -1233,7 +1233,7 @@
     "topic": 1,
     "questionNumber": 220,
     "ref": "2024 / T1 Q220",
-    "cue": "You are migrating your on-premises data warehouse to BigQuery. One of the upstream data sources resides on a",
+    "cue": "does not go through the public internet",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Use Datastream to replicate data from your on-premises MySQL database to BigQuery. Set up Cloud Interconnect between your on-premises data center and Google Cloud. Use Private connectivity as the connectivity method and allocate an IP address range within your VPC network to the Datastream connectivity configuration. Use Server-only as the encryption type when setting up the connection profile in Datastream.",
@@ -1261,7 +1261,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241220,
-    "cueWhy": "I chose this cue because 'You are migrating your on-premises data warehouse to BigQuery. One of the upstream data sources resides on a' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use Datastream to replicate data from your on-premises MySQL database to BigQuery. Set up Cloud Interconnect between your on-premises data center and Google Cloud. Use Private connectivity as the connectivity metho..."
+    "cueWhy": "On-prem MySQL with no public IP into BigQuery privately: Datastream over Cloud Interconnect with private connectivity."
   },
   {
     "id": 36,
@@ -1269,7 +1269,7 @@
     "topic": 1,
     "questionNumber": 221,
     "ref": "2024 / T1 Q221",
-    "cue": "You store and analyze your relational data in BigQuery on Google Cloud with all data that resides in US",
+    "cue": "as little movement of data as possible",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Use the BigQuery Omni functionality and BigLake tables to query files in Azure and AWS.",
@@ -1297,7 +1297,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241221,
-    "cueWhy": "I chose this cue because 'You store and analyze your relational data in BigQuery on Google Cloud with all data that resides in US' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use the BigQuery Omni functionality and BigLake tables to query files in Azure and AWS."
+    "cueWhy": "Query US BigQuery plus US Azure/AWS object data in place \u2192 BigQuery Omni / BigLake, not bulk copying everything in."
   },
   {
     "id": 37,
@@ -1305,7 +1305,7 @@
     "topic": 1,
     "questionNumber": 222,
     "ref": "2024 / T1 Q222",
-    "cue": "You have a variety of files in Cloud Storage that your data science team wants to use in their models.",
+    "cue": "low code + cleanse and explore",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Provide the data science team access to Dataprep to prepare, validate, and explore the data within Cloud Storage.",
@@ -1333,7 +1333,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241222,
-    "cueWhy": "I chose this cue because 'You have a variety of files in Cloud Storage that your data science team wants to use in their models.' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Provide the data science team access to Dataprep to prepare, validate, and explore the data within Cloud Storage."
+    "cueWhy": "Data science needs low-code prep/validation on Cloud Storage files \u2192 Dataprep."
   },
   {
     "id": 38,
@@ -1341,7 +1341,7 @@
     "topic": 1,
     "questionNumber": 223,
     "ref": "2024 / T1 Q223",
-    "cue": "You are building an ELT solution in BigQuery by using Dataform. You need to perform uniqueness and null value",
+    "cue": "uniqueness and null value checks + Dataform",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Build Dataform assertions into your code.",
@@ -1369,7 +1369,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241223,
-    "cueWhy": "I chose this cue because 'You are building an ELT solution in BigQuery by using Dataform. You need to perform uniqueness and null value' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Build Dataform assertions into your code."
+    "cueWhy": "ELT quality checks inside Dataform pipelines belong as Dataform assertions in code."
   },
   {
     "id": 39,
@@ -1377,7 +1377,7 @@
     "topic": 1,
     "questionNumber": 225,
     "ref": "2024 / T1 Q225",
-    "cue": "Your organization stores customer data in an on-premises Apache Hadoop cluster in Apache Parquet format. Data",
+    "cue": "minimizing ETL data processing changes",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Migrate your data to Cloud Storage and migrate the metadata to Dataproc Metastore (DPMS). Refactor Spark pipelines to write and read data on Cloud Storage, and run them on Dataproc Serverless.",
@@ -1405,7 +1405,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241225,
-    "cueWhy": "I chose this cue because 'Your organization stores customer data in an on-premises Apache Hadoop cluster in Apache Parquet format. Data' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Migrate your data to Cloud Storage and migrate the metadata to Dataproc Metastore (DPMS). Refactor Spark pipelines to write and read data on Cloud Storage, and run them on Dataproc Serverless."
+    "cueWhy": "Move Spark+Parquet with managed services and minimal pipeline rewrites: Cloud Storage + Dataproc Metastore, run Spark on Dataproc; BigQuery later."
   },
   {
     "id": 40,
@@ -1413,7 +1413,7 @@
     "topic": 1,
     "questionNumber": 226,
     "ref": "2024 / T1 Q226",
-    "cue": "Your organization has two Google Cloud projects, project A and project B. In project A, you have a Pub/Sub",
+    "cue": "any future project cannot access",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Configure VPC Service Controls in the organization with a perimeter around project A.",
@@ -1441,7 +1441,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241226,
-    "cueWhy": "I chose this cue because 'Your organization has two Google Cloud projects, project A and project B. In project A, you have a Pub/Sub' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Configure VPC Service Controls in the organization with a perimeter around project A."
+    "cueWhy": "Lock a confidential Pub/Sub topic to project A only, including future projects \u2192 VPC Service Controls perimeter around project A."
   },
   {
     "id": 41,
@@ -1449,7 +1449,7 @@
     "topic": 1,
     "questionNumber": 227,
     "ref": "2024 / T1 Q227",
-    "cue": "You stream order data by using a Dataflow pipeline, and write the aggregated result to Memorystore. You",
+    "cue": "few hundred + read-only clients + Basic Tier",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create a new Memorystore for Redis instance with Standard Tier. Set capacity to 5 GB and create multiple read replicas. Delete the old instance.",
@@ -1477,7 +1477,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241227,
-    "cueWhy": "I chose this cue because 'You stream order data by using a Dataflow pipeline, and write the aggregated result to Memorystore. You' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create a new Memorystore for Redis instance with Standard Tier. Set capacity to 5 GB and create multiple read replicas. Delete the old instance."
+    "cueWhy": "Many read-only clients need Standard Tier Redis with read replicas."
   },
   {
     "id": 42,
@@ -1485,7 +1485,7 @@
     "topic": 1,
     "questionNumber": 228,
     "ref": "2024 / T1 Q228",
-    "cue": "You have a streaming pipeline that ingests data from Pub/Sub in production. You need to update this streaming",
+    "cue": "reprocesses the previous two days of delivered Pub/Sub messages",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Use the Pub/Sub subscription retain-acked-messages flag.",
@@ -1517,7 +1517,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241228,
-    "cueWhy": "I chose this cue because 'You have a streaming pipeline that ingests data from Pub/Sub in production. You need to update this streaming' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use the Pub/Sub subscription retain-acked-messages flag."
+    "cueWhy": "Need already-acked history for replay \u2192 retain-acked-messages (plus snapshot/new sub as second control)."
   },
   {
     "id": 43,
@@ -1525,7 +1525,7 @@
     "topic": 1,
     "questionNumber": 229,
     "ref": "2024 / T1 Q229",
-    "cue": "You currently use a SQL-based tool to visualize your data stored in BigQuery. The data visualizations require",
+    "cue": "outer joins and analytic functions + no less than 4 hours old",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Create materialized views with the allow_non_incremental_definition option set to true for the visualization queries. Specify the max_staleness parameter to 4 hours and the enable_refresh parameter to true. Reference the materialized views in the data visualization tool.",
@@ -1553,7 +1553,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241229,
-    "cueWhy": "I chose this cue because 'You currently use a SQL-based tool to visualize your data stored in BigQuery. The data visualizations require' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create materialized views with the allow_non_incremental_definition option set to true for the visualization queries. Specify the max_staleness parameter to 4 hours and the enable_refresh parameter to true. Referen..."
+    "cueWhy": "Non-incremental materialized views with max_staleness 4h speed viz SQL."
   },
   {
     "id": 44,
@@ -1561,7 +1561,7 @@
     "topic": 1,
     "questionNumber": 230,
     "ref": "2024 / T1 Q230",
-    "cue": "You need to modernize your existing on-premises data strategy. Your organization currently uses:\u2022 Apache",
+    "cue": "minimal changes + Hadoop + Airflow",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Use Dataproc to migrate Hadoop clusters to Google Cloud, and Cloud Storage to handle any HDFS use cases. Orchestrate your pipelines with Cloud Composer.",
@@ -1589,7 +1589,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241230,
-    "cueWhy": "I chose this cue because 'You need to modernize your existing on-premises data strategy. Your organization currently uses:\u2022 Apache' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use Dataproc to migrate Hadoop clusters to Google Cloud, and Cloud Storage to handle any HDFS use cases. Orchestrate your pipelines with Cloud Composer."
+    "cueWhy": "Lift Hadoop to Dataproc + GCS for HDFS; keep orchestration on Cloud Composer."
   },
   {
     "id": 45,
@@ -1597,7 +1597,7 @@
     "topic": 1,
     "questionNumber": 231,
     "ref": "2024 / T1 Q231",
-    "cue": "You recently deployed several data processing jobs into your Cloud Composer 2 environment. You notice that",
+    "cue": "worker pod evictions + workers memory usage",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Increase the maximum number of workers and reduce worker concurrency.",
@@ -1629,7 +1629,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241231,
-    "cueWhy": "I chose this cue because 'You recently deployed several data processing jobs into your Cloud Composer 2 environment. You notice that' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Increase the maximum number of workers and reduce worker concurrency."
+    "cueWhy": "Composer OOM/evictions: raise max workers and lower concurrency (and/or worker memory)."
   },
   {
     "id": 46,
@@ -1637,7 +1637,7 @@
     "topic": 1,
     "questionNumber": 232,
     "ref": "2024 / T1 Q232",
-    "cue": "You are on the data governance team and are implementing security requirements to deploy resources. You need",
+    "cue": "only the europe-west3 region",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Set the constraints/gcp.resourceLocations organization policy constraint to in:europe-west3-locations.",
@@ -1665,7 +1665,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241232,
-    "cueWhy": "I chose this cue because 'You are on the data governance team and are implementing security requirements to deploy resources. You need' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Set the constraints/gcp.resourceLocations organization policy constraint to in:europe-west3-locations."
+    "cueWhy": "Org-wide location lock \u2192 resourceLocations constraint to europe-west3."
   },
   {
     "id": 47,
@@ -1673,7 +1673,7 @@
     "topic": 1,
     "questionNumber": 233,
     "ref": "2024 / T1 Q233",
-    "cue": "You are a BigQuery admin supporting a team of data consumers who run ad hoc queries and downstream reporting",
+    "cue": "job queuing or slot contention",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use available administrative resource charts to determine how slots are being used and how jobs are performing over time. Run a query on the INFORMATION_SCHEMA to review query performance.",
@@ -1701,7 +1701,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241233,
-    "cueWhy": "I chose this cue because 'You are a BigQuery admin supporting a team of data consumers who run ad hoc queries and downstream reporting' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use available administrative resource charts to determine how slots are being used and how jobs are performing over time. Run a query on the INFORMATION_SCHEMA to review query performance."
+    "cueWhy": "Admin resource charts + INFORMATION_SCHEMA to diagnose slot/queue slowdowns."
   },
   {
     "id": 48,
@@ -1709,7 +1709,7 @@
     "topic": 1,
     "questionNumber": 234,
     "ref": "2024 / T1 Q234",
-    "cue": "You migrated a data backend for an application that serves 10 PB of historical product data for analytics.",
+    "cue": "10 PB of historical + 1000 queries per second",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: 1. Store the historical data in BigQuery for analytics. 2. In a Cloud SQL table, store the last state of the product after every product change. 3. Serve the last state data directly from Cloud SQL to the API.",
@@ -1737,7 +1737,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241234,
-    "cueWhy": "I chose this cue because 'You migrated a data backend for an application that serves 10 PB of historical product data for analytics.' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: 1. Store the historical data in BigQuery for analytics. 2. In a Cloud SQL table, store the last state of the product after every product change. 3. Serve the last state data directly from Cloud SQL to the API."
+    "cueWhy": "Huge history in BigQuery; hot last-state API in Cloud SQL."
   },
   {
     "id": 49,
@@ -1745,7 +1745,7 @@
     "topic": 1,
     "questionNumber": 235,
     "ref": "2024 / T1 Q235",
-    "cue": "You want to schedule a number of sequential load and transformation jobs. Data files will be added to a Cloud",
+    "cue": "no fixed schedule + different for every table",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: 1. Create an Apache Airflow directed acyclic graph (DAG) in Cloud Composer with sequential tasks by using the Dataproc and BigQuery operators. 2. Create a separate DAG for each table that needs to go through the pipeline. 3. Use a Cloud Storage object trigger to launch a Cloud Function that triggers the DAG.",
@@ -1773,7 +1773,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241235,
-    "cueWhy": "I chose this cue because 'You want to schedule a number of sequential load and transformation jobs. Data files will be added to a Cloud' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: 1. Create an Apache Airflow directed acyclic graph (DAG) in Cloud Composer with sequential tasks by using the Dataproc and BigQuery operators. 2. Create a separate DAG for each table that needs to go through the pi..."
+    "cueWhy": "Event-driven sequential Dataproc/BQ transforms per table \u2192 Composer DAGs + GCS trigger."
   },
   {
     "id": 50,
@@ -1781,7 +1781,7 @@
     "topic": 1,
     "questionNumber": 236,
     "ref": "2024 / T1 Q236",
-    "cue": "You are deploying a MySQL database workload onto Cloud SQL. The database must be able to scale up to support",
+    "cue": "regional outage + several readers from various geographic regions",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Create a highly available Cloud SQL instance in region A. Create a highly available read replica in region B. Scale up read workloads by creating cascading read replicas in multiple regions. Promote the read replica in region B when region A is down.",
@@ -1809,7 +1809,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241236,
-    "cueWhy": "I chose this cue because 'You are deploying a MySQL database workload onto Cloud SQL. The database must be able to scale up to support' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create a highly available Cloud SQL instance in region A. Create a highly available read replica in region B. Scale up read workloads by creating cascading read replicas in multiple regions. Promote the read replic..."
+    "cueWhy": "HA Cloud SQL + cross-region HA replica, cascade readers, promote on failover."
   },
   {
     "id": 51,
@@ -1817,7 +1817,7 @@
     "topic": 1,
     "questionNumber": 237,
     "ref": "2024 / T1 Q237",
-    "cue": "You are planning to load some of your existing on-premises data into BigQuery on Google Cloud. You want to",
+    "cue": "stream or batch-load + mask some sensitive data + programmatic",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Create your pipeline with Dataflow through the Apache Beam SDK for Python, customizing separate options within your code for streaming, batch processing, and Cloud DLP. Select BigQuery as your data sink.",
@@ -1845,7 +1845,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241237,
-    "cueWhy": "I chose this cue because 'You are planning to load some of your existing on-premises data into BigQuery on Google Cloud. You want to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create your pipeline with Dataflow through the Apache Beam SDK for Python, customizing separate options within your code for streaming, batch processing, and Cloud DLP. Select BigQuery as your data sink."
+    "cueWhy": "One Beam pipeline covering stream/batch + DLP into BQ is cost-efficient."
   },
   {
     "id": 52,
@@ -1853,7 +1853,7 @@
     "topic": 1,
     "questionNumber": 238,
     "ref": "2024 / T1 Q238",
-    "cue": "You want to encrypt the customer data stored in BigQuery. You need to implement per-user crypto-deletion on",
+    "cue": "per-user crypto-deletion",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Implement Authenticated Encryption with Associated Data (AEAD) BigQuery functions while storing your data in BigQuery.",
@@ -1881,7 +1881,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241238,
-    "cueWhy": "I chose this cue because 'You want to encrypt the customer data stored in BigQuery. You need to implement per-user crypto-deletion on' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Implement Authenticated Encryption with Associated Data (AEAD) BigQuery functions while storing your data in BigQuery."
+    "cueWhy": "Native per-user crypto-shredding in BQ \u2192 AEAD functions."
   },
   {
     "id": 53,
@@ -1889,7 +1889,7 @@
     "topic": 1,
     "questionNumber": 239,
     "ref": "2024 / T1 Q239",
-    "cue": "The data analyst team at your company uses BigQuery for ad-hoc queries and scheduled SQL pipelines in a",
+    "cue": "quota errors + 1500 queries + non time-sensitive",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Update SQL pipelines to run as a batch query, and run ad-hoc queries as interactive query jobs.",
@@ -1917,7 +1917,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241239,
-    "cueWhy": "I chose this cue because 'The data analyst team at your company uses BigQuery for ad-hoc queries and scheduled SQL pipelines in a' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Update SQL pipelines to run as a batch query, and run ad-hoc queries as interactive query jobs."
+    "cueWhy": "Slot contention: run pipelines as batch jobs; keep ad-hoc interactive."
   },
   {
     "id": 54,
@@ -1925,7 +1925,7 @@
     "topic": 1,
     "questionNumber": 240,
     "ref": "2024 / T1 Q240",
-    "cue": "You are designing a data mesh on Google Cloud by using Dataplex to manage data in BigQuery and Cloud Storage.",
+    "cue": "Data engineers + Analytic users",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: 1. Grant the dataplex.dataOwner role to the data engineer group on the customer data lake. 2. Grant the dataplex.dataReader role to the analytic user group on the customer curated zone.",
@@ -1953,7 +1953,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241240,
-    "cueWhy": "I chose this cue because 'You are designing a data mesh on Google Cloud by using Dataplex to manage data in BigQuery and Cloud Storage.' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: 1. Grant the dataplex.dataOwner role to the data engineer group on the customer data lake. 2. Grant the dataplex.dataReader role to the analytic user group on the customer curated zone."
+    "cueWhy": "Lake: dataOwner for engineers; curated zone: dataReader for analysts."
   },
   {
     "id": 55,
@@ -1961,7 +1961,7 @@
     "topic": 1,
     "questionNumber": 241,
     "ref": "2024 / T1 Q241",
-    "cue": "You are designing the architecture of your application to store data in Cloud Storage. Your application",
+    "cue": "regional failure + minimize the recovery point objective (RPO)",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Adopt a dual-region Cloud Storage bucket, and enable turbo replication in your architecture.",
@@ -1989,7 +1989,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241241,
-    "cueWhy": "I chose this cue because 'You are designing the architecture of your application to store data in Cloud Storage. Your application' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Adopt a dual-region Cloud Storage bucket, and enable turbo replication in your architecture."
+    "cueWhy": "Pipeline buckets surviving regional failure with low RPO \u2192 dual-region + turbo replication."
   },
   {
     "id": 56,
@@ -1997,7 +1997,7 @@
     "topic": 1,
     "questionNumber": 242,
     "ref": "2024 / T1 Q242",
-    "cue": "You have designed an Apache Beam processing pipeline that reads from a Pub/Sub topic. The topic has a message",
+    "cue": "RPO of 15 minutes + regional outage",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: 1. Use a dual-region Cloud Storage bucket with turbo replication enabled. 2. Monitor Dataflow metrics with Cloud Monitoring to determine when an outage occurs. 3. Seek the subscription back in time by 60 minutes to recover the acknowledged messages. 4. Start the Dataflow job in a secondary region.",
@@ -2025,7 +2025,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241242,
-    "cueWhy": "I chose this cue because 'You have designed an Apache Beam processing pipeline that reads from a Pub/Sub topic. The topic has a message' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: 1. Use a dual-region Cloud Storage bucket with turbo replication enabled. 2. Monitor Dataflow metrics with Cloud Monitoring to determine when an outage occurs. 3. Seek the subscription back in time by 60 minutes to..."
+    "cueWhy": "Dual-region turbo GCS + seek subscription back + restart Dataflow in secondary region."
   },
   {
     "id": 57,
@@ -2033,7 +2033,7 @@
     "topic": 1,
     "questionNumber": 243,
     "ref": "2024 / T1 Q243",
-    "cue": "You are preparing data that your machine learning team will use to train a model using BigQueryML. They want",
+    "cue": "replace the nulls with zeros",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: ",
@@ -2061,7 +2061,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241243,
-    "cueWhy": "I chose this cue because 'You are preparing data that your machine learning team will use to train a model using BigQueryML. They want' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: "
+    "cueWhy": "For BQML features, replace null feature1 with 0 in the SELECT (IFNULL/COALESCE) feeding the model."
   },
   {
     "id": 58,
@@ -2069,7 +2069,7 @@
     "topic": 1,
     "questionNumber": 244,
     "ref": "2024 / T1 Q244",
-    "cue": "Different teams in your organization store customer and performance data in BigQuery. Each team needs to keep",
+    "cue": "full control of their collected data + exchange their data",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Ask each team to publish their data in Analytics Hub. Direct the other teams to subscribe to them.",
@@ -2097,7 +2097,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241244,
-    "cueWhy": "I chose this cue because 'Different teams in your organization store customer and performance data in BigQuery. Each team needs to keep' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Ask each team to publish their data in Analytics Hub. Direct the other teams to subscribe to them."
+    "cueWhy": "Teams keep ownership and share read access \u2192 publish/subscribe via Analytics Hub."
   },
   {
     "id": 59,
@@ -2105,7 +2105,7 @@
     "topic": 1,
     "questionNumber": 245,
     "ref": "2024 / T1 Q245",
-    "cue": "You are developing a model to identify the factors that lead to sales conversions for your customers. You",
+    "cue": "completed processing your data + model development lifecycle",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Delineate what data will be used for testing and what will be used for training the model.",
@@ -2133,7 +2133,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241245,
-    "cueWhy": "I chose this cue because 'You are developing a model to identify the factors that lead to sales conversions for your customers. You' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Delineate what data will be used for testing and what will be used for training the model."
+    "cueWhy": "After prep, next ML step is split train vs test data."
   },
   {
     "id": 60,
@@ -2141,7 +2141,7 @@
     "topic": 1,
     "questionNumber": 246,
     "ref": "2024 / T1 Q246",
-    "cue": "You have one BigQuery dataset which includes customers\u2019 street addresses. You want to retrieve all",
+    "cue": "street addresses",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create a deep inspection job on each table in your dataset with Cloud Data Loss Prevention and create an inspection template that includes the STREET_ADDRESS infoType.",
@@ -2169,7 +2169,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241246,
-    "cueWhy": "I chose this cue because 'You have one BigQuery dataset which includes customers\u2019 street addresses. You want to retrieve all' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create a deep inspection job on each table in your dataset with Cloud Data Loss Prevention and create an inspection template that includes the STREET_ADDRESS infoType."
+    "cueWhy": "Find STREET_ADDRESS occurrences across a dataset \u2192 DLP deep inspection with that infoType."
   },
   {
     "id": 61,
@@ -2177,7 +2177,7 @@
     "topic": 1,
     "questionNumber": 247,
     "ref": "2024 / T1 Q247",
-    "cue": "Your company operates in three domains: airlines, hotels, and ride-hailing services. Each domain has two",
+    "cue": "central data platform team is becoming a bottleneck + data mesh",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: 1. Create one lake for each domain. Inside each lake, create one zone for each team. 2. Attach each of the BigQuery datasets created by the individual teams as assets to the respective zone. 3. Direct each domain to manage their own lake\u2019s data assets.",
@@ -2205,7 +2205,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241247,
-    "cueWhy": "I chose this cue because 'Your company operates in three domains: airlines, hotels, and ride-hailing services. Each domain has two' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: 1. Create one lake for each domain. Inside each lake, create one zone for each team. 2. Attach each of the BigQuery datasets created by the individual teams as assets to the respective zone. 3. Direct each domain t..."
+    "cueWhy": "Per-domain Dataplex lakes/zones owned by domain teams removes central bottleneck."
   },
   {
     "id": 62,
@@ -2213,7 +2213,7 @@
     "topic": 1,
     "questionNumber": 248,
     "ref": "2024 / T1 Q248",
-    "cue": "dataset.inventory_vm sample records:You have an inventory of VM data stored in the BigQuery table. You want",
+    "cue": "fewer than 8 vCPU",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Create a view with a filter to drop rows with fewer than 8 vCPU, and use the UNNEST operator.",
@@ -2241,7 +2241,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241248,
-    "cueWhy": "I chose this cue because 'dataset.inventory_vm sample records:You have an inventory of VM data stored in the BigQuery table. You want' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create a view with a filter to drop rows with fewer than 8 vCPU, and use the UNNEST operator."
+    "cueWhy": "Cheap recurring filter of nested VM inventory \u2192 view with filter + UNNEST."
   },
   {
     "id": 63,
@@ -2249,7 +2249,7 @@
     "topic": 1,
     "questionNumber": 249,
     "ref": "2024 / T1 Q249",
-    "cue": "Your team is building a data lake platform on Google Cloud. As a part of the data foundation design, you are",
+    "cue": "There should not be any charges for data retrieval",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Create the bucket with the Autoclass storage class feature.",
@@ -2277,7 +2277,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241249,
-    "cueWhy": "I chose this cue because 'Your team is building a data lake platform on Google Cloud. As a part of the data foundation design, you are' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create the bucket with the Autoclass storage class feature."
+    "cueWhy": "No retrieval fees, instant access, deletable old data \u2192 Autoclass."
   },
   {
     "id": 64,
@@ -2285,7 +2285,7 @@
     "topic": 1,
     "questionNumber": 250,
     "ref": "2024 / T1 Q250",
-    "cue": "Your company's data platform ingests CSV file dumps of booking and user profile data from upstream sources",
+    "cue": "email field + personally identifiable information (PII) should not be accessible",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: 1. Create a pipeline to de-identify the email field by using recordTransformations in Cloud DLP with format-preserving encryption with FFX as the de-identification transformation type. 2. Load the booking and user profile data into a BigQuery table.",
@@ -2313,7 +2313,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241250,
-    "cueWhy": "I chose this cue because 'Your company's data platform ingests CSV file dumps of booking and user profile data from upstream sources' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: 1. Create a pipeline to de-identify the email field by using recordTransformations in Cloud DLP with format-preserving encryption with FFX as the de-identification transformation type. 2. Load the booking and user..."
+    "cueWhy": "Join on email without exposing PII \u2192 DLP FFX format-preserving encryption then load BQ."
   },
   {
     "id": 65,
@@ -2321,7 +2321,7 @@
     "topic": 1,
     "questionNumber": 251,
     "ref": "2024 / T1 Q251",
-    "cue": "You have important legal hold documents in a Cloud Storage bucket. You need to ensure that these documents",
+    "cue": "not deleted or modified",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Set a retention policy. Lock the retention policy.",
@@ -2349,7 +2349,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241251,
-    "cueWhy": "I chose this cue because 'You have important legal hold documents in a Cloud Storage bucket. You need to ensure that these documents' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Set a retention policy. Lock the retention policy."
+    "cueWhy": "Legal hold immutability \u2192 retention policy and lock it."
   },
   {
     "id": 66,
@@ -2357,7 +2357,7 @@
     "topic": 1,
     "questionNumber": 252,
     "ref": "2024 / T1 Q252",
-    "cue": "You are designing a data warehouse in BigQuery to analyze sales data for a telecommunication service",
+    "cue": "historical record of all data + easy-to-use",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create a denormalized, append-only model with nested and repeated fields. Use the ingestion timestamp to track historical data.",
@@ -2385,7 +2385,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241252,
-    "cueWhy": "I chose this cue because 'You are designing a data warehouse in BigQuery to analyze sales data for a telecommunication service' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a denormalized, append-only model with nested and repeated fields. Use the ingestion timestamp to track historical data."
+    "cueWhy": "Monthly-updating dims with history for viz \u2192 denormalized append-only nested model + ingest time."
   },
   {
     "id": 67,
@@ -2393,7 +2393,7 @@
     "topic": 1,
     "questionNumber": 253,
     "ref": "2024 / T1 Q253",
-    "cue": "You are deploying a batch pipeline in Dataflow. This pipeline reads data from Cloud Storage, transforms the",
+    "cue": "only internal IP addresses and no external IP addresses",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Ensure that Private Google Access is enabled in the subnetwork. Use Dataflow with only internal IP addresses.",
@@ -2421,7 +2421,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241253,
-    "cueWhy": "I chose this cue because 'You are deploying a batch pipeline in Dataflow. This pipeline reads data from Cloud Storage, transforms the' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Ensure that Private Google Access is enabled in the subnetwork. Use Dataflow with only internal IP addresses."
+    "cueWhy": "Org bans external IPs: Private Google Access + internal-IP Dataflow workers."
   },
   {
     "id": 68,
@@ -2429,7 +2429,7 @@
     "topic": 1,
     "questionNumber": 254,
     "ref": "2024 / T1 Q254",
-    "cue": "You are running a Dataflow streaming pipeline, with Streaming Engine and Horizontal Autoscaling enabled. You",
+    "cue": "autoscaler is not spinning up additional workers",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Change the pipeline code, and introduce a Reshuffle step to prevent fusion.",
@@ -2457,7 +2457,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241254,
-    "cueWhy": "I chose this cue because 'You are running a Dataflow streaming pipeline, with Streaming Engine and Horizontal Autoscaling enabled. You' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Change the pipeline code, and introduce a Reshuffle step to prevent fusion."
+    "cueWhy": "Fusion hides parallelism so autoscaler stalls \u2192 Reshuffle to break fusion."
   },
   {
     "id": 69,
@@ -2465,7 +2465,7 @@
     "topic": 1,
     "questionNumber": 255,
     "ref": "2024 / T1 Q255",
-    "cue": "You have an Oracle database deployed in a VM as part of a Virtual Private Cloud (VPC) network. You want to",
+    "cue": "Oracle + continuously synchronize + minimize the need to manage infrastructure",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create a Datastream service from Oracle to BigQuery, use a private connectivity configuration to the same VPC network, and a connection profile to BigQuery.",
@@ -2493,7 +2493,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241255,
-    "cueWhy": "I chose this cue because 'You have an Oracle database deployed in a VM as part of a Virtual Private Cloud (VPC) network. You want to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a Datastream service from Oracle to BigQuery, use a private connectivity configuration to the same VPC network, and a connection profile to BigQuery."
+    "cueWhy": "Managed Oracle\u2192BQ continuous sync on private VPC \u2192 Datastream."
   },
   {
     "id": 70,
@@ -2501,7 +2501,7 @@
     "topic": 1,
     "questionNumber": 256,
     "ref": "2024 / T1 Q256",
-    "cue": "You are deploying an Apache Airflow directed acyclic graph (DAG) in a Cloud Composer 2 instance. You have",
+    "cue": "no Internet access + reactive way every time a new file",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: 1. Enable the Airflow REST API, and set up Cloud Storage notifications to trigger a Cloud Function instance. 2. Create a Private Service Connect (PSC) endpoint. 3. Write a Cloud Function that connects to the Cloud Composer cluster through the PSC endpoint.",
@@ -2529,7 +2529,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241256,
-    "cueWhy": "I chose this cue because 'You are deploying an Apache Airflow directed acyclic graph (DAG) in a Cloud Composer 2 instance. You have' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: 1. Enable the Airflow REST API, and set up Cloud Storage notifications to trigger a Cloud Function instance. 2. Create a Private Service Connect (PSC) endpoint. 3. Write a Cloud Function that connects to the Cloud..."
+    "cueWhy": "Private Composer react to GCS object: GCS notify \u2192 CF via PSC to Airflow API."
   },
   {
     "id": 71,
@@ -2537,7 +2537,7 @@
     "topic": 1,
     "questionNumber": 258,
     "ref": "2024 / T1 Q258",
-    "cue": "You have several different file type data sources, such as Apache Parquet and CSV. You want to store the data",
+    "cue": "your own encryption keys + GUI-based solution",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Use Cloud Data Fusion to move files into Cloud Storage.",
@@ -2565,7 +2565,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241258,
-    "cueWhy": "I chose this cue because 'You have several different file type data sources, such as Apache Parquet and CSV. You want to store the data' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use Cloud Data Fusion to move files into Cloud Storage."
+    "cueWhy": "GUI ingest of Parquet/CSV into GCS with customer keys \u2192 Cloud Data Fusion."
   },
   {
     "id": 72,
@@ -2573,7 +2573,7 @@
     "topic": 1,
     "questionNumber": 259,
     "ref": "2024 / T1 Q259",
-    "cue": "Your business users need a way to clean and prepare data before using the data for analysis. Your business",
+    "cue": "graphical user interfaces + spreadsheet",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Use Dataprep to clean the data, and write the results to BigQuery. Analyze the data by using Connected Sheets.",
@@ -2601,7 +2601,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241259,
-    "cueWhy": "I chose this cue because 'Your business users need a way to clean and prepare data before using the data for analysis. Your business' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use Dataprep to clean the data, and write the results to BigQuery. Analyze the data by using Connected Sheets."
+    "cueWhy": "GUI prep then analyze in sheets \u2192 Dataprep to BQ + Connected Sheets."
   },
   {
     "id": 73,
@@ -2609,7 +2609,7 @@
     "topic": 1,
     "questionNumber": 260,
     "ref": "2024 / T1 Q260",
-    "cue": "You have two projects where you run BigQuery jobs:\u2022 One project runs production jobs that have strict",
+    "cue": "strict completion time SLAs + ad-hoc analytical queries",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create two reservations, one for each of the projects. For the SLA project, use an Enterprise Edition with a baseline of 300 slots and enable autoscaling up to 500 slots. For the ad-hoc project, configure on-demand billing.",
@@ -2637,7 +2637,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241260,
-    "cueWhy": "I chose this cue because 'You have two projects where you run BigQuery jobs:\u2022 One project runs production jobs that have strict' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create two reservations, one for each of the projects. For the SLA project, use an Enterprise Edition with a baseline of 300 slots and enable autoscaling up to 500 slots. For the ad-hoc project, configure on-demand..."
+    "cueWhy": "SLA project: Enterprise baseline 300 + autoscale 500; ad-hoc stays on-demand."
   },
   {
     "id": 74,
@@ -2645,7 +2645,7 @@
     "topic": 1,
     "questionNumber": 261,
     "ref": "2024 / T1 Q261",
-    "cue": "You want to migrate your existing Teradata data warehouse to BigQuery. You want to move the historical data",
+    "cue": "local storage space on your existing data warehouse is limited",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Use BigQuery Data Transfer Service by using the Java Database Connectivity (JDBC) driver with FastExport connection.",
@@ -2673,7 +2673,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241261,
-    "cueWhy": "I chose this cue because 'You want to migrate your existing Teradata data warehouse to BigQuery. You want to move the historical data' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use BigQuery Data Transfer Service by using the Java Database Connectivity (JDBC) driver with FastExport connection."
+    "cueWhy": "Teradata\u2192BQ with little code and limited local disk \u2192 BQ Data Transfer JDBC FastExport."
   },
   {
     "id": 75,
@@ -2681,7 +2681,7 @@
     "topic": 1,
     "questionNumber": 262,
     "ref": "2024 / T1 Q262",
-    "cue": "You are on the data governance team and are implementing security requirements. You need to encrypt all your",
+    "cue": "on-premises hardware security module (HSM)",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create the encryption key in the on-premises HSM and link it to a Cloud External Key Manager (Cloud EKM) key. Associate the created Cloud KMS key while creating the BigQuery resources.",
@@ -2709,7 +2709,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241262,
-    "cueWhy": "I chose this cue because 'You are on the data governance team and are implementing security requirements. You need to encrypt all your' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create the encryption key in the on-premises HSM and link it to a Cloud External Key Manager (Cloud EKM) key. Associate the created Cloud KMS key while creating the BigQuery resources."
+    "cueWhy": "Keys only on customer HSM for BQ \u2192 Cloud EKM linked from on-prem HSM."
   },
   {
     "id": 76,
@@ -2717,7 +2717,7 @@
     "topic": 1,
     "questionNumber": 263,
     "ref": "2024 / T1 Q263",
-    "cue": "You maintain ETL pipelines. You notice that a streaming pipeline running on Dataflow is taking a long time to",
+    "cue": "merged into one step + potential bottleneck",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Insert a Reshuffle operation after each processing step, and monitor the execution details in the Dataflow console.",
@@ -2745,7 +2745,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241263,
-    "cueWhy": "I chose this cue because 'You maintain ETL pipelines. You notice that a streaming pipeline running on Dataflow is taking a long time to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Insert a Reshuffle operation after each processing step, and monitor the execution details in the Dataflow console."
+    "cueWhy": "Fused Dataflow graph hides stage cost \u2192 Reshuffle between steps to inspect."
   },
   {
     "id": 77,
@@ -2753,7 +2753,7 @@
     "topic": 1,
     "questionNumber": 264,
     "ref": "2024 / T1 Q264",
-    "cue": "You are running your BigQuery project in the on-demand billing model and are executing a change data capture",
+    "cue": "predictable cost model + scan intensive",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create a BigQuery reservation for the project.",
@@ -2781,7 +2781,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241264,
-    "cueWhy": "I chose this cue because 'You are running your BigQuery project in the on-demand billing model and are executing a change data capture' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a BigQuery reservation for the project."
+    "cueWhy": "On-demand CDC merge scanning huge target \u2192 BigQuery reservation."
   },
   {
     "id": 78,
@@ -2789,7 +2789,7 @@
     "topic": 1,
     "questionNumber": 265,
     "ref": "2024 / T1 Q265",
-    "cue": "You are designing a fault-tolerant architecture to store data in a regional BigQuery dataset. You need to",
+    "cue": "past seven days + lowest RPO",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Access historical data by using time travel in BigQuery.",
@@ -2817,7 +2817,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241265,
-    "cueWhy": "I chose this cue because 'You are designing a fault-tolerant architecture to store data in a regional BigQuery dataset. You need to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Access historical data by using time travel in BigQuery."
+    "cueWhy": "Recover from recent table corruption cheaply \u2192 BigQuery time travel."
   },
   {
     "id": 79,
@@ -2825,7 +2825,7 @@
     "topic": 1,
     "questionNumber": 266,
     "ref": "2024 / T1 Q266",
-    "cue": "You are building a streaming Dataflow pipeline that ingests noise level data from hundreds of sensors placed",
+    "cue": "more than 30 minutes + no data has been received for 15 minutes",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Use session windows with a 15-minute gap duration.",
@@ -2853,7 +2853,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241266,
-    "cueWhy": "I chose this cue because 'You are building a streaming Dataflow pipeline that ingests noise level data from hundreds of sensors placed' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use session windows with a 15-minute gap duration."
+    "cueWhy": "Activity then 15-minute silence ends the window \u2192 session windows with 15-minute gap."
   },
   {
     "id": 80,
@@ -2861,7 +2861,7 @@
     "topic": 1,
     "questionNumber": 267,
     "ref": "2024 / T1 Q267",
-    "cue": "You are creating a data model in BigQuery that will hold retail transaction data. Your two largest tables,",
+    "cue": "tightly coupled immutable relationship + frequently joined",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Create a sales_transaction table that holds the sales_transaction_header information as rows and the sales_transaction_line rows as nested and repeated fields.",
@@ -2889,7 +2889,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241267,
-    "cueWhy": "I chose this cue because 'You are creating a data model in BigQuery that will hold retail transaction data. Your two largest tables,' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create a sales_transaction table that holds the sales_transaction_header information as rows and the sales_transaction_line rows as nested and repeated fields."
+    "cueWhy": "Header/line sales tables rarely change and always join \u2192 nest lines under header."
   },
   {
     "id": 81,
@@ -2897,7 +2897,7 @@
     "topic": 1,
     "questionNumber": 268,
     "ref": "2024 / T1 Q268",
-    "cue": "You created a new version of a Dataflow streaming data ingestion pipeline that reads from Pub/Sub and writes",
+    "cue": "without losing any data + more than 10 minutes",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Drain the old pipeline, then start the new pipeline.",
@@ -2925,7 +2925,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241268,
-    "cueWhy": "I chose this cue because 'You created a new version of a Dataflow streaming data ingestion pipeline that reads from Pub/Sub and writes' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Drain the old pipeline, then start the new pipeline."
+    "cueWhy": "Replace streaming Dataflow safely: drain old pipeline, then start new."
   },
   {
     "id": 82,
@@ -2933,7 +2933,7 @@
     "topic": 1,
     "questionNumber": 269,
     "ref": "2024 / T1 Q269",
-    "cue": "Your organization's data assets are stored in BigQuery, Pub/Sub, and a PostgreSQL instance running on Compute",
+    "cue": "BigQuery, Pub/Sub, and a PostgreSQL + discoverability",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Use Data Catalog to automatically catalog BigQuery datasets and Pub/Sub topics. Use Data Catalog APIs to manually catalog PostgreSQL tables.",
@@ -2961,7 +2961,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241269,
-    "cueWhy": "I chose this cue because 'Your organization's data assets are stored in BigQuery, Pub/Sub, and a PostgreSQL instance running on Compute' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use Data Catalog to automatically catalog BigQuery datasets and Pub/Sub topics. Use Data Catalog APIs to manually catalog PostgreSQL tables."
+    "cueWhy": "Auto-catalog BQ/Pub/Sub in Data Catalog; manually catalog Postgres via API."
   },
   {
     "id": 83,
@@ -2969,7 +2969,7 @@
     "topic": 1,
     "questionNumber": 270,
     "ref": "2024 / T1 Q270",
-    "cue": "You need to create a SQL pipeline. The pipeline runs an aggregate SQL transformation on a BigQuery table",
+    "cue": "every two hours + three consecutive failures",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create a BigQuery scheduled query to run the SQL transformation with schedule options that repeats every two hours, and enable notification to Pub/Sub topic. Use Pub/Sub and Cloud Functions to send an email after three failed executions.",
@@ -2997,7 +2997,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241270,
-    "cueWhy": "I chose this cue because 'You need to create a SQL pipeline. The pipeline runs an aggregate SQL transformation on a BigQuery table' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a BigQuery scheduled query to run the SQL transformation with schedule options that repeats every two hours, and enable notification to Pub/Sub topic. Use Pub/Sub and Cloud Functions to send an email after t..."
+    "cueWhy": "Scheduled BQ SQL every 2h with email after 3 failures: scheduled query \u2192 Pub/Sub \u2192 Cloud Functions."
   },
   {
     "id": 84,
@@ -3005,7 +3005,7 @@
     "topic": 1,
     "questionNumber": 271,
     "ref": "2024 / T1 Q271",
-    "cue": "You are monitoring your organization\u2019s data lake hosted on BigQuery. The ingestion pipelines read data from",
+    "cue": "daily stored data increased by 50% + volumes of data in Pub/Sub remained the same",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: 1. Check for duplicate rows in the BigQuery tables that have the daily partition data size doubled. 2. Check the BigQuery Audit logs to find job IDs. 3. Use Cloud Monitoring to determine when the identified Dataflow jobs started and the pipeline code version. 4. When more than one pipeline ingests data into a table, stop all versions except the latest one.",
@@ -3033,7 +3033,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241271,
-    "cueWhy": "I chose this cue because 'You are monitoring your organization\u2019s data lake hosted on BigQuery. The ingestion pipelines read data from' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: 1. Check for duplicate rows in the BigQuery tables that have the daily partition data size doubled. 2. Check the BigQuery Audit logs to find job IDs. 3. Use Cloud Monitoring to determine when the identified Dataflo..."
+    "cueWhy": "Same Pub/Sub volume but bigger BQ partitions \u2192 investigate duplicates and which Dataflow version wrote them."
   },
   {
     "id": 85,
@@ -3041,7 +3041,7 @@
     "topic": 1,
     "questionNumber": 272,
     "ref": "2024 / T1 Q272",
-    "cue": "You have a BigQuery dataset named \u201ccustomers\u201d. All tables will be tagged by using a Data Catalog tag template",
+    "cue": "has_sensitive_data + Human Resources (HR) group",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Create the \u201cgdpr\u201d tag template with public visibility. Assign the bigquery.dataViewer role to the HR group on the tables that contain sensitive data.",
@@ -3069,7 +3069,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241272,
-    "cueWhy": "I chose this cue because 'You have a BigQuery dataset named \u201ccustomers\u201d. All tables will be tagged by using a Data Catalog tag template' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create the \u201cgdpr\u201d tag template with public visibility. Assign the bigquery.dataViewer role to the HR group on the tables that contain sensitive data."
+    "cueWhy": "Public tag-template search for everyone; only HR gets dataViewer on sensitive tables."
   },
   {
     "id": 86,
@@ -3077,7 +3077,7 @@
     "topic": 1,
     "questionNumber": 273,
     "ref": "2024 / T1 Q273",
-    "cue": "You are creating the CI/CD cycle for the code of the directed acyclic graphs (DAGs) running in Cloud",
+    "cue": "certain tag is pushed + development and another instance for production",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: 1. Use Cloud Build to copy the code of the DAG to the Cloud Storage bucket of the development instance for DAG testing. 2. If the tests pass, use Cloud Build to copy the code to the bucket of the production instance.",
@@ -3105,7 +3105,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241273,
-    "cueWhy": "I chose this cue because 'You are creating the CI/CD cycle for the code of the directed acyclic graphs (DAGs) running in Cloud' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: 1. Use Cloud Build to copy the code of the DAG to the Cloud Storage bucket of the development instance for DAG testing. 2. If the tests pass, use Cloud Build to copy the code to the bucket of the production instance."
+    "cueWhy": "Tag-based DAG deploy: Cloud Build to dev bucket then prod bucket after tests."
   },
   {
     "id": 87,
@@ -3113,7 +3113,7 @@
     "topic": 1,
     "questionNumber": 274,
     "ref": "2024 / T1 Q274",
-    "cue": "You have a BigQuery table that ingests data directly from a Pub/Sub subscription. The ingested data is",
+    "cue": "Google-managed encryption key + Cloud KMS",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create a new BigQuery table by using customer-managed encryption keys (CMEK), and migrate the data from the old BigQuery table.",
@@ -3141,7 +3141,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241274,
-    "cueWhy": "I chose this cue because 'You have a BigQuery table that ingests data directly from a Pub/Sub subscription. The ingested data is' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create a new BigQuery table by using customer-managed encryption keys (CMEK), and migrate the data from the old BigQuery table."
+    "cueWhy": "Org requires CMEK: create CMEK table and migrate from Google-managed table."
   },
   {
     "id": 88,
@@ -3149,7 +3149,7 @@
     "topic": 1,
     "questionNumber": 275,
     "ref": "2024 / T1 Q275",
-    "cue": "You created an analytics environment on Google Cloud so that your data scientist team can explore data",
+    "cue": "ORC + Hive partitioning + SQL on the Hive query engine",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Copy the ORC files on Cloud Storage, then create external BigQuery tables for the data scientist team.",
@@ -3177,7 +3177,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241275,
-    "cueWhy": "I chose this cue because 'You created an analytics environment on Google Cloud so that your data scientist team can explore data' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Copy the ORC files on Cloud Storage, then create external BigQuery tables for the data scientist team."
+    "cueWhy": "Explore ORC Hive-partitioned HDFS-like data: copy to GCS + BigQuery external tables."
   },
   {
     "id": 89,
@@ -3185,7 +3185,7 @@
     "topic": 1,
     "questionNumber": 276,
     "ref": "2024 / T1 Q276",
-    "cue": "You are designing a Dataflow pipeline for a batch processing job. You want to mitigate multiple zonal",
+    "cue": "multiple zonal failures at job submission time",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Specify a worker region by using the --region flag.",
@@ -3213,7 +3213,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241276,
-    "cueWhy": "I chose this cue because 'You are designing a Dataflow pipeline for a batch processing job. You want to mitigate multiple zonal' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Specify a worker region by using the --region flag."
+    "cueWhy": "Batch Dataflow resilience at submit: set --region (regional workers)."
   },
   {
     "id": 90,
@@ -3221,7 +3221,7 @@
     "topic": 1,
     "questionNumber": 277,
     "ref": "2024 / T1 Q277",
-    "cue": "You are designing a real-time system for a ride hailing app that identifies areas with high demand for rides",
+    "cue": "real-time dashboards + supply and demand",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Group the data by using a hopping window in a Dataflow pipeline, and write the aggregated data to Memorystore.",
@@ -3249,7 +3249,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241277,
-    "cueWhy": "I chose this cue because 'You are designing a real-time system for a ride hailing app that identifies areas with high demand for rides' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Group the data by using a hopping window in a Dataflow pipeline, and write the aggregated data to Memorystore."
+    "cueWhy": "Ride-hail real-time aggregates for dashboards \u2192 hopping windows in Dataflow to Memorystore."
   },
   {
     "id": 91,
@@ -3257,7 +3257,7 @@
     "topic": 1,
     "questionNumber": 278,
     "ref": "2024 / T1 Q278",
-    "cue": "Your car factory is pushing machine measurements as messages into a Pub/Sub topic in your Google Cloud",
+    "cue": "business logic fails on a message + alerting",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Use an exception handling block in your Dataflow\u2019s DoFn code to push the messages that failed to be transformed through a side output and to a new Pub/Sub topic. Use Cloud Monitoring to monitor the topic/num_unacked_messages_by_region metric on this new topic.",
@@ -3285,7 +3285,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241278,
-    "cueWhy": "I chose this cue because 'Your car factory is pushing machine measurements as messages into a Pub/Sub topic in your Google Cloud' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use an exception handling block in your Dataflow\u2019s DoFn code to push the messages that failed to be transformed through a side output and to a new Pub/Sub topic. Use Cloud Monitoring to monitor the topic/num_unacke..."
+    "cueWhy": "Failed DoFn elements \u2192 side output to a monitor Pub/Sub topic."
   },
   {
     "id": 92,
@@ -3293,7 +3293,7 @@
     "topic": 1,
     "questionNumber": 279,
     "ref": "2024 / T1 Q279",
-    "cue": "You want to store your team\u2019s shared tables in a single dataset to make data easily accessible to various",
+    "cue": "readable but unmodifiable + individual workspaces",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Give analysts the BigQuery Data Viewer role on the shared dataset. Create a dataset for each analyst, and give each analyst the BigQuery Data Editor role at the dataset level for their assigned dataset.",
@@ -3321,7 +3321,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241279,
-    "cueWhy": "I chose this cue because 'You want to store your team\u2019s shared tables in a single dataset to make data easily accessible to various' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Give analysts the BigQuery Data Viewer role on the shared dataset. Create a dataset for each analyst, and give each analyst the BigQuery Data Editor role at the dataset level for their assigned dataset."
+    "cueWhy": "Shared dataset: Data Viewer; per-analyst datasets with Data Editor."
   },
   {
     "id": 93,
@@ -3329,7 +3329,7 @@
     "topic": 1,
     "questionNumber": 280,
     "ref": "2024 / T1 Q280",
-    "cue": "You are running a streaming pipeline with Dataflow and are using hopping windows to group the data as the",
+    "cue": "late data + hopping windows",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Use watermarks to define the expected data arrival window. Allow late data as it arrives.",
@@ -3357,7 +3357,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241280,
-    "cueWhy": "I chose this cue because 'You are running a streaming pipeline with Dataflow and are using hopping windows to group the data as the' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use watermarks to define the expected data arrival window. Allow late data as it arrives."
+    "cueWhy": "Late data not classified correctly \u2192 watermarks + allowed lateness."
   },
   {
     "id": 94,
@@ -3365,7 +3365,7 @@
     "topic": 1,
     "questionNumber": 281,
     "ref": "2024 / T1 Q281",
-    "cue": "You work for a large ecommerce company. You store your customer's order data in Bigtable. You have a garbage",
+    "cue": "garbage collection policy + older than 30 days",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Use a timestamp range filter in the query to fetch the customer's data for a specific range.",
@@ -3393,7 +3393,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241281,
-    "cueWhy": "I chose this cue because 'You work for a large ecommerce company. You store your customer's order data in Bigtable. You have a garbage' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use a timestamp range filter in the query to fetch the customer's data for a specific range."
+    "cueWhy": "GC is lazy; filter by timestamp range in queries so analysts never see >30-day data."
   },
   {
     "id": 95,
@@ -3401,7 +3401,7 @@
     "topic": 1,
     "questionNumber": 282,
     "ref": "2024 / T1 Q282",
-    "cue": "You are using a Dataflow streaming job to read messages from a message bus that does not support exactly-once",
+    "cue": "exactly-once delivery semantics + 1.5 GB per second",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Use the BigQuery Storage Write API and ensure that your target BigQuery table is multiregional.",
@@ -3429,7 +3429,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241282,
-    "cueWhy": "I chose this cue because 'You are using a Dataflow streaming job to read messages from a message bus that does not support exactly-once' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Use the BigQuery Storage Write API and ensure that your target BigQuery table is multiregional."
+    "cueWhy": "Exactly-once into BQ at high rate \u2192 BigQuery Storage Write API (multiregional table)."
   },
   {
     "id": 96,
@@ -3437,7 +3437,7 @@
     "topic": 1,
     "questionNumber": 283,
     "ref": "2024 / T1 Q283",
-    "cue": "You have created an external table for Apache Hive partitioned data that resides in a Cloud Storage bucket,",
+    "cue": "Hive partitioned + queries against this table are slow",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Upgrade the external table to a BigLake table. Enable metadata caching for the table.",
@@ -3465,7 +3465,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241283,
-    "cueWhy": "I chose this cue because 'You have created an external table for Apache Hive partitioned data that resides in a Cloud Storage bucket,' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Upgrade the external table to a BigLake table. Enable metadata caching for the table."
+    "cueWhy": "Slow external Hive table: upgrade to BigLake + metadata caching."
   },
   {
     "id": 97,
@@ -3473,7 +3473,7 @@
     "topic": 1,
     "questionNumber": 284,
     "ref": "2024 / T1 Q284",
-    "cue": "You have a network of 1000 sensors. The sensors generate time series data: one metric per sensor per second,",
+    "cue": "single-digit millisecond latency + complex analytic queries",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Store your data in Bigtable. Concatenate the sensor ID and timestamp and use it as the row key. Perform an export to BigQuery every day.",
@@ -3501,7 +3501,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241284,
-    "cueWhy": "I chose this cue because 'You have a network of 1000 sensors. The sensors generate time series data: one metric per sensor per second,' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Store your data in Bigtable. Concatenate the sensor ID and timestamp and use it as the row key. Perform an export to BigQuery every day."
+    "cueWhy": "Point lookups in ms \u2192 Bigtable row key; daily export to BigQuery for analytics."
   },
   {
     "id": 98,
@@ -3509,7 +3509,7 @@
     "topic": 1,
     "questionNumber": 285,
     "ref": "2024 / T1 Q285",
-    "cue": "You have 100 GB of data stored in a BigQuery table. This data is outdated and will only be accessed one or",
+    "cue": "immutable for 3 years + one or two times a year",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: 1. Perform a BigQuery export to a Cloud Storage bucket with archive storage class. 2. Set a locked retention policy on the bucket. 3. Create a BigQuery external table on the exported files.",
@@ -3537,7 +3537,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241285,
-    "cueWhy": "I chose this cue because 'You have 100 GB of data stored in a BigQuery table. This data is outdated and will only be accessed one or' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: 1. Perform a BigQuery export to a Cloud Storage bucket with archive storage class. 2. Set a locked retention policy on the bucket. 3. Create a BigQuery external table on the exported files."
+    "cueWhy": "Rare SQL access + 3y immutability: export to Archive GCS, lock retention, external table."
   },
   {
     "id": 99,
@@ -3545,7 +3545,7 @@
     "topic": 1,
     "questionNumber": 286,
     "ref": "2024 / T1 Q286",
-    "cue": "You have thousands of Apache Spark jobs running in your on-premises Apache Hadoop cluster. You want to",
+    "cue": "keep code changes to a minimum + managed services",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Move your data to Cloud Storage. Run your jobs on Dataproc.",
@@ -3573,7 +3573,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241286,
-    "cueWhy": "I chose this cue because 'You have thousands of Apache Spark jobs running in your on-premises Apache Hadoop cluster. You want to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Move your data to Cloud Storage. Run your jobs on Dataproc."
+    "cueWhy": "Many Spark jobs off long-lived Hadoop: data to GCS, run on Dataproc."
   },
   {
     "id": 100,
@@ -3581,7 +3581,7 @@
     "topic": 1,
     "questionNumber": 287,
     "ref": "2024 / T1 Q287",
-    "cue": "You are administering shared BigQuery datasets that contain views used by multiple teams in your",
+    "cue": "consistent BigQuery analytics spend each month",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Create a BigQuery reservation with a baseline of 500 slots with no autoscaling for the marketing team, and bill them back accordingly.",
@@ -3609,7 +3609,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241287,
-    "cueWhy": "I chose this cue because 'You are administering shared BigQuery datasets that contain views used by multiple teams in your' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create a BigQuery reservation with a baseline of 500 slots with no autoscaling for the marketing team, and bill them back accordingly."
+    "cueWhy": "Predictable monthly spend \u2192 fixed baseline reservation (no autoscaling) and chargeback."
   },
   {
     "id": 101,
@@ -3617,7 +3617,7 @@
     "topic": 1,
     "questionNumber": 288,
     "ref": "2024 / T1 Q288",
-    "cue": "You are part of a healthcare organization where data is organized and managed by respective data owners in",
+    "cue": "Data lineage tracking + Data quality validation",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Use Dataplex to manage data, track data lineage, and perform data quality validation.",
@@ -3645,7 +3645,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241288,
-    "cueWhy": "I chose this cue because 'You are part of a healthcare organization where data is organized and managed by respective data owners in' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use Dataplex to manage data, track data lineage, and perform data quality validation."
+    "cueWhy": "Discovery + lineage + quality in one managed service \u2192 Dataplex."
   },
   {
     "id": 102,
@@ -3653,7 +3653,7 @@
     "topic": 1,
     "questionNumber": 289,
     "ref": "2024 / T1 Q289",
-    "cue": "You have data located in BigQuery that is used to generate reports for your company. You have noticed some",
+    "cue": "no coding + recurring job + normalize",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Use Cloud Data Fusion and Wrangler to normalize the data, and set up a recurring job.",
@@ -3681,7 +3681,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241289,
-    "cueWhy": "I chose this cue because 'You have data located in BigQuery that is used to generate reports for your company. You have noticed some' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use Cloud Data Fusion and Wrangler to normalize the data, and set up a recurring job."
+    "cueWhy": "No-code recurring normalize of BQ report fields \u2192 Data Fusion Wrangler."
   },
   {
     "id": 103,
@@ -3689,7 +3689,7 @@
     "topic": 1,
     "questionNumber": 290,
     "ref": "2024 / T1 Q290",
-    "cue": "You are designing a messaging system by using Pub/Sub to process clickstream data with an event-driven",
+    "cue": "maximum of 10 retries + store the failed messages",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Use exponential backoff as the subscription retry policy, and configure dead lettering to a different topic with maximum delivery attempts set to 10.",
@@ -3717,7 +3717,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241290,
-    "cueWhy": "I chose this cue because 'You are designing a messaging system by using Pub/Sub to process clickstream data with an event-driven' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use exponential backoff as the subscription retry policy, and configure dead lettering to a different topic with maximum delivery attempts set to 10."
+    "cueWhy": "Push reliability: exponential backoff + dead letter topic after 10 attempts."
   },
   {
     "id": 104,
@@ -3725,7 +3725,7 @@
     "topic": 1,
     "questionNumber": 291,
     "ref": "2024 / T1 Q291",
-    "cue": "You designed a data warehouse in BigQuery to analyze sales data. You want a self-serving, low-maintenance,",
+    "cue": "self-serving, low-maintenance + share the sales dataset",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Create an Analytics Hub private exchange, and publish the sales dataset.",
@@ -3753,7 +3753,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241291,
-    "cueWhy": "I chose this cue because 'You designed a data warehouse in BigQuery to analyze sales data. You want a self-serving, low-maintenance,' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create an Analytics Hub private exchange, and publish the sales dataset."
+    "cueWhy": "Org sharing of a BQ dataset with low ops \u2192 Analytics Hub private exchange."
   },
   {
     "id": 105,
@@ -3761,7 +3761,7 @@
     "topic": 1,
     "questionNumber": 292,
     "ref": "2024 / T1 Q292",
-    "cue": "You have terabytes of customer behavioral data streaming from Google Analytics into BigQuery daily. Your",
+    "cue": "100 times a day + Cloud SQL for MySQL + Cloud SQL for PostgreSQL",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Create streams in Datastream to replicate the required tables from both Cloud SQL databases to BigQuery for these queries.",
@@ -3789,7 +3789,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241292,
-    "cueWhy": "I chose this cue because 'You have terabytes of customer behavioral data streaming from Google Analytics into BigQuery daily. Your' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create streams in Datastream to replicate the required tables from both Cloud SQL databases to BigQuery for these queries."
+    "cueWhy": "Frequent BQ campaigns joining GA + two Cloud SQL sources \u2192 Datastream replicate into BQ."
   },
   {
     "id": 106,
@@ -3797,7 +3797,7 @@
     "topic": 1,
     "questionNumber": 293,
     "ref": "2024 / T1 Q293",
-    "cue": "Your organization is modernizing their IT services and migrating to Google Cloud. You need to organize the",
+    "cue": "data mesh + sales, product design, and marketing",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: 1. Create multiple projects for storage of the data for each of your departments\u2019 applications. 2. Enable each department to create Cloud Storage buckets and BigQuery datasets. 3. In Dataplex, map each department to a data lake and the Cloud Storage buckets, and map the BigQuery datasets to zones. 4. Enable each department to own and share the data of their data lakes.",
@@ -3825,7 +3825,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241293,
-    "cueWhy": "I chose this cue because 'Your organization is modernizing their IT services and migrating to Google Cloud. You need to organize the' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: 1. Create multiple projects for storage of the data for each of your departments\u2019 applications. 2. Enable each department to create Cloud Storage buckets and BigQuery datasets. 3. In Dataplex, map each department t..."
+    "cueWhy": "Per-department lakes/zones in Dataplex over their own projects enables mesh sharing."
   },
   {
     "id": 107,
@@ -3833,7 +3833,7 @@
     "topic": 1,
     "questionNumber": 294,
     "ref": "2024 / T1 Q294",
-    "cue": "You work for a large ecommerce company. You are using Pub/Sub to ingest the clickstream data to Google Cloud",
+    "cue": "new subscriber + last 30 days",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Set the topic retention policy to 30 days.",
@@ -3861,7 +3861,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241294,
-    "cueWhy": "I chose this cue because 'You work for a large ecommerce company. You are using Pub/Sub to ingest the clickstream data to Google Cloud' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Set the topic retention policy to 30 days."
+    "cueWhy": "Late joiners need historical messages \u2192 topic retention 30 days."
   },
   {
     "id": 108,
@@ -3869,7 +3869,7 @@
     "topic": 1,
     "questionNumber": 295,
     "ref": "2024 / T1 Q295",
-    "cue": "You are designing the architecture to process your data from Cloud Storage to BigQuery by using Dataflow. The",
+    "cue": "Shared VPC network + Dataflow",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Assign the compute.networkUser role to the service account that executes the Dataflow pipeline.",
@@ -3897,7 +3897,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241295,
-    "cueWhy": "I chose this cue because 'You are designing the architecture to process your data from Cloud Storage to BigQuery by using Dataflow. The' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Assign the compute.networkUser role to the service account that executes the Dataflow pipeline."
+    "cueWhy": "Deploy Dataflow on Shared VPC: grant compute.networkUser to the pipeline SA."
   },
   {
     "id": 109,
@@ -3905,7 +3905,7 @@
     "topic": 1,
     "questionNumber": 297,
     "ref": "2024 / T1 Q297",
-    "cue": "You migrated your on-premises Apache Hadoop Distributed File System (HDFS) data lake to Cloud Storage. The",
+    "cue": "column level + data mesh",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: 1. Define a BigLake table. 2. Create a taxonomy of policy tags in Data Catalog. 3. Add policy tags to columns. 4. Process with the Spark-BigQuery connector or BigQuery SQL.",
@@ -3933,7 +3933,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241297,
-    "cueWhy": "I chose this cue because 'You migrated your on-premises Apache Hadoop Distributed File System (HDFS) data lake to Cloud Storage. The' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: 1. Define a BigLake table. 2. Create a taxonomy of policy tags in Data Catalog. 3. Add policy tags to columns. 4. Process with the Spark-BigQuery connector or BigQuery SQL."
+    "cueWhy": "HDFS\u2192GCS with Spark/SQL and column security \u2192 BigLake + policy tags."
   },
   {
     "id": 110,
@@ -3941,7 +3941,7 @@
     "topic": 1,
     "questionNumber": 298,
     "ref": "2024 / T1 Q298",
-    "cue": "One of your encryption keys stored in Cloud Key Management Service (Cloud KMS) was exposed. You need to re-",
+    "cue": "re- encrypt + CMEK-protected + compromised key",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create a new Cloud KMS key. Create a new Cloud Storage bucket configured to use the new key as the default CMEK key. Copy all objects from the old bucket to the new bucket without specifying a key.",
@@ -3969,7 +3969,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241298,
-    "cueWhy": "I chose this cue because 'One of your encryption keys stored in Cloud Key Management Service (Cloud KMS) was exposed. You need to re-' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a new Cloud KMS key. Create a new Cloud Storage bucket configured to use the new key as the default CMEK key. Copy all objects from the old bucket to the new bucket without specifying a key."
+    "cueWhy": "New KMS key, new default-CMEK bucket, copy objects, then retire old key."
   },
   {
     "id": 111,
@@ -3977,7 +3977,7 @@
     "topic": 1,
     "questionNumber": 299,
     "ref": "2024 / T1 Q299",
-    "cue": "You have an upstream process that writes data to Cloud Storage. This data is then read by an Apache Spark job",
+    "cue": "RPO=15 mins + minimal latency when reading",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: 1. Create a dual-region Cloud Storage bucket in the us-central1 and us-south1 regions. 2. Enable turbo replication. 3. Run the Dataproc cluster in a zone in the us-central1 region, reading from the bucket in the same region. 4. In case of a regional failure, redeploy the Dataproc clusters to the us-south1 region and read from the same bucket.",
@@ -4005,7 +4005,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241299,
-    "cueWhy": "I chose this cue because 'You have an upstream process that writes data to Cloud Storage. This data is then read by an Apache Spark job' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: 1. Create a dual-region Cloud Storage bucket in the us-central1 and us-south1 regions. 2. Enable turbo replication. 3. Run the Dataproc cluster in a zone in the us-central1 region, reading from the bucket in the sa..."
+    "cueWhy": "Dual-region GCS + turbo replication; read local region, failover Dataproc."
   },
   {
     "id": 112,
@@ -4013,7 +4013,7 @@
     "topic": 1,
     "questionNumber": 300,
     "ref": "2024 / T1 Q300",
-    "cue": "You currently have transactional data stored on-premises in a PostgreSQL database. To modernize your data",
+    "cue": "without changing database management systems + transactional workloads and support analytics",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Migrate your workloads to AlloyDB for PostgreSQL.",
@@ -4041,7 +4041,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241300,
-    "cueWhy": "I chose this cue because 'You currently have transactional data stored on-premises in a PostgreSQL database. To modernize your data' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Migrate your workloads to AlloyDB for PostgreSQL."
+    "cueWhy": "Stay on PostgreSQL with HTAP: AlloyDB for PostgreSQL."
   },
   {
     "id": 113,
@@ -4049,7 +4049,7 @@
     "topic": 1,
     "questionNumber": 301,
     "ref": "2024 / T1 Q301",
-    "cue": "You are architecting a data transformation solution for BigQuery. Your developers are proficient with SQL and",
+    "cue": "ELT + SQL as code",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Use Dataform to build, manage, and schedule SQL pipelines.",
@@ -4077,7 +4077,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241301,
-    "cueWhy": "I chose this cue because 'You are architecting a data transformation solution for BigQuery. Your developers are proficient with SQL and' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use Dataform to build, manage, and schedule SQL pipelines."
+    "cueWhy": "SQL-first ELT with code management \u2192 Dataform."
   },
   {
     "id": 114,
@@ -4085,7 +4085,7 @@
     "topic": 1,
     "questionNumber": 302,
     "ref": "2024 / T1 Q302",
-    "cue": "You work for a farming company. You have one BigQuery table named sensors, which is about 500 MB and contains",
+    "cue": "500 MB + every 30 seconds + once a week",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: 1. Create a metrics table partitioned by timestamp. 2. Create a sensorId column in the metrics table, that points to the id column in the sensors table. 3. Use an INSERT statement every 30 seconds to append new metrics to the metrics table. 4. Join the two tables, if needed, when running the analytical query.",
@@ -4113,7 +4113,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241302,
-    "cueWhy": "I chose this cue because 'You work for a farming company. You have one BigQuery table named sensors, which is about 500 MB and contains' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: 1. Create a metrics table partitioned by timestamp. 2. Create a sensorId column in the metrics table, that points to the id column in the sensors table. 3. Use an INSERT statement every 30 seconds to append new met..."
+    "cueWhy": "Small sensor dim table + high-frequency metrics: partition metrics by time, FK to sensors, append inserts."
   },
   {
     "id": 115,
@@ -4121,7 +4121,7 @@
     "topic": 1,
     "questionNumber": 303,
     "ref": "2024 / T1 Q303",
-    "cue": "You are managing a Dataplex environment with raw and curated zones. A data engineering team is uploading JSON",
+    "cue": "curated zone but the files are not being automatically discovered",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Move the JSON and CSV files to the raw zone.",
@@ -4149,7 +4149,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241303,
-    "cueWhy": "I chose this cue because 'You are managing a Dataplex environment with raw and curated zones. A data engineering team is uploading JSON' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Move the JSON and CSV files to the raw zone."
+    "cueWhy": "JSON/CSV auto-discovery belongs in raw; move files from curated to raw zone."
   },
   {
     "id": 116,
@@ -4157,7 +4157,7 @@
     "topic": 1,
     "questionNumber": 304,
     "ref": "2024 / T1 Q304",
-    "cue": "You have a table that contains millions of rows of sales data, partitioned by date. Various applications and",
+    "cue": "past year of data + always include the latest data",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Create a materialized view to aggregate the base table data. Include a filter clause to specify the last one year of partitions.",
@@ -4185,7 +4185,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241304,
-    "cueWhy": "I chose this cue because 'You have a table that contains millions of rows of sales data, partitioned by date. Various applications and' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create a materialized view to aggregate the base table data. Include a filter clause to specify the last one year of partitions."
+    "cueWhy": "Materialized view over last-year partitions keeps fresh aggregates without scanning full history."
   },
   {
     "id": 117,
@@ -4193,7 +4193,7 @@
     "topic": 1,
     "questionNumber": 305,
     "ref": "2024 / T1 Q305",
-    "cue": "Your organization uses a multi-cloud data storage strategy, storing data in Cloud Storage, and data in Amazon",
+    "cue": "Amazon Web Services\u2019 (AWS) S3",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Setup a BigQuery Omni connection to the AWS S3 bucket data. Create BigLake tables over the Cloud Storage and S3 data and query the data using BigQuery directly.",
@@ -4221,7 +4221,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241305,
-    "cueWhy": "I chose this cue because 'Your organization uses a multi-cloud data storage strategy, storing data in Cloud Storage, and data in Amazon' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Setup a BigQuery Omni connection to the AWS S3 bucket data. Create BigLake tables over the Cloud Storage and S3 data and query the data using BigQuery directly."
+    "cueWhy": "Query US GCS+S3 in place without bucket ACLs to users \u2192 BigQuery Omni/BigLake."
   },
   {
     "id": 118,
@@ -4229,7 +4229,7 @@
     "topic": 1,
     "questionNumber": 306,
     "ref": "2024 / T1 Q306",
-    "cue": "You are preparing an organization-wide dataset. You need to preprocess customer data stored in a restricted",
+    "cue": "data privacy requirements",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Use Dataflow and the Cloud Data Loss Prevention API to mask sensitive data. Write the processed data in BigQuery.",
@@ -4257,7 +4257,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241306,
-    "cueWhy": "I chose this cue because 'You are preparing an organization-wide dataset. You need to preprocess customer data stored in a restricted' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use Dataflow and the Cloud Data Loss Prevention API to mask sensitive data. Write the processed data in BigQuery."
+    "cueWhy": "Restricted GCS customer data \u2192 Dataflow + DLP mask, then BigQuery."
   },
   {
     "id": 119,
@@ -4265,7 +4265,7 @@
     "topic": 1,
     "questionNumber": 307,
     "ref": "2024 / T1 Q307",
-    "cue": "You need to connect multiple applications with dynamic public IP addresses to a Cloud SQL instance. You",
+    "cue": "dynamic public IP addresses + Cloud SQL public IP",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Leave the Authorized Network empty. Use Cloud SQL Auth proxy on all applications.",
@@ -4293,7 +4293,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241307,
-    "cueWhy": "I chose this cue because 'You need to connect multiple applications with dynamic public IP addresses to a Cloud SQL instance. You' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Leave the Authorized Network empty. Use Cloud SQL Auth proxy on all applications."
+    "cueWhy": "Changing client IPs can\u2019t use static authorized networks \u2192 Cloud SQL Auth proxy."
   },
   {
     "id": 120,
@@ -4301,7 +4301,7 @@
     "topic": 1,
     "questionNumber": 308,
     "ref": "2024 / T1 Q308",
-    "cue": "You are migrating a large number of files from a public HTTPS endpoint to Cloud Storage. The files are",
+    "cue": "signed URLs + HTTP 403",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Create a new TSV file for the remaining files by generating signed URLs with a longer validity period. Split the TSV file into multiple smaller files and submit them as separate Storage Transfer Service jobs in parallel.",
@@ -4329,7 +4329,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241308,
-    "cueWhy": "I chose this cue because 'You are migrating a large number of files from a public HTTPS endpoint to Cloud Storage. The files are' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Create a new TSV file for the remaining files by generating signed URLs with a longer validity period. Split the TSV file into multiple smaller files and submit them as separate Storage Transfer Service jobs in par..."
+    "cueWhy": "Expired signed URLs mid-transfer: regenerate longer-lived URLs and split parallel STS jobs."
   },
   {
     "id": 121,
@@ -4337,7 +4337,7 @@
     "topic": 1,
     "questionNumber": 309,
     "ref": "2024 / T1 Q309",
-    "cue": "You work for an airline and you need to store weather data in a BigQuery table. Weather data will be used as",
+    "cue": "only uses the last 30 days + minimize costs",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create a BigQuery table partitioned by datetime value of the weather date. Set up partition expiration to 30 days.",
@@ -4365,7 +4365,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241309,
-    "cueWhy": "I chose this cue because 'You work for an airline and you need to store weather data in a BigQuery table. Weather data will be used as' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create a BigQuery table partitioned by datetime value of the weather date. Set up partition expiration to 30 days."
+    "cueWhy": "Partition by weather date and expire partitions after 30 days."
   },
   {
     "id": 122,
@@ -4373,7 +4373,7 @@
     "topic": 1,
     "questionNumber": 310,
     "ref": "2024 / T1 Q310",
-    "cue": "You need to look at BigQuery data from a specific table multiple times a day. The underlying table you are",
+    "cue": "several petabytes + simple aggregations + up-to-date",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create a materialized view based off of the query being run.",
@@ -4401,7 +4401,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241310,
-    "cueWhy": "I chose this cue because 'You need to look at BigQuery data from a specific table multiple times a day. The underlying table you are' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a materialized view based off of the query being run."
+    "cueWhy": "Repeated filtered aggregations on huge table \u2192 materialized view."
   },
   {
     "id": 123,
@@ -4409,7 +4409,7 @@
     "topic": 1,
     "questionNumber": 311,
     "ref": "2024 / T1 Q311",
-    "cue": "Your chemical company needs to manually check documentation for customer order. You use a pull subscription",
+    "cue": "do not process orders twice + pull subscription",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use Pub/Sub exactly-once delivery in your pull subscription.",
@@ -4437,7 +4437,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241311,
-    "cueWhy": "I chose this cue because 'Your chemical company needs to manually check documentation for customer order. You use a pull subscription' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use Pub/Sub exactly-once delivery in your pull subscription."
+    "cueWhy": "Pull subscription without double-processing \u2192 Pub/Sub exactly-once delivery."
   },
   {
     "id": 124,
@@ -4445,7 +4445,7 @@
     "topic": 1,
     "questionNumber": 313,
     "ref": "2024 / T1 Q313",
-    "cue": "You want to migrate an Apache Spark 3 batch job from on-premises to Google Cloud. You need to minimally",
+    "cue": "minimally change + 8 vCPU and 16 GB + minimize installation",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Execute as a Dataproc Serverless job.",
@@ -4473,7 +4473,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241313,
-    "cueWhy": "I chose this cue because 'You want to migrate an Apache Spark 3 batch job from on-premises to Google Cloud. You need to minimally' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Execute as a Dataproc Serverless job."
+    "cueWhy": "Spark 3 batch with similar executor sizing and low ops \u2192 Dataproc Serverless."
   },
   {
     "id": 125,
@@ -4481,7 +4481,7 @@
     "topic": 1,
     "questionNumber": 314,
     "ref": "2024 / T1 Q314",
-    "cue": "You are configuring networking for a Dataflow job. The data pipeline uses custom container images with the",
+    "cue": "cost-effective and secure communication + Google APIs",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Disable external IP addresses from worker VMs and enable Private Google Access.",
@@ -4509,7 +4509,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241314,
-    "cueWhy": "I chose this cue because 'You are configuring networking for a Dataflow job. The data pipeline uses custom container images with the' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Disable external IP addresses from worker VMs and enable Private Google Access."
+    "cueWhy": "Dataflow workers: no external IPs + Private Google Access to reach Google APIs."
   },
   {
     "id": 126,
@@ -4517,7 +4517,7 @@
     "topic": 1,
     "questionNumber": 316,
     "ref": "2024 / T1 Q316",
-    "cue": "You are administering a BigQuery on-demand environment. Your business intelligence tool is submitting",
+    "cue": "day and month levels + minimize maintenance",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Build materialized views on top of the sales table to aggregate data at the day and month level.",
@@ -4545,7 +4545,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241316,
-    "cueWhy": "I chose this cue because 'You are administering a BigQuery on-demand environment. Your business intelligence tool is submitting' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Build materialized views on top of the sales table to aggregate data at the day and month level."
+    "cueWhy": "Repeated day/month aggregations on a huge fact table \u2192 materialized views."
   },
   {
     "id": 127,
@@ -4553,7 +4553,7 @@
     "topic": 1,
     "questionNumber": 317,
     "ref": "2024 / T1 Q317",
-    "cue": "You have several different unstructured data sources, within your on-premises data center as well as in the",
+    "cue": "your own encryption keys + GUI-based solution",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Use Cloud Data Fusion to move files into Cloud Storage.",
@@ -4581,7 +4581,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241317,
-    "cueWhy": "I chose this cue because 'You have several different unstructured data sources, within your on-premises data center as well as in the' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use Cloud Data Fusion to move files into Cloud Storage."
+    "cueWhy": "GUI move of mixed on-prem/cloud files into GCS with customer keys \u2192 Cloud Data Fusion."
   },
   {
     "id": 128,
@@ -4589,7 +4589,7 @@
     "topic": 1,
     "questionNumber": 319,
     "ref": "2024 / T1 Q319",
-    "cue": "You are preparing an organization-wide dataset. You need to preprocess customer data stored in a restricted",
+    "cue": "protecting certain sensitive data elements + retaining all of the data",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use Dataflow and the Cloud Data Loss Prevention API to mask sensitive data. Write the processed data in BigQuery.",
@@ -4617,7 +4617,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20241319,
-    "cueWhy": "I chose this cue because 'You are preparing an organization-wide dataset. You need to preprocess customer data stored in a restricted' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use Dataflow and the Cloud Data Loss Prevention API to mask sensitive data. Write the processed data in BigQuery."
+    "cueWhy": "Mask with Dataflow+DLP into BQ while keeping usable data for analysis."
   },
   {
     "id": 129,
@@ -4625,7 +4625,7 @@
     "topic": 1,
     "questionNumber": 209,
     "ref": "2025 / T1 Q209",
-    "cue": "A shipping company has live package-tracking data that is sent to an Apache Kafka stream in real time. This",
+    "cue": "ingest-date partitioning + geospatial trends + package",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Implement clustering in BigQuery on the package-tracking ID column.",
@@ -4653,7 +4653,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20251209,
-    "cueWhy": "I chose this cue because 'A shipping company has live package-tracking data that is sent to an Apache Kafka stream in real time. This' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Implement clustering in BigQuery on the package-tracking ID column."
+    "cueWhy": "Queries by package lifecycle not ingest day \u2192 cluster on package-tracking ID."
   },
   {
     "id": 130,
@@ -4661,7 +4661,7 @@
     "topic": 1,
     "questionNumber": 213,
     "ref": "2025 / T1 Q213",
-    "cue": "Your company's customer_order table in BigQuery stores the order history for 10 million customers, with a",
+    "cue": "country_name and username + 10 PB",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Cluster the table by country and username fields.",
@@ -4689,7 +4689,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20251213,
-    "cueWhy": "I chose this cue because 'Your company's customer_order table in BigQuery stores the order history for 10 million customers, with a' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Cluster the table by country and username fields."
+    "cueWhy": "Filter-heavy huge order table \u2192 cluster by country and username."
   },
   {
     "id": 131,
@@ -4697,7 +4697,7 @@
     "topic": 1,
     "questionNumber": 257,
     "ref": "2025 / T1 Q257",
-    "cue": "You are planning to use Cloud Storage as part of your data lake solution. The Cloud Storage bucket will",
+    "cue": "ingested once + access patterns of individual objects will be random",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Create a Cloud Storage bucket with Autoclass enabled.",
@@ -4725,7 +4725,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20251257,
-    "cueWhy": "I chose this cue because 'You are planning to use Cloud Storage as part of your data lake solution. The Cloud Storage bucket will' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create a Cloud Storage bucket with Autoclass enabled."
+    "cueWhy": "One-write random-read cost optimization without app changes \u2192 Autoclass."
   },
   {
     "id": 132,
@@ -4733,7 +4733,7 @@
     "topic": 1,
     "questionNumber": 296,
     "ref": "2025 / T1 Q296",
-    "cue": "Your infrastructure team has set up an interconnect link between Google Cloud and the on-premises network.",
+    "cue": "Apache Kafka + interconnect + minimal latency",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use Dataflow, write a pipeline that reads the data from Kafka, and writes the data to BigQuery.",
@@ -4761,7 +4761,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20251296,
-    "cueWhy": "I chose this cue because 'Your infrastructure team has set up an interconnect link between Google Cloud and the on-premises network.' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use Dataflow, write a pipeline that reads the data from Kafka, and writes the data to BigQuery."
+    "cueWhy": "On-prem Kafka over interconnect into BQ with low latency \u2192 Dataflow."
   },
   {
     "id": 133,
@@ -4769,7 +4769,7 @@
     "topic": 1,
     "questionNumber": 312,
     "ref": "2025 / T1 Q312",
-    "cue": "You are migrating your on-premises data warehouse to BigQuery. As part of the migration, you want to",
+    "cue": "securely publish, discover, and subscribe + data freshness",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Use Analytics Hub to facilitate data sharing.",
@@ -4797,7 +4797,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20251312,
-    "cueWhy": "I chose this cue because 'You are migrating your on-premises data warehouse to BigQuery. As part of the migration, you want to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use Analytics Hub to facilitate data sharing."
+    "cueWhy": "Org-wide self-serve read-only sharing with freshness \u2192 Analytics Hub."
   },
   {
     "id": 134,
@@ -4805,7 +4805,7 @@
     "topic": 1,
     "questionNumber": 315,
     "ref": "2025 / T1 Q315",
-    "cue": "You are using Workflows to call an API that returns a 1KB JSON response, apply some complex business logic on",
+    "cue": "Python's standard library + Workflows",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Invoke a Cloud Function instance that uses Python to apply the logic on your JSON file.",
@@ -4833,7 +4833,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20251315,
-    "cueWhy": "I chose this cue because 'You are using Workflows to call an API that returns a 1KB JSON response, apply some complex business logic on' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Invoke a Cloud Function instance that uses Python to apply the logic on your JSON file."
+    "cueWhy": "When Workflows can\u2019t run complex Python logic, call a Cloud Function then continue."
   },
   {
     "id": 135,
@@ -4841,7 +4841,7 @@
     "topic": 1,
     "questionNumber": 318,
     "ref": "2025 / T1 Q318",
-    "cue": "You are using BigQuery with a regional dataset that includes a table with the daily sales volumes. This table",
+    "cue": "recovery point objective (RPO) of less than 24 hours",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Schedule a daily export of the table to a Cloud Storage dual or multi-region bucket.",
@@ -4869,7 +4869,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20251318,
-    "cueWhy": "I chose this cue because 'You are using BigQuery with a regional dataset that includes a table with the daily sales volumes. This table' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Schedule a daily export of the table to a Cloud Storage dual or multi-region bucket."
+    "cueWhy": "Cheap regional-table protection: daily export to dual/multi-region GCS."
   },
   {
     "id": 136,
@@ -4877,7 +4877,7 @@
     "topic": 1,
     "questionNumber": 320,
     "ref": "2026 / T1 Q320",
-    "cue": "Your company uses Looker Studio connected to BigQuery for reporting. Users are experiencing slow dashboard",
+    "cue": "Looker Studio + slow dashboard load times",
     "category": "General",
     "answerLetters": "BD",
     "answerPattern": "B: Create a materialized view in BigQuery that pre-calculates the aggregations and filters used in the Looker Studio dashboards. | D: Use BigQuery BI Engine to accelerate query performance by caching frequently accessed data.",
@@ -4905,7 +4905,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261320,
-    "cueWhy": "I chose this cue because 'Your company uses Looker Studio connected to BigQuery for reporting. Users are experiencing slow dashboard' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer BD: B: Create a materialized view in BigQuery that pre-calculates the aggregations and filters used in the Looker Studio dashboards. | D: Use BigQuery BI Engine to accelerate query performance by caching frequently access..."
+    "cueWhy": "Precompute with materialized views and/or accelerate with BI Engine for Looker Studio."
   },
   {
     "id": 137,
@@ -4913,7 +4913,7 @@
     "topic": 1,
     "questionNumber": 321,
     "ref": "2026 / T1 Q321",
-    "cue": "Your company has data assets across multiple Cloud Storage buckets and BigQuery datasets containing raw and",
+    "cue": "without physically moving or duplicating the data",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: 1. Use Dataplex to organize the BigQuery datasets and Cloud Storage buckets into lakes and zones. 2. Use Dataplex for automated metadata discovery, centralized security policy management, data profiling, and data quality tasks.",
@@ -4941,7 +4941,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261321,
-    "cueWhy": "I chose this cue because 'Your company has data assets across multiple Cloud Storage buckets and BigQuery datasets containing raw and' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: 1. Use Dataplex to organize the BigQuery datasets and Cloud Storage buckets into lakes and zones. 2. Use Dataplex for automated metadata discovery, centralized security policy management, data profiling, and data q..."
+    "cueWhy": "Federated governance over GCS+BQ without copies is Dataplex lakes/zones + quality/policies."
   },
   {
     "id": 138,
@@ -4949,7 +4949,7 @@
     "topic": 1,
     "questionNumber": 322,
     "ref": "2026 / T1 Q322",
-    "cue": "Your company is planning to migrate a large on-premises data warehouse to BigQuery. The data is currently",
+    "cue": "proprietary, vendor-specific format + batch migration",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Export the data to CSV files, upload the files to Cloud Storage, then load the files into BigQuery.",
@@ -4977,7 +4977,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261322,
-    "cueWhy": "I chose this cue because 'Your company is planning to migrate a large on-premises data warehouse to BigQuery. The data is currently' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Export the data to CSV files, upload the files to Cloud Storage, then load the files into BigQuery."
+    "cueWhy": "Unknown proprietary warehouse format: export CSV \u2192 GCS \u2192 load BigQuery."
   },
   {
     "id": 139,
@@ -4985,7 +4985,7 @@
     "topic": 1,
     "questionNumber": 323,
     "ref": "2026 / T1 Q323",
-    "cue": "Your company uses separate Google Cloud projects for development, staging, and production. Developers need",
+    "cue": "development, staging, and production + Google-recommended practices",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create Google Groups for access levels, assign developers to groups, and grant the groups the appropriate IAM roles on each project.",
@@ -5013,7 +5013,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261323,
-    "cueWhy": "I chose this cue because 'Your company uses separate Google Cloud projects for development, staging, and production. Developers need' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create Google Groups for access levels, assign developers to groups, and grant the groups the appropriate IAM roles on each project."
+    "cueWhy": "Manage env IAM via Google Groups with roles per project, not per-user bindings."
   },
   {
     "id": 140,
@@ -5021,7 +5021,7 @@
     "topic": 1,
     "questionNumber": 324,
     "ref": "2026 / T1 Q324",
-    "cue": "Your financial services company has a critical daily reconciliation process that involves several distinct",
+    "cue": "strict dependencies + notify you if not completed by 7:00 AM",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Implement a Cloud Composer DAG, with each step defined as a separate task using appropriate Airflow operators, and schedule the DAG for daily execution.",
@@ -5049,7 +5049,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261324,
-    "cueWhy": "I chose this cue because 'Your financial services company has a critical daily reconciliation process that involves several distinct' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Implement a Cloud Composer DAG, with each step defined as a separate task using appropriate Airflow operators, and schedule the DAG for daily execution."
+    "cueWhy": "Multi-step SFTP\u2192decrypt\u2192GCS\u2192BQ with SLA/alerts and reruns is Cloud Composer (Airflow)."
   },
   {
     "id": 141,
@@ -5057,7 +5057,7 @@
     "topic": 1,
     "questionNumber": 325,
     "ref": "2026 / T1 Q325",
-    "cue": "Your large e-commerce company uses BigQuery for its data warehousing needs. They have two primary types of",
+    "cue": "Analyst dashboards + ETL jobs",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Use BigQuery editions to create an autoscaling reservation with dedicated slots for analyst dashboards, while running ETL jobs with a separate reservation or using the on-demand billing model.",
@@ -5085,7 +5085,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261325,
-    "cueWhy": "I chose this cue because 'Your large e-commerce company uses BigQuery for its data warehousing needs. They have two primary types of' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Use BigQuery editions to create an autoscaling reservation with dedicated slots for analyst dashboards, while running ETL jobs with a separate reservation or using the on-demand billing model."
+    "cueWhy": "Separate capacity: reserved/autoscaling slots for interactive dashboards vs separate/on-demand for ETL."
   },
   {
     "id": 142,
@@ -5093,7 +5093,7 @@
     "topic": 1,
     "questionNumber": 326,
     "ref": "2026 / T1 Q326",
-    "cue": "Your team runs a complex analytical query daily that processes terabytes of data. Recently, after running for",
+    "cue": "Resources exceeded",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Move from BigQuery on-demand to slot reservations.",
@@ -5121,7 +5121,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261326,
-    "cueWhy": "I chose this cue because 'Your team runs a complex analytical query daily that processes terabytes of data. Recently, after running for' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Move from BigQuery on-demand to slot reservations."
+    "cueWhy": "On-demand resource failures on huge queries \u2192 move to slot reservations."
   },
   {
     "id": 143,
@@ -5129,7 +5129,7 @@
     "topic": 1,
     "questionNumber": 327,
     "ref": "2026 / T1 Q327",
-    "cue": "Your company wants to implement a Retrieval-Augmented Generation (RAG) system to allow employees to query an",
+    "cue": "Retrieval-Augmented Generation + embedding",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Convert the unstructured documents into high-dimensional numerical vectors that capture the semantic meaning and relationships of the text.",
@@ -5157,7 +5157,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261327,
-    "cueWhy": "I chose this cue because 'Your company wants to implement a Retrieval-Augmented Generation (RAG) system to allow employees to query an' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Convert the unstructured documents into high-dimensional numerical vectors that capture the semantic meaning and relationships of the text."
+    "cueWhy": "RAG prep means embedding unstructured text into semantic vectors, not keyword indexes alone."
   },
   {
     "id": 144,
@@ -5165,7 +5165,7 @@
     "topic": 1,
     "questionNumber": 328,
     "ref": "2026 / T1 Q328",
-    "cue": "You need to load a dataset with multiple terabytes of clickstream data into BigQuery. The data arrives each",
+    "cue": "compressed JSON + low-cost, programmatic",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Create an external table in BigQuery pointing to the Cloud Storage bucket and run the INSERT INTO ... SELECT * FROM external_table command.",
@@ -5193,7 +5193,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261328,
-    "cueWhy": "I chose this cue because 'You need to load a dataset with multiple terabytes of clickstream data into BigQuery. The data arrives each' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Create an external table in BigQuery pointing to the Cloud Storage bucket and run the INSERT INTO ... SELECT * FROM external_table command."
+    "cueWhy": "TB-scale daily JSON in GCS: external table then INSERT\u2026SELECT is cheap and scalable."
   },
   {
     "id": 145,
@@ -5201,7 +5201,7 @@
     "topic": 1,
     "questionNumber": 329,
     "ref": "2026 / T1 Q329",
-    "cue": "Your Cloud Storage data lake has raw, processed, and historical data in different buckets. Data older than",
+    "cue": "older than two years + seven years",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Configure an Object Lifecycle Management rule to transition objects older than two years to the Archive storage class and eventually delete them after seven years.",
@@ -5229,7 +5229,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261329,
-    "cueWhy": "I chose this cue because 'Your Cloud Storage data lake has raw, processed, and historical data in different buckets. Data older than' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Configure an Object Lifecycle Management rule to transition objects older than two years to the Archive storage class and eventually delete them after seven years."
+    "cueWhy": "Lifecycle: Archive after 2 years, delete at 7 years for rarely accessed historical objects."
   },
   {
     "id": 146,
@@ -5237,7 +5237,7 @@
     "topic": 1,
     "questionNumber": 330,
     "ref": "2026 / T1 Q330",
-    "cue": "Your data science team needs to perform interactive SQL queries on large datasets stored in Apache Parquet",
+    "cue": "HiveQL queries directly against the data in Cloud Storage",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Deploy a Dataproc cluster with Hive services enabled.",
@@ -5265,7 +5265,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261330,
-    "cueWhy": "I chose this cue because 'Your data science team needs to perform interactive SQL queries on large datasets stored in Apache Parquet' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Deploy a Dataproc cluster with Hive services enabled."
+    "cueWhy": "Interactive HiveQL on Parquet in GCS with low ops \u2192 Dataproc with Hive enabled."
   },
   {
     "id": 147,
@@ -5273,7 +5273,7 @@
     "topic": 1,
     "questionNumber": 331,
     "ref": "2026 / T1 Q331",
-    "cue": "You analyze user clickstream data to personalize content recommendations. The data arrives continuously and",
+    "cue": "millions of events each second + late-arriving data",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use Pub/Sub for ingestion, Dataflow with Apache Beam for processing, and BigQuery for storage and analytics.",
@@ -5301,7 +5301,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261331,
-    "cueWhy": "I chose this cue because 'You analyze user clickstream data to personalize content recommendations. The data arrives continuously and' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use Pub/Sub for ingestion, Dataflow with Apache Beam for processing, and BigQuery for storage and analytics."
+    "cueWhy": "High-rate clickstream with sessionization and late data is Pub/Sub + Dataflow + BigQuery."
   },
   {
     "id": 148,
@@ -5309,7 +5309,7 @@
     "topic": 1,
     "questionNumber": 332,
     "ref": "2026 / T1 Q332",
-    "cue": "You are designing BigQuery tables for large volumes of clickstream event data. Your data analyst team will",
+    "cue": "event date ranges + user ID UUID",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Partition the table by the event date column and cluster the table by user ID column.",
@@ -5337,7 +5337,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261332,
-    "cueWhy": "I chose this cue because 'You are designing BigQuery tables for large volumes of clickstream event data. Your data analyst team will' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Partition the table by the event date column and cluster the table by user ID column."
+    "cueWhy": "Partition by event date and cluster by user ID optimizes time-range + user filters."
   },
   {
     "id": 149,
@@ -5345,7 +5345,7 @@
     "topic": 1,
     "questionNumber": 333,
     "ref": "2026 / T1 Q333",
-    "cue": "You are building a Dataflow pipeline to ingest customer feedback. Before loading to your data warehouse, you",
+    "cue": "validate email + generative AI sentiment + manual review",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Apply a ParDo transform in Dataflow to validate each element, use a RunInference transform to assign sentiment scores, and use side outputs to route valid/invalid records.",
@@ -5373,7 +5373,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261333,
-    "cueWhy": "I chose this cue because 'You are building a Dataflow pipeline to ingest customer feedback. Before loading to your data warehouse, you' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Apply a ParDo transform in Dataflow to validate each element, use a RunInference transform to assign sentiment scores, and use side outputs to route valid/invalid records."
+    "cueWhy": "Dataflow ParDo validation + RunInference sentiment + side outputs for invalids matches the branching pipeline."
   },
   {
     "id": 150,
@@ -5381,7 +5381,7 @@
     "topic": 1,
     "questionNumber": 334,
     "ref": "2026 / T1 Q334",
-    "cue": "You need to orchestrate a pipeline with several Google Cloud services: a batch Dataflow job, then a BigQuery",
+    "cue": "lightweight, serverless orchestration + sequential",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Select Cloud Workflows.",
@@ -5409,7 +5409,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261334,
-    "cueWhy": "I chose this cue because 'You need to orchestrate a pipeline with several Google Cloud services: a batch Dataflow job, then a BigQuery' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Select Cloud Workflows."
+    "cueWhy": "Sequential Dataflow\u2192BQ\u2192Vertex with minimal ops is Cloud Workflows, not heavy Composer."
   },
   {
     "id": 151,
@@ -5417,7 +5417,7 @@
     "topic": 1,
     "questionNumber": 335,
     "ref": "2026 / T1 Q335",
-    "cue": "You have a data analyst team member who needs to analyze data by using BigQuery. The data analyst wants to",
+    "cue": "fully managed, no-code + 200 CSV files",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create a pipeline by using BigQuery pipelines and schedule it to load the data into BigQuery daily.",
@@ -5445,7 +5445,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261335,
-    "cueWhy": "I chose this cue because 'You have a data analyst team member who needs to analyze data by using BigQuery. The data analyst wants to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create a pipeline by using BigQuery pipelines and schedule it to load the data into BigQuery daily."
+    "cueWhy": "Analyst no-code daily CSV\u2192BQ load/transform fits BigQuery pipelines."
   },
   {
     "id": 152,
@@ -5453,7 +5453,7 @@
     "topic": 1,
     "questionNumber": 336,
     "ref": "2026 / T1 Q336",
-    "cue": "You are designing a stateful data processing pipeline that reads data from a Cloud Storage bucket and writes",
+    "cue": "resilient to zonal failures + us-central1",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Launch the Dataflow job with the --region=us-central1 parameter.",
@@ -5481,7 +5481,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261336,
-    "cueWhy": "I chose this cue because 'You are designing a stateful data processing pipeline that reads data from a Cloud Storage bucket and writes' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Launch the Dataflow job with the --region=us-central1 parameter."
+    "cueWhy": "Regional Dataflow (--region=us-central1) survives zonal outages better than a single zone."
   },
   {
     "id": 153,
@@ -5489,7 +5489,7 @@
     "topic": 1,
     "questionNumber": 337,
     "ref": "2026 / T1 Q337",
-    "cue": "Your team has created several BigQuery curated datasets containing anonymized industry benchmark data. You",
+    "cue": "external partner companies + discoverable",
     "category": "General",
     "answerLetters": "A",
     "answerPattern": "A: Publish the datasets as listings within BigQuery sharing (Analytics Hub).",
@@ -5517,7 +5517,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261337,
-    "cueWhy": "I chose this cue because 'Your team has created several BigQuery curated datasets containing anonymized industry benchmark data. You' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer A: A: Publish the datasets as listings within BigQuery sharing (Analytics Hub)."
+    "cueWhy": "Secure cross-org discoverable sharing of curated BQ datasets is Analytics Hub listings."
   },
   {
     "id": 154,
@@ -5525,7 +5525,7 @@
     "topic": 1,
     "questionNumber": 338,
     "ref": "2026 / T1 Q338",
-    "cue": "Your organization stores highly personal data in BigQuery and needs to comply with strict data privacy",
+    "cue": "unreadable whenever an employee leaves",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Use AEAD functions and delete keys when employees leave the organization.",
@@ -5553,7 +5553,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261338,
-    "cueWhy": "I chose this cue because 'Your organization stores highly personal data in BigQuery and needs to comply with strict data privacy' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use AEAD functions and delete keys when employees leave the organization."
+    "cueWhy": "Crypto-shredding: AEAD encrypt with per-employee keys and delete keys when they leave."
   },
   {
     "id": 155,
@@ -5561,7 +5561,7 @@
     "topic": 1,
     "questionNumber": 339,
     "ref": "2026 / T1 Q339",
-    "cue": "You monitor and optimize the BigQuery instance for your team. You notice that a particular daily report that",
+    "cue": "execution plan + JOIN",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Leverage BigQuery's Query History view and analyze the execution graph.",
@@ -5589,7 +5589,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261339,
-    "cueWhy": "I chose this cue because 'You monitor and optimize the BigQuery instance for your team. You notice that a particular daily report that' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Leverage BigQuery's Query History view and analyze the execution graph."
+    "cueWhy": "To inspect JOIN bottlenecks fast, use Query History and the execution graph."
   },
   {
     "id": 156,
@@ -5597,7 +5597,7 @@
     "topic": 1,
     "questionNumber": 340,
     "ref": "2026 / T1 Q340",
-    "cue": "Your company stores vital operational sales data in a BigQuery dataset in us-central1. Your company requires",
+    "cue": "recovery point objective (RPO) of 24 hours + recovery time objective (RTO) of 4 hours",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Configure BigQuery cross-region dataset replication from ns-central1 to us-east1.",
@@ -5625,7 +5625,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261340,
-    "cueWhy": "I chose this cue because 'Your company stores vital operational sales data in a BigQuery dataset in us-central1. Your company requires' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Configure BigQuery cross-region dataset replication from ns-central1 to us-east1."
+    "cueWhy": "Cross-region BigQuery dataset replication to us-east1 meets regional DR with low ops vs custom export."
   },
   {
     "id": 157,
@@ -5633,7 +5633,7 @@
     "topic": 1,
     "questionNumber": 341,
     "ref": "2026 / T1 Q341",
-    "cue": "You are integrating your legacy on-premises MySQL database into a new Google Cloud data warehouse. The",
+    "cue": "managed integration + incremental loads",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Configure a scheduled transfer in BigQuery Data Transfer Service to ingest data from the MySQL database with a scheduled transfer configuration.",
@@ -5661,7 +5661,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261341,
-    "cueWhy": "I chose this cue because 'You are integrating your legacy on-premises MySQL database into a new Google Cloud data warehouse. The' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Configure a scheduled transfer in BigQuery Data Transfer Service to ingest data from the MySQL database with a scheduled transfer configuration."
+    "cueWhy": "Daily MySQL\u2192BigQuery managed incremental ingest is BigQuery Data Transfer Service."
   },
   {
     "id": 158,
@@ -5669,7 +5669,7 @@
     "topic": 1,
     "questionNumber": 342,
     "ref": "2026 / T1 Q342",
-    "cue": "You are developing a fraud detection model using BigQuery ML. You have a raw transaction dataset and need to",
+    "cue": "consistently applied during both model training and prediction",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use the TRANSFORM clause within the CREATE MODEL statement, leveraging SQL functions for aggregations and time-based calculations.",
@@ -5697,7 +5697,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261342,
-    "cueWhy": "I chose this cue because 'You are developing a fraud detection model using BigQuery ML. You have a raw transaction dataset and need to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use the TRANSFORM clause within the CREATE MODEL statement, leveraging SQL functions for aggregations and time-based calculations."
+    "cueWhy": "BQML TRANSFORM in CREATE MODEL keeps feature SQL consistent for train and predict without manual dual pipelines."
   },
   {
     "id": 159,
@@ -5705,7 +5705,7 @@
     "topic": 1,
     "questionNumber": 343,
     "ref": "2026 / T1 Q343",
-    "cue": "Your organization has thousands of images stored in Cloud Storage. The organization's data analysts need to",
+    "cue": "categorize these images + least amount of coding",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use Vertex AI Vision API to analyze the images and store the results in BigQuery.",
@@ -5733,7 +5733,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261343,
-    "cueWhy": "I chose this cue because 'Your organization has thousands of images stored in Cloud Storage. The organization's data analysts need to' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use Vertex AI Vision API to analyze the images and store the results in BigQuery."
+    "cueWhy": "Least-code image content analysis into structured BigQuery results points to Vertex AI Vision API."
   },
   {
     "id": 160,
@@ -5741,7 +5741,7 @@
     "topic": 1,
     "questionNumber": 344,
     "ref": "2026 / T1 Q344",
-    "cue": "You are building a system to process financial transactions. The system must handle a high throughput of",
+    "cue": "ACID compliance + high throughput + low-latency",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Select Spanner.",
@@ -5769,7 +5769,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261344,
-    "cueWhy": "I chose this cue because 'You are building a system to process financial transactions. The system must handle a high throughput of' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Select Spanner."
+    "cueWhy": "Concurrent transactional ops with ACID on a managed service maps to Spanner."
   },
   {
     "id": 161,
@@ -5777,7 +5777,7 @@
     "topic": 1,
     "questionNumber": 345,
     "ref": "2026 / T1 Q345",
-    "cue": "You are preparing data to serve a sales demand prediction model. The training data undergoes several",
+    "cue": "prevent training-serving skew",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Replicate the exact same pre-processing logic in the inference pipeline that was used during model training.",
@@ -5805,7 +5805,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261345,
-    "cueWhy": "I chose this cue because 'You are preparing data to serve a sales demand prediction model. The training data undergoes several' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Replicate the exact same pre-processing logic in the inference pipeline that was used during model training."
+    "cueWhy": "Preprocessing must match train and serve. Replicate the same pre-processing logic in the Vertex AI inference path."
   },
   {
     "id": 162,
@@ -5813,7 +5813,7 @@
     "topic": 1,
     "questionNumber": 346,
     "ref": "2026 / T1 Q346",
-    "cue": "Your retail company is concerned about their BigQuery analytics spend. The company runs several queries that",
+    "cue": "same aggregation + minimizes analytics spend",
     "category": "General",
     "answerLetters": "B",
     "answerPattern": "B: Create a materialized view to minimize repetitive computations.",
@@ -5841,7 +5841,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261346,
-    "cueWhy": "I chose this cue because 'Your retail company is concerned about their BigQuery analytics spend. The company runs several queries that' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer B: B: Create a materialized view to minimize repetitive computations."
+    "cueWhy": "Repeated store-ID/sales aggregations should not recompute every query. A materialized view caches that aggregation cheaper and faster."
   },
   {
     "id": 163,
@@ -5849,7 +5849,7 @@
     "topic": 1,
     "questionNumber": 347,
     "ref": "2026 / T1 Q347",
-    "cue": "You are defining the data governance strategy for a new BigQuery table with medical and financial data. You",
+    "cue": "clinical researchers + accounting team",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Create separate datasets with authorized views exposing only approved data.",
@@ -5877,7 +5877,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261347,
-    "cueWhy": "I chose this cue because 'You are defining the data governance strategy for a new BigQuery table with medical and financial data. You' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Create separate datasets with authorized views exposing only approved data."
+    "cueWhy": "Different teams need different columns from the same sensitive table. Separate datasets with authorized views expose only approved fields per team."
   },
   {
     "id": 164,
@@ -5885,7 +5885,7 @@
     "topic": 1,
     "questionNumber": 348,
     "ref": "2026 / T1 Q348",
-    "cue": "You are designing a data lake on Google Cloud to store vast amounts of customer interaction data from various",
+    "cue": "consistently cataloged + data quality checks and transformations",
     "category": "General",
     "answerLetters": "C",
     "answerPattern": "C: Use Cloud Storage and BigQuery as repositories. Use Dataplex Universal Catalog for metadata discovery, data quality checks, and transformations.",
@@ -5913,7 +5913,7 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261348,
-    "cueWhy": "I chose this cue because 'You are designing a data lake on Google Cloud to store vast amounts of customer interaction data from various' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer C: C: Use Cloud Storage and BigQuery as repositories. Use Dataplex Universal Catalog for metadata discovery, data quality checks, and transformations."
+    "cueWhy": "Different formats need catalog discovery plus quality/transform before use. Dataplex Universal Catalog over GCS/BQ is the managed governance path."
   },
   {
     "id": 165,
@@ -5921,7 +5921,7 @@
     "topic": 1,
     "questionNumber": 349,
     "ref": "2026 / T1 Q349",
-    "cue": "You are using Dataflow to build a streaming data pipeline to analyze user website click activity from",
+    "cue": "30 minutes of inactivity",
     "category": "General",
     "answerLetters": "D",
     "answerPattern": "D: Use session windows with a 30-minute gap duration.",
@@ -5949,6 +5949,6 @@
     "sourceType": "Dump",
     "caseStudy": "",
     "sortOrder": 20261349,
-    "cueWhy": "I chose this cue because 'You are using Dataflow to build a streaming data pipeline to analyze user website click activity from' is the decision trigger in the question, not just a product name from the answer. It tells you which constraint must be solved, so map it to answer D: D: Use session windows with a 30-minute gap duration."
+    "cueWhy": "A visit ends after inactivity, which is a per-user gap \u2014 not a fixed clock window. Session windows with a 30-minute gap match that definition; tumbling/hopping windows do not."
   }
 ]
